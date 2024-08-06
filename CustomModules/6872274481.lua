@@ -9449,3 +9449,450 @@ run(function()
         ["Function"] = function(callback) end
     })
 end)																																																																																																																																																																																																				
+run(function()
+        local TweenService = game:GetService("TweenService")
+        local lplr = game.Players.LocalPlayer
+        local tpSpeed = 0.7
+        local mode = "DeathTween"
+        local tped = false
+    
+        local function isPlayerAlive(player)
+            return player.Character and player.Character:FindFirstChildOfClass("Humanoid") and player.Character.Humanoid.Health > 0
+        end
+    
+        local function findNearestPlayer()
+            local nearestPlayer = nil
+            local minDistance = math.huge
+            
+            for _, player in pairs(game.Players:GetPlayers()) do
+                if player ~= lplr and player.Character and player.Character:FindFirstChild("HumanoidRootPart") and player.Team ~= lplr.Team and isPlayerAlive(player) then
+                    local distance = (player.Character.HumanoidRootPart.Position - lplr.Character.HumanoidRootPart.Position).magnitude
+                    if distance < minDistance then
+                        nearestPlayer = player
+                        minDistance = distance
+                    end
+                end
+            end
+            return nearestPlayer
+        end
+    
+        local function teleportToPlayer(player)
+            if mode == "TP" then
+                local randomPlayerPosition = player.Character.HumanoidRootPart.Position
+                if lplr.Character and lplr.Character:FindFirstChild("HumanoidRootPart") then
+                    lplr.Character.HumanoidRootPart.CFrame = CFrame.new(randomPlayerPosition)
+                end
+                wait(0.5) -- Ensures the teleport completes
+                PlayerTP.ToggleButton(false) -- Disables the module after teleportation
+            elseif mode == "DeathTween" and not tped then
+                tped = true
+                lplr.Character:FindFirstChildOfClass("Humanoid"):ChangeState(Enum.HumanoidStateType.Dead) -- Resets the player
+                lplr.CharacterAdded:Connect(function()
+                    wait(0.3) -- Small delay for the character to respawn
+                    tweenToNearestPlayer()
+                end)
+            elseif mode == "Autowin" then
+                local randomPlayerPosition = player.Character.HumanoidRootPart.Position
+                if lplr.Character and lplr.Character:FindFirstChild("HumanoidRootPart") then
+                    lplr.Character.HumanoidRootPart.CFrame = CFrame.new(randomPlayerPosition)
+                end
+            end
+        end
+    
+        local function tweenToNearestPlayer()
+            local nearestPlayer = findNearestPlayer()
+            
+            if nearestPlayer and not tped then
+                tped = true
+    
+                local playerRootPart = nearestPlayer.Character.HumanoidRootPart
+                local blockPosition = Vector3.new(playerRootPart.Position.X, playerRootPart.Position.Y, playerRootPart.Position.Z)
+                
+                local playerName = nearestPlayer.Name  
+    
+                warningNotification("PlayerTP", "Teleporting to " .. playerName, 5)  
+    
+                local teleportSuccess = false  
+    
+                local tween = TweenService:Create(lplr.Character.HumanoidRootPart, TweenInfo.new(tpSpeed), {CFrame = CFrame.new(blockPosition)})
+                tween:Play()
+                tween.Completed:Connect(function()
+                    teleportSuccess = true
+                    PlayerTP.ToggleButton(false) -- Disables the module after teleportation
+                end)
+    
+                wait(7) 
+                if not teleportSuccess and isPlayerAlive(nearestPlayer) then
+                    warningNotification("PlayerTP", "Teleport failed", 5) 
+                end
+            end
+        end
+    
+        PlayerTP = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+            Name = "PlayerTP",
+            Function = function(callback)
+                if callback then
+                    if mode == "DeathTween" then
+                        tped = false -- Reset the flag whenever the module is enabled
+                        lplr.Character:FindFirstChildOfClass("Humanoid"):ChangeState(Enum.HumanoidStateType.Dead) -- Resets the player
+                        lplr.CharacterAdded:Connect(function()
+                            wait(0.3) -- Small delay for the character to respawn
+                            tweenToNearestPlayer()
+                        end)
+                    elseif mode == "TP" then
+                        tped = false -- Reset the flag whenever the module is enabled
+                        local nearestPlayer = findNearestPlayer()
+                        if nearestPlayer then
+                            teleportToPlayer(nearestPlayer)
+                        else
+                            warn("No players found")
+                            PlayerTP.ToggleButton(false) -- Disable if no players found
+                        end
+                    elseif mode == "Autowin" then
+                        while PlayerTP.Enabled and mode == "Autowin" do
+                            local nearestPlayer = findNearestPlayer()
+                            if nearestPlayer then
+                                teleportToPlayer(nearestPlayer)
+                                wait(0.1) -- Small delay to prevent spamming
+                            else
+                                warn("No players found")
+                                wait(1) -- Wait longer if no players were found
+                            end
+                        end
+                    end
+                end
+            end,
+            HoverText = "TP to players!"
+        })
+    
+        PlayerTP.CreateDropdown({
+            Name = "Mode",
+            List = {"DeathTween", "TP", "Autowin"},
+            Function = function(newMode)
+                mode = newMode
+            end,
+            HoverText = "Select mode"
+        })
+    
+        PlayerTP.CreateSlider({
+            Name = "TweenSpeed",
+            Min = 0.1,
+            Max = 5,
+            Function = function(val)
+                tpSpeed = val
+            end,
+            Default = 0.7,
+            HoverText = "Adjust teleport speed"
+        })
+    end)
+
+run(function()
+	local Changed = {["Enabled"] = false}
+	local ThemeChanger = {["Enabled"] = false}
+	local SelectedTheme = {["Value"] = "ChillPurpleSky"}
+	local AvaiableThemes = {
+		["ChillPurpleSky"] = function() 
+			task.spawn(function()
+				game.Lighting.Sky.SkyboxBk = "http://www.roblox.com/asset/?id=5260808177"
+				game.Lighting.Sky.SkyboxDn = "http://www.roblox.com/asset/?id=5260653793"
+				game.Lighting.Sky.SkyboxFt = "http://www.roblox.com/asset/?id=5260817288"
+				game.Lighting.Sky.SkyboxLf = "http://www.roblox.com/asset/?id=5260800833"
+				game.Lighting.Sky.SkyboxRt = "http://www.roblox.com/asset/?id=5260811073"
+				game.Lighting.Sky.SkyboxUp = "http://www.roblox.com/asset/?id=5260824661"
+				game.Lighting.FogColor = Color3.new(236, 88, 241)
+				game.Lighting.FogEnd = "200"
+				game.Lighting.FogStart = "0"
+				game.Lighting.Ambient = Color3.new(0.5, 0, 1)
+			end)
+		end,
+		["SpaceSky"] = function() 
+			task.spawn(function()
+				game.Lighting.Sky.SkyboxBk = "http://www.roblox.com/asset/?id=1735468027"
+				game.Lighting.Sky.SkyboxDn = "http://www.roblox.com/asset/?id=1735500192"
+				game.Lighting.Sky.SkyboxFt = "http://www.roblox.com/asset/?id=1735467260"
+				game.Lighting.Sky.SkyboxLf = "http://www.roblox.com/asset/?id=1735467682"
+				game.Lighting.Sky.SkyboxRt = "http://www.roblox.com/asset/?id=1735466772"
+				game.Lighting.Sky.SkyboxUp = "http://www.roblox.com/asset/?id=1735500898"
+				game.Lighting.FogColor = Color3.new(236, 88, 241)
+				game.Lighting.FogEnd = "200"
+				game.Lighting.FogStart = "0"
+				game.Lighting.Ambient = Color3.new(0.5, 0, 1)
+			end)
+		end,
+		["MidNightPurpleSky"] = function() 
+			task.spawn(function()
+				game.Lighting.Sky.SkyboxBk = "http://www.roblox.com/asset/?id=187713366"
+				game.Lighting.Sky.SkyboxDn = "http://www.roblox.com/asset/?id=187712428"
+				game.Lighting.Sky.SkyboxFt = "http://www.roblox.com/asset/?id=187712836"
+				game.Lighting.Sky.SkyboxLf = "http://www.roblox.com/asset/?id=187713755"
+				game.Lighting.Sky.SkyboxRt = "http://www.roblox.com/asset/?id=187714525"
+				game.Lighting.Sky.SkyboxUp = "http://www.roblox.com/asset/?id=187712111"
+				game.Lighting.FogColor = Color3.new(236, 88, 241)
+				game.Lighting.FogEnd = "200"
+				game.Lighting.FogStart = "0"
+				game.Lighting.Ambient = Color3.new(0.5, 0, 1)
+			end)
+		end,
+		["Chill"] = function()
+			task.spawn(function()
+				game.Lighting.Sky.SkyboxBk = "http://www.roblox.com/asset/?id=169210090"
+				game.Lighting.Sky.SkyboxDn = "http://www.roblox.com/asset/?id=169210108"
+				game.Lighting.Sky.SkyboxFt = "http://www.roblox.com/asset/?id=169210121"
+				game.Lighting.Sky.SkyboxLf = "http://www.roblox.com/asset/?id=169210133"
+				game.Lighting.Sky.SkyboxRt = "http://www.roblox.com/asset/?id=169210143"
+				game.Lighting.Sky.SkyboxUp = "http://www.roblox.com/asset/?id=169210149"
+			end)
+		end,
+		["MountainSky"] = function()
+			task.spawn(function()
+				game.Lighting.Sky.SkyboxBk = "http://www.roblox.com/asset/?id=174457450"
+				game.Lighting.Sky.SkyboxDn = "http://www.roblox.com/asset/?id=174457519"
+				game.Lighting.Sky.SkyboxFt = "http://www.roblox.com/asset/?id=174457566"
+				game.Lighting.Sky.SkyboxLf = "http://www.roblox.com/asset/?id=174457651"
+				game.Lighting.Sky.SkyboxRt = "http://www.roblox.com/asset/?id=174457702"
+				game.Lighting.Sky.SkyboxUp = "http://www.roblox.com/asset/?id=174457748"
+			end)
+		end,
+		["Darkness"] = function()
+			task.spawn(function()
+				game.Lighting.Sky.SkyboxBk = "http://www.roblox.com/asset/?id=2240134413"
+				game.Lighting.Sky.SkyboxDn = "http://www.roblox.com/asset/?id=2240136039"
+				game.Lighting.Sky.SkyboxFt = "http://www.roblox.com/asset/?id=2240130790"
+				game.Lighting.Sky.SkyboxLf = "http://www.roblox.com/asset/?id=2240133550"
+				game.Lighting.Sky.SkyboxRt = "http://www.roblox.com/asset/?id=2240132643"
+				game.Lighting.Sky.SkyboxUp = "http://www.roblox.com/asset/?id=2240135222"
+			end)
+		end,
+		["RealisticSky"] = function() 
+			task.spawn(function()
+				game.Lighting.Sky.SkyboxBk = "http://www.roblox.com/asset/?id=144933338"
+				game.Lighting.Sky.SkyboxDn = "http://www.roblox.com/asset/?id=144931530"
+				game.Lighting.Sky.SkyboxFt = "http://www.roblox.com/asset/?id=144933262"
+				game.Lighting.Sky.SkyboxLf = "http://www.roblox.com/asset/?id=144933244"
+				game.Lighting.Sky.SkyboxRt = "http://www.roblox.com/asset/?id=144933299"
+				game.Lighting.Sky.SkyboxUp = "http://www.roblox.com/asset/?id=144931564"
+			end)
+		end,
+        ["StormyNight"] = function() 
+			task.spawn(function()
+				game.Lighting.Sky.SkyboxBk = "http://www.roblox.com/asset/?id=15502511288"
+				game.Lighting.Sky.SkyboxDn = "http://www.roblox.com/asset/?id=15502508460"
+				game.Lighting.Sky.SkyboxFt = "http://www.roblox.com/asset/?id=15502510289"
+				game.Lighting.Sky.SkyboxLf = "http://www.roblox.com/asset/?id=15502507918"
+				game.Lighting.Sky.SkyboxRt = "http://www.roblox.com/asset/?id=15502509398"
+				game.Lighting.Sky.SkyboxUp = "http://www.roblox.com/asset/?id=15502511911"
+			end)
+        end,
+        ["AnimeSky"] = function() 
+			task.spawn(function()
+				game.Lighting.Sky.SkyboxBk = "http://www.roblox.com/asset/?id=6778646360"
+				game.Lighting.Sky.SkyboxDn = "http://www.roblox.com/asset/?id=6778658683"
+				game.Lighting.Sky.SkyboxFt = "http://www.roblox.com/asset/?id=6778648039"
+				game.Lighting.Sky.SkyboxLf = "http://www.roblox.com/asset/?id=6778649136"
+				game.Lighting.Sky.SkyboxRt = "http://www.roblox.com/asset/?id=6778650519"
+				game.Lighting.Sky.SkyboxUp = "http://www.roblox.com/asset/?id=6778658364"
+			end)
+        end,
+        ["RainySky"] = function() 
+			task.spawn(function()
+				game.Lighting.Sky.SkyboxBk = "http://www.roblox.com/asset/?id=271042516"
+				game.Lighting.Sky.SkyboxDn = "http://www.roblox.com/asset/?id=271077243"
+				game.Lighting.Sky.SkyboxFt = "http://www.roblox.com/asset/?id=271042556"
+				game.Lighting.Sky.SkyboxLf = "http://www.roblox.com/asset/?id=271042310"
+				game.Lighting.Sky.SkyboxRt = "http://www.roblox.com/asset/?id=271042467"
+				game.Lighting.Sky.SkyboxUp = "http://www.roblox.com/asset/?id=271077958"
+			end)
+		end
+	}
+	ThemeChanger = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+		["Name"] = "ThemeChanger",
+		["Function"] = function(callback) 
+			if callback then
+				AvaiableThemes[SelectedTheme["Value"]]() 
+			else
+				game.Lighting.Sky.SkyboxBk = "http://www.roblox.com/asset/?id=7018684000"
+				game.Lighting.Sky.SkyboxDn = "http://www.roblox.com/asset/?id=6334928194"
+				game.Lighting.Sky.SkyboxFt = "http://www.roblox.com/asset/?id=7018684000"
+				game.Lighting.Sky.SkyboxLf = "http://www.roblox.com/asset/?id=7018684000"
+				game.Lighting.Sky.SkyboxRt = "http://www.roblox.com/asset/?id=7018684000"
+				game.Lighting.Sky.SkyboxUp = "http://www.roblox.com/asset/?id=7018689553"
+				game.Lighting.FogColor = Color3.new(1, 1, 1)
+				game.Lighting.FogEnd = "10000"
+				game.Lighting.FogStart = "0"
+				game.Lighting.Ambient = Color3.new(0, 0, 0)
+			end
+		end,
+		["ExtraText"] = function()
+			return SelectedTheme["Value"]
+		end
+	})	
+	SelectedTheme = ThemeChanger.CreateDropdown({
+		["Name"] = "Theme",
+		["Function"] = function() end,
+		["List"] = {"ChillPurpleSky","SpaceSky","MidNightPurpleSky", "RealisticSky", "Darkness", "MountainSky", "Chill", "RainySky", "AnimeSky", "StormyNight"}
+	})
+end)
+run(function()
+	local insta = {Enabled = false}
+	insta = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+		Name = "EmberExploit",
+		Function = function(callback)
+			if callback then
+				warningNotification("EmberExploit", "Ember blade is required for this to work", 3)
+				task.spawn(function()
+					repeat
+						task.wait()
+						game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.HellBladeRelease:FireServer({
+							["chargeTime"] = 0.999,
+							["player"] = game:GetService("Players").LocalPlayer,
+							["weapon"] =game:GetService("ReplicatedStorage").Inventories:FindFirstChild(lplr.Name.."infernal_saber"),
+						})
+					until (not insta.Enabled)
+				end)
+			end
+		end, 
+		HoverText = "🔥ember"
+	})
+end)
+
+run(function()
+	InfiniteJump = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+		Name = "InfiniteJump",
+		Function = function(callback)
+			if callback then
+
+			end
+		end
+	})
+	game:GetService("UserInputService").JumpRequest:Connect(function()
+		if not InfiniteJump.Enabled then return end
+		if lplr.Character and lplr.Character:FindFirstChildOfClass("Humanoid") then
+			local hum = lplr.Character:FindFirstChildOfClass("Humanoid")
+			hum:ChangeState("Jumping")
+		end
+	end)         
+end)
+run(function()
+	local AutoUpgradeEra = {}
+	AutoUpgradeEra = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+		Name = 'AutoUpgradeEra',
+		Function = function(calling)
+			if calling then 
+				task.spawn(function()
+					repeat task.wait(0.5)
+						local args = {
+							[1] = {
+								["era"] = "iron_era"
+							}
+						}
+						
+						game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):WaitForChild("RequestPurchaseEra"):InvokeServer(unpack(args))
+	
+						local args = {
+							[1] = {
+								["era"] = "diamond_era"
+							}
+						}
+						
+						game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):WaitForChild("RequestPurchaseEra"):InvokeServer(unpack(args))
+	
+						local args = {
+							[1] = {
+								["era"] = "emerald_era"
+							}
+						}
+						
+						game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):WaitForChild("RequestPurchaseEra"):InvokeServer(unpack(args))
+					until (not AutoUpgradeEra.Enabled)
+				end)
+			end
+		end
+    })
+end)
+function IsAlive(plr)
+    plr = plr or lplr
+    if not plr.Character then return false end
+    if not plr.Character:FindFirstChild("Head") then return false end
+    if not plr.Character:FindFirstChild("Humanoid") then return false end
+    if plr.Character:FindFirstChild("Humanoid").Health < 0.11 then return false end
+    return true
+end
+
+run(function()
+    local GodMode = {Enabled = false}
+    GodMode = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+        Name = "Antihistamine",
+        Function = function(callback)
+            if callback then
+				spawn(function()
+					while task.wait() do
+						if (not GodMode.Enabled) then return end
+						if (not GuiLibrary.ObjectsThatCanBeSaved.FlyOptionsButton.Api.Enabled) and (not GuiLibrary.ObjectsThatCanBeSaved.InfiniteFlyOptionsButton.Api.Enabled) then
+							for i, v in pairs(game:GetService("Players"):GetChildren()) do
+								if v.Team ~= lplr.Team and IsAlive(v) and IsAlive(lplr) then
+									if v and v ~= lplr then
+										local TargetDistance = lplr:DistanceFromCharacter(v.Character:FindFirstChild("HumanoidRootPart").CFrame.p)
+										if TargetDistance < 25 then
+											if not lplr.Character.HumanoidRootPart:FindFirstChildOfClass("BodyVelocity") then
+												repeat task.wait() until store.matchState ~= 0
+												if not (v.Character.HumanoidRootPart.Velocity.Y < -10*5) then
+													lplr.Character.Archivable = true
+
+													local Clone = lplr.Character:Clone()
+													Clone.Parent = workspace
+													Clone.Head:ClearAllChildren()
+													gameCamera.CameraSubject = Clone:FindFirstChild("Humanoid")
+
+													for i,v in pairs(Clone:GetChildren()) do
+														if string.lower(v.ClassName):find("part") and v.Name ~= "HumanoidRootPart" then
+															v.Transparency = 1
+														end
+														if v:IsA("Accessory") then
+															v:FindFirstChild("Handle").Transparency = 1
+														end
+													end
+
+													lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame + Vector3.new(0,100000,0)
+
+													game:GetService("RunService").RenderStepped:Connect(function()
+														if Clone ~= nil and Clone:FindFirstChild("HumanoidRootPart") then
+															Clone.HumanoidRootPart.Position = Vector3.new(lplr.Character.HumanoidRootPart.Position.X, Clone.HumanoidRootPart.Position.Y, lplr.Character.HumanoidRootPart.Position.Z)
+														end
+													end)
+
+													task.wait(0.3)
+													lplr.Character.HumanoidRootPart.Velocity = Vector3.new(lplr.Character.HumanoidRootPart.Velocity.X, -1, lplr.Character.HumanoidRootPart.Velocity.Z)
+													lplr.Character.HumanoidRootPart.CFrame = Clone.HumanoidRootPart.CFrame
+													gameCamera.CameraSubject = lplr.Character:FindFirstChild("Humanoid")
+													Clone:Destroy()
+													task.wait(0.15)
+												end
+											end
+										end
+									end
+								end
+							end
+						end
+					end
+				end)
+			end
+        end
+    })
+end)
+
+	run(function()
+		local InfiniteYield = {Enabled = false}
+		InfiniteYield = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+			Name = "Chat Bypass",
+			Function = function(callback)
+				if callback then
+					task.spawn(function()
+					loadstring(game:HttpGet('https://raw.githubusercontent.com/SkireScripts/Ouxie/main/Projects/simplebypass.lua'))()
+					InfiniteYield["ToggleButton"](false)
+					warningNotification("Chat Bypass", "Loaded", 5)
+					end)
+				end
+			end,
+			HoverText = "infinite yield lel"
+		})
+	end)								
