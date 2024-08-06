@@ -9117,71 +9117,8 @@ task.spawn(function()
 		AutoLeave.ToggleButton(false)
 	end
 end)
-function IsAlive(plr)
-    plr = plr or lplr
-    if not plr.Character then return false end
-    if not plr.Character:FindFirstChild("Head") then return false end
-    if not plr.Character:FindFirstChild("Humanoid") then return false end
-    if plr.Character:FindFirstChild("Humanoid").Health < 0.11 then return false end
-    return true
-end
 
-run(function()
-    local FloatDisabler = {Enabled = false}
-    FloatDisabler = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
-        Name = "FloatDisabler",
-        Function = function(callback)
-            if callback then
-                FloatDisabler.Enabled = true
-                spawn(function()
-                    while task.wait() do
-                        if not FloatDisabler.Enabled then return end
-                        if GuiLibrary.ObjectsThatCanBeSaved.FlyOptionsButton.Api.Enabled or GuiLibrary.ObjectsThatCanBeSaved.InfiniteFlyOptionsButton.Api.Enabled then
-                            if IsAlive(lplr) then
-                                local character = lplr.Character
-                                character.Archivable = true
 
-                                local Clone = character:Clone()
-                                Clone.Parent = workspace
-                                Clone.Head:ClearAllChildren()
-                                gameCamera.CameraSubject = Clone:FindFirstChild("Humanoid")
-
-                                for _, part in pairs(Clone:GetChildren()) do
-                                    if string.lower(part.ClassName):find("part") and part.Name ~= "HumanoidRootPart" then
-                                        part.Transparency = 1
-                                    end
-                                    if part:IsA("Accessory") then
-                                        part:FindFirstChild("Handle").Transparency = 1
-                                    end
-                                end
-
-                                character.HumanoidRootPart.CFrame = character.HumanoidRootPart.CFrame + Vector3.new(0, 100000, 0)
-
-                                local connection
-                                connection = game:GetService("RunService").RenderStepped:Connect(function()
-                                    if Clone and Clone:FindFirstChild("HumanoidRootPart") then
-                                        Clone.HumanoidRootPart.Position = Vector3.new(character.HumanoidRootPart.Position.X, Clone.HumanoidRootPart.Position.Y, character.HumanoidRootPart.Position.Z)
-                                    else
-                                        connection:Disconnect()
-                                    end
-                                end)
-
-                                task.wait(0.3)
-                                character.HumanoidRootPart.Velocity = Vector3.new(character.HumanoidRootPart.Velocity.X, -1, character.HumanoidRootPart.Velocity.Z)
-                                character.HumanoidRootPart.CFrame = Clone.HumanoidRootPart.CFrame
-                                gameCamera.CameraSubject = character:FindFirstChild("Humanoid")
-                                Clone:Destroy()
-                                task.wait(0.15)
-                            end
-                        end
-                    end
-                end)
-            else
-                FloatDisabler.Enabled = false
-            end
-        end
-    })
-end)
 local function Pay2Code(func) func() end
 
 getgenv().JumpBoostEnabled = true
