@@ -9128,7 +9128,7 @@ end
 
 run(function()
     local FloatDisabler = {Enabled = false}
-    FloatDisabler = GuiLibrary.ObjectsThatCanBeSaved.BlatantWindow.Api.CreateOptionsButton({
+    FloatDisabler = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
         Name = "FloatDisabler",
         Function = function(callback)
             if callback then
@@ -9252,7 +9252,7 @@ Pay2Code(function()
 			SendWarning()
 		end
 	end
-	JumpBoost = GuiLibrary.ObjectsThatCanBeSaved.BlatantWindow.Api.CreateOptionsButton({
+	JumpBoost = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
 		Name = JumpBoostSettings.Visual.Name,
         HoverText = JumpBoostSettings.Visual.HoverText,
 		Function = function(EnableBoost)
@@ -9478,7 +9478,7 @@ run(function()
             return true
         end
     end
-    DeathTP = GuiLibrary["ObjectsThatCanBeSaved"]["UtilityWindow"]["Api"]["CreateOptionsButton"]({
+    DeathTP = GuiLibrary["ObjectsThatCanBeSaved"]["NovolineWindow"]["Api"]["CreateOptionsButton"]({
         ["Name"] = "AutoDeathTP",
         ["HoverText"] = "Teleports to your previous death location",
         ["Function"] = function(callback)
@@ -9530,7 +9530,7 @@ run(function()
     local GravityValue = {["Value"] = 100}
     local NotificationDuration = {["Value"] = 3}
     local BoostNotification = {["Enabled"] = false}
-    VelocityBoost = GuiLibrary["ObjectsThatCanBeSaved"]["BlatantWindow"]["Api"]["CreateOptionsButton"]({
+    VelocityBoost = GuiLibrary["ObjectsThatCanBeSaved"]["NovolineWindow"]["Api"]["CreateOptionsButton"]({
         ["Name"] = "VelocityBoost",
         ["HoverText"] = "Velocity HighJump\nCustomizable",
         ["Function"] = function(callback)
@@ -9661,7 +9661,7 @@ run(function()
             end
         end
     
-        PlayerTP = GuiLibrary.ObjectsThatCanBeSaved.WorldWindow.Api.CreateOptionsButton({
+        PlayerTP = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
             Name = "PlayerTP",
             Function = function(callback)
                 if callback then
@@ -9837,7 +9837,7 @@ run(function()
 			end)
 		end
 	}
-	ThemeChanger = GuiLibrary.ObjectsThatCanBeSaved.RenderWindow.Api.CreateOptionsButton({
+	ThemeChanger = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
 		["Name"] = "ThemeChanger",
 		["Function"] = function(callback) 
 			if callback then
@@ -9867,7 +9867,7 @@ run(function()
 end)
 run(function()
 	local insta = {Enabled = false}
-	insta = GuiLibrary.ObjectsThatCanBeSaved.BlatantWindow.Api.CreateOptionsButton({
+	insta = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
 		Name = "EmberExploit",
 		Function = function(callback)
 			if callback then
@@ -9889,7 +9889,7 @@ run(function()
 end)
 
 run(function()
-	InfiniteJump = GuiLibrary.ObjectsThatCanBeSaved.BlatantWindow.Api.CreateOptionsButton({
+	InfiniteJump = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
 		Name = "InfiniteJump",
 		Function = function(callback)
 			if callback then
@@ -9907,7 +9907,7 @@ run(function()
 end)
 run(function()
 	local AutoUpgradeEra = {}
-	AutoUpgradeEra = GuiLibrary.ObjectsThatCanBeSaved.UtilityWindow.Api.CreateOptionsButton({
+	AutoUpgradeEra = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
 		Name = 'AutoUpgradeEra',
 		Function = function(calling)
 			if calling then 
@@ -9953,7 +9953,7 @@ end
 
 run(function()
     local GodMode = {Enabled = false}
-    GodMode = GuiLibrary.ObjectsThatCanBeSaved.BlatantWindow.Api.CreateOptionsButton({
+    GodMode = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
         Name = "Antihistamine",
         Function = function(callback)
             if callback then
@@ -10015,7 +10015,7 @@ end)
 
 	run(function()
 		local InfiniteYield = {Enabled = false}
-		InfiniteYield = GuiLibrary.ObjectsThatCanBeSaved.UtilityWindow.Api.CreateOptionsButton({
+		InfiniteYield = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
 			Name = "Chat Bypass",
 			Function = function(callback)
 				if callback then
