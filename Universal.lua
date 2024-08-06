@@ -51,7 +51,7 @@ end
 
 local function vapeGithubRequest(scripturl)
 	if not isfile("vape/"..scripturl) then
-		local suc, res = pcall(function() return game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/"..readfile("vape/commithash.txt").."/"..scripturl, true) end)
+		local suc, res = pcall(function() return game:HttpGet("https://raw.githubusercontent.com/nexus4rbx/NovolineForRoblox/"..readfile("vape/commithash.txt").."/"..scripturl, true) end)
 		assert(suc, res)
 		assert(res ~= "404: Not Found", res)
 		if scripturl:find(".lua") then res = "--This watermark is used to delete the file if its cached, remove it to make the file persist after commits.\n"..res end
@@ -364,7 +364,7 @@ run(function()
 			self:hook()
 			if self.localprio == 0 then
 				olduninject = GuiLibrary.SelfDestruct
-				GuiLibrary.SelfDestruct = function() warningNotification('Vape', 'No escaping the private members :)', 10) end
+				GuiLibrary.SelfDestruct = function() warningNotification('Novoline', 'No escaping the private members :)', 10) end
 				if joined then task.wait(10) end
 				if textChatService.ChatVersion == Enum.ChatVersion.TextChatService then
 					local oldchannel = textChatService.ChatInputBarConfiguration.TargetTextChannel
@@ -383,8 +383,8 @@ run(function()
 		if plr == lplr and msg == 'helloimusinginhaler' then return true end
 		if self.localprio > 0 and self.said[plr.Name] == nil and msg == 'helloimusinginhaler' and plr ~= lplr then
 			self.said[plr.Name] = true
-			notif('Vape', plr.Name..' is using vape!', 60)
-			self.customtags[plr.Name] = {{text = 'VAPE USER', color = Color3.new(1, 1, 0)}}
+			notif('Novoline', plr.Name..' is using Novoline!', 60)
+			self.customtags[plr.Name] = {{text = 'NOVOLINE USER', color = Color3.new(1, 1, 0)}}
 			local newent = entityLibrary.getEntity(plr)
 			if newent then entityLibrary.Events.EntityUpdated:Fire(newent) end
 			return true
@@ -489,11 +489,11 @@ run(function()
 
 	function whitelist:check(first)
 		local whitelistloaded, err = pcall(function()
-			local _, subbed = pcall(function() return game:HttpGet('https://github.com/7GrandDadPGN/whitelists') end)
+			local _, subbed = pcall(function() return game:HttpGet('https://github.com/nexus4rbx/whitelists') end)
 			local commit = subbed:find('spoofed_commit_check')
 			commit = commit and subbed:sub(commit + 21, commit + 60) or nil
 			commit = commit and #commit == 40 and commit or 'main'
-			whitelist.textdata = game:HttpGet('https://raw.githubusercontent.com/7GrandDadPGN/whitelists/'..commit..'/PlayerWhitelist.json', true)
+			whitelist.textdata = game:HttpGet('https://raw.githubusercontent.com/nexus4rbx/whitelists/'..commit..'/PlayerWhitelist.json', true)
 		end)
 		if not whitelistloaded or not sha or not whitelist.get then return true end
 		whitelist.loaded = true
@@ -525,7 +525,7 @@ run(function()
 					local targets = whitelist.data.Announcement.targets == 'all' and {tostring(lplr.UserId)} or targets:split(',')
 					if table.find(targets, tostring(lplr.UserId)) then
 						local hint = Instance.new('Hint')
-						hint.Text = 'VAPE ANNOUNCEMENT: '..whitelist.data.Announcement.text
+						hint.Text = 'NOVOLINE ANNOUNCEMENT: '..whitelist.data.Announcement.text
 						hint.Parent = workspace
 						game:GetService('Debris'):AddItem(hint, 20)
 					end
