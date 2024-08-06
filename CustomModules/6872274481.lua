@@ -9965,3 +9965,50 @@ end)
 			HoverText = "infinite yield lel"
 		})
 	end)								
+local controlmodule = require(lplr.PlayerScripts.PlayerModule).controls
+
+local oldmove
+local BetterBreadCrumbs = {Enabled = false}
+local BetterBreadCrumbsMode = {Value = "Optimized"}
+local lastDotTime = 0
+local dotInterval = 0.2
+local dotLifetime = 1.3
+local dotColor = Color3.fromRGB(128, 0, 128)
+
+local function createDot(position, color, lifetime)
+    local part = Instance.new("Part")
+    part.Shape = Enum.PartType.Ball
+    part.Size = Vector3.new(0.3, 0.3, 0.3)
+    part.Position = position
+    part.Anchored = true
+    part.CanCollide = false
+    part.Color = color
+    part.Parent = workspace
+
+    game:GetService("Debris"):AddItem(part, lifetime)
+end
+
+BetterBreadCrumbs = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+    Name = "BetterBreadCrumbs",
+    Function = function(callback)
+        if callback then
+            BetterBreadCrumbs.connection = game:GetService("RunService").RenderStepped:Connect(function()
+                if lplr.Character and lplr.Character:FindFirstChild("HumanoidRootPart") then
+                    local currentTime = tick()
+                    if currentTime - lastDotTime >= dotInterval then
+                        local rootPart = lplr.Character.HumanoidRootPart
+                        local groundPosition = Vector3.new(rootPart.Position.X, rootPart.Position.Y - rootPart.Size.Y/2 - 0.15, rootPart.Position.Z)
+                        createDot(groundPosition, dotColor, dotLifetime)
+                        lastDotTime = currentTime
+                    end
+                end
+            end)
+        else
+            if BetterBreadCrumbs.connection then
+                BetterBreadCrumbs.connection:Disconnect()
+                BetterBreadCrumbs.connection = nil
+            end
+        end
+    end,
+    HoverText = "Credits NeptuneRbx"
+})
