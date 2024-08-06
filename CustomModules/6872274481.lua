@@ -103,7 +103,7 @@ end
 
 local function vapeGithubRequest(scripturl)
 	if not isfile("vape/"..scripturl) then
-		local suc, res = pcall(function() return game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/"..readfile("vape/commithash.txt").."/"..scripturl, true) end)
+		local suc, res = pcall(function() return game:HttpGet("https://raw.githubusercontent.com/nexus4rbx/NovolineForRoblox/"..readfile("vape/commithash.txt").."/"..scripturl, true) end)
 		assert(suc, res)
 		assert(res ~= "404: Not Found", res)
 		if scripturl:find(".lua") then res = "--This watermark is used to delete the file if its cached, remove it to make the file persist after commits.\n"..res end
@@ -1667,7 +1667,7 @@ do
 	end)
 	local textlabel = Instance.new("TextLabel")
 	textlabel.Size = UDim2.new(1, 0, 0, 36)
-	textlabel.Text = "The current version of vape is no longer being maintained, join the discord (click the discord icon) to get updates on the latest release."
+	textlabel.Text = "Novoline"
 	textlabel.BackgroundTransparency = 1
 	textlabel.ZIndex = 10
 	textlabel.TextStrokeTransparency = 0
@@ -2083,7 +2083,7 @@ run(function()
 						bedwars.QueueController.leaveParty()
 					end
 					if AutoLeaveStaff2.Enabled then
-						warningNotification("Vape", "Staff Detected : "..(plr.DisplayName and plr.DisplayName.." ("..plr.Name..")" or plr.Name).." : Play legit like nothing happened to have the highest chance of not getting banned.", 60)
+						warningNotification("Novoline", "Staff Detected : "..(plr.DisplayName and plr.DisplayName.." ("..plr.Name..")" or plr.Name).." : Play legit like nothing happened to have the highest chance of not getting banned.", 60)
 						GuiLibrary.SaveSettings = function() end
 						for i,v in pairs(GuiLibrary.ObjectsThatCanBeSaved) do
 							if v.Type == "OptionsButton" then
@@ -2099,14 +2099,14 @@ run(function()
 					else
 						GuiLibrary.SelfDestruct()
 						game:GetService("StarterGui"):SetCore("SendNotification", {
-							Title = "Vape",
+							Title = "Novoline",
 							Text = "Staff Detected\n"..(plr.DisplayName and plr.DisplayName.." ("..plr.Name..")" or plr.Name),
 							Duration = 60,
 						})
 					end
 					return
 				else
-					warningNotification("Vape", "Staff Detected : "..(plr.DisplayName and plr.DisplayName.." ("..plr.Name..")" or plr.Name), 60)
+					warningNotification("Novoline", "Staff Detected : "..(plr.DisplayName and plr.DisplayName.." ("..plr.Name..")" or plr.Name), 60)
 				end
 			end
 		end)
@@ -3534,7 +3534,7 @@ run(function()
 		Function = function(callback)
 			if callback then
 				--context issues moment
-			--[[	killaurarangecirclepart = Instance.new("MeshPart")
+				killaurarangecirclepart = Instance.new("MeshPart")
 				killaurarangecirclepart.MeshId = "rbxassetid://3726303797"
 				killaurarangecirclepart.Color = Color3.fromHSV(killauracolor["Hue"], killauracolor["Sat"], killauracolor.Value)
 				killaurarangecirclepart.CanCollide = false
@@ -5087,7 +5087,7 @@ run(function()
 	})
 end)
 
-run(function()
+--[[run(function()
 	local transformed = false
 	local GameTheme = {Enabled = false}
 	local GameThemeMode = {Value = "GameTheme"}
@@ -5539,7 +5539,7 @@ run(function()
 		Function = function() end,
 		List = {"Old", "Winter", "Halloween", "Valentines"}
 	})
-end)
+end)--]]
 
 run(function()
 	local oldkilleffect
@@ -6347,74 +6347,8 @@ run(function()
 	})
 end)
 
-run(function()
-	local performed = false
-	GuiLibrary.ObjectsThatCanBeSaved.RenderWindow.Api.CreateOptionsButton({
-		Name = "UICleanup",
-		Function = function(callback)
-			if callback and not performed then
-				performed = true
-				task.spawn(function()
-					local hotbar = require(lplr.PlayerScripts.TS.controllers.global.hotbar.ui["hotbar-app"]).HotbarApp
-					local hotbaropeninv = require(lplr.PlayerScripts.TS.controllers.global.hotbar.ui["hotbar-open-inventory"]).HotbarOpenInventory
-					local topbarbutton = require(replicatedStorage["rbxts_include"]["node_modules"]["@easy-games"]["game-core"].out).TopBarButton
-					local gametheme = require(replicatedStorage["rbxts_include"]["node_modules"]["@easy-games"]["game-core"].out.shared.ui["game-theme"]).GameTheme
-					bedwars.AppController:closeApp("TopBarApp")
-					local oldrender = topbarbutton.render
-					topbarbutton.render = function(self)
-						local res = oldrender(self)
-						if not self.props.Text then
-							return bedwars.Roact.createElement("TextButton", {Visible = false}, {})
-						end
-						return res
-					end
-					hotbaropeninv.render = function(self)
-						return bedwars.Roact.createElement("TextButton", {Visible = false}, {})
-					end
-					--[[debug.setconstant(hotbar.render, 52, 0.9975)
-					debug.setconstant(hotbar.render, 73, 100)
-					debug.setconstant(hotbar.render, 89, 1)
-					debug.setconstant(hotbar.render, 90, 0.04)
-					debug.setconstant(hotbar.render, 91, -0.03)
-					debug.setconstant(hotbar.render, 109, 1.35)
-					debug.setconstant(hotbar.render, 110, 0)
-					debug.setconstant(debug.getupvalue(hotbar.render, 11).render, 30, 1)
-					debug.setconstant(debug.getupvalue(hotbar.render, 11).render, 31, 0.175)
-					debug.setconstant(debug.getupvalue(hotbar.render, 11).render, 33, -0.101)
-					debug.setconstant(debug.getupvalue(hotbar.render, 18).render, 71, 0)
-					debug.setconstant(debug.getupvalue(hotbar.render, 18).tweenPosition, 16, 0)]]
-					gametheme.topBarBGTransparency = 0.5
-					bedwars.TopBarController:mountHud()
-					game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.PlayerList, true)
-					bedwars.AbilityUIController.abilityButtonsScreenGui.Visible = false
-					bedwars.MatchEndScreenController.waitUntilDisplay = function() return false end
-					task.spawn(function()
-						repeat
-							task.wait()
-							local gui = lplr.PlayerGui:FindFirstChild("StatusEffectHudScreen")
-							if gui then gui.Enabled = false break end
-						until false
-					end)
-					task.spawn(function()
-						repeat task.wait() until store.matchState ~= 0
-						if bedwars.ClientStoreHandler:getState().Game.customMatch == nil then
-							debug.setconstant(bedwars.QueueCard.render, 15, 0.1)
-						end
-					end)
-					local slot = bedwars.ClientStoreHandler:getState().Inventory.observedInventory.hotbarSlot
-					bedwars.ClientStoreHandler:dispatch({
-						type = "InventorySelectHotbarSlot",
-						slot = slot + 1 % 8
-					})
-					bedwars.ClientStoreHandler:dispatch({
-						type = "InventorySelectHotbarSlot",
-						slot = slot
-					})
-				end)
-			end
-		end
-	})
-end)
+
+
 
 run(function()
 	local AntiAFK = {Enabled = false}
@@ -7281,7 +7215,7 @@ run(function()
 	})
 end)
 
-run(function()
+--[[run(function()
 	local AutoForge = {Enabled = false}
 	local AutoForgeWeapon = {Value = "Sword"}
 	local AutoForgeBow = {Enabled = false}
@@ -7361,7 +7295,7 @@ run(function()
 		Function = function() end,
 		Default = true
 	})
-end)
+end)--]]
 
 run(function()
 	local alreadyreportedlist = {}
@@ -7491,7 +7425,7 @@ run(function()
 			if callback then
 				table.insert(AutoToxic.Connections, vapeEvents.BedwarsBedBreak.Event:Connect(function(bedTable)
 					if AutoToxicBedDestroyed.Enabled and bedTable.brokenBedTeam.id == lplr:GetAttribute("Team") then
-						local custommsg = #AutoToxicPhrases6.ObjectList > 0 and AutoToxicPhrases6.ObjectList[math.random(1, #AutoToxicPhrases6.ObjectList)] or "How dare you break my bed >:( <name> | vxpe on top"
+						local custommsg = #AutoToxicPhrases6.ObjectList > 0 and AutoToxicPhrases6.ObjectList[math.random(1, #AutoToxicPhrases6.ObjectList)] or "How dare you break my bed >:( <name> | Novoline on top"
 						if custommsg then
 							custommsg = custommsg:gsub("<name>", (bedTable.player.DisplayName or bedTable.player.Name))
 						end
@@ -7501,7 +7435,7 @@ run(function()
 							replicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(custommsg, 'All')
 						end
 					elseif AutoToxicBedBreak.Enabled and bedTable.player.UserId == lplr.UserId then
-						local custommsg = #AutoToxicPhrases7.ObjectList > 0 and AutoToxicPhrases7.ObjectList[math.random(1, #AutoToxicPhrases7.ObjectList)] or "nice bed <teamname> | vxpe on top"
+						local custommsg = #AutoToxicPhrases7.ObjectList > 0 and AutoToxicPhrases7.ObjectList[math.random(1, #AutoToxicPhrases7.ObjectList)] or "nice bed <teamname> | Novoline on top"
 						if custommsg then
 							local team = bedwars.QueueMeta[store.queueType].teams[tonumber(bedTable.brokenBedTeam.id)]
 							local teamname = team and team.displayName:lower() or "white"
@@ -7522,7 +7456,7 @@ run(function()
 						if killed == lplr then
 							if (not leavesaid) and killer ~= lplr and AutoToxicDeath.Enabled then
 								leavesaid = true
-								local custommsg = #AutoToxicPhrases3.ObjectList > 0 and AutoToxicPhrases3.ObjectList[math.random(1, #AutoToxicPhrases3.ObjectList)] or "My gaming chair expired midfight, thats why you won <name> | vxpe on top"
+								local custommsg = #AutoToxicPhrases3.ObjectList > 0 and AutoToxicPhrases3.ObjectList[math.random(1, #AutoToxicPhrases3.ObjectList)] or "My gaming chair expired midfight, thats why you won <name> | Novoline on top"
 								if custommsg then
 									custommsg = custommsg:gsub("<name>", (killer.DisplayName or killer.Name))
 								end
@@ -7534,9 +7468,9 @@ run(function()
 							end
 						else
 							if killer == lplr and AutoToxicFinalKill.Enabled then
-								local custommsg = #AutoToxicPhrases2.ObjectList > 0 and AutoToxicPhrases2.ObjectList[math.random(1, #AutoToxicPhrases2.ObjectList)] or "L <name> | vxpe on top"
+								local custommsg = #AutoToxicPhrases2.ObjectList > 0 and AutoToxicPhrases2.ObjectList[math.random(1, #AutoToxicPhrases2.ObjectList)] or "L <name> | Novoline on top"
 								if custommsg == lastsaid then
-									custommsg = #AutoToxicPhrases2.ObjectList > 0 and AutoToxicPhrases2.ObjectList[math.random(1, #AutoToxicPhrases2.ObjectList)] or "L <name> | vxpe on top"
+									custommsg = #AutoToxicPhrases2.ObjectList > 0 and AutoToxicPhrases2.ObjectList[math.random(1, #AutoToxicPhrases2.ObjectList)] or "L <name> | Novoline on top"
 								else
 									lastsaid = custommsg
 								end
@@ -7562,7 +7496,7 @@ run(function()
 							end
 						end
 						if AutoToxicWin.Enabled then
-							local custommsg = #AutoToxicPhrases.ObjectList > 0 and AutoToxicPhrases.ObjectList[math.random(1, #AutoToxicPhrases.ObjectList)] or "EZ L TRASH KIDS | vxpe on top"
+							local custommsg = #AutoToxicPhrases.ObjectList > 0 and AutoToxicPhrases.ObjectList[math.random(1, #AutoToxicPhrases.ObjectList)] or "womp womp | Novoline on top"
 							if textChatService.ChatVersion == Enum.ChatVersion.TextChatService then
 								textChatService.ChatInputBarConfiguration.TargetTextChannel:SendAsync(custommsg)
 							else
@@ -7577,7 +7511,7 @@ run(function()
 						if custommsg then
 							custommsg = custommsg:gsub("<name>", (plr.DisplayName or plr.Name))
 						end
-						local msg = custommsg or "Imagine lagbacking L "..(plr.DisplayName or plr.Name).." | vxpe on top"
+						local msg = custommsg or "Imagine lagbacking L "..(plr.DisplayName or plr.Name).." | Novoline on top"
 						if textChatService.ChatVersion == Enum.ChatVersion.TextChatService then
 							textChatService.ChatInputBarConfiguration.TargetTextChannel:SendAsync(msg)
 						else
@@ -7597,7 +7531,7 @@ run(function()
 								if custommsg then
 									custommsg = custommsg:gsub("<name>", (plr.DisplayName or plr.Name))
 								end
-								local msg = custommsg or "I don't care about the fact that I'm hacking, I care about you dying in a block game. L "..(plr.DisplayName or plr.Name).." | vxpe on top"
+								local msg = custommsg or "I don't care about the fact that I'm exploiting, I care about you dying in a block game. L "..(plr.DisplayName or plr.Name).." | Novoline on top"
 								if textChatService.ChatVersion == Enum.ChatVersion.TextChatService then
 									textChatService.ChatInputBarConfiguration.TargetTextChannel:SendAsync(msg)
 								else
@@ -7902,7 +7836,7 @@ run(function()
 	})
 end)
 
-run(function()
+--[[run(function()
 	local BowExploit = {Enabled = false}
 	local BowExploitTarget = {Value = "Mouse"}
 	local BowExploitAutoShootFOV = {Value = 1000}
@@ -7986,7 +7920,7 @@ run(function()
 		Max = 1000,
 		Default = 1000
 	})
-end)
+end)--]]
 
 run(function()
 	local RavenTP = {Enabled = false}
@@ -8249,7 +8183,7 @@ run(function()
 	})
 end)
 
-run(function()
+--[[run(function()
 	local oldhitblock
 
 	local AutoTool = GuiLibrary.ObjectsThatCanBeSaved.WorldWindow.Api.CreateOptionsButton({
@@ -8273,7 +8207,7 @@ run(function()
 		end,
 		HoverText = "Automatically swaps your hand to the appropriate tool."
 	})
-end)
+end)--]]
 
 run(function()
 	local BedProtector = {Enabled = false}
@@ -9116,3 +9050,402 @@ task.spawn(function()
 		AutoLeave.ToggleButton(false)
 	end
 end)
+local function Pay2Code(func) func() end
+
+getgenv().JumpBoostEnabled = true
+getgenv().JumpBoostDefault = false
+
+local JumpBoostSettings = {
+	Visual = {
+		Name = "JumpBoost",
+		HoverText = "Boosts you in the air"
+	},
+	Inside = {Default = getgenv().JumpBoostDefault}
+}
+
+Pay2Code(function()
+	local JumpBoost = {Enabled = false}
+	local JumpBoostMode = {Value = "Velocity"}
+	local JumpBoostVelocity = {Value = 650}
+	local JumpBoostCFrame = {Value = 50}
+	local JumpBoostTween = {Value = 1000}
+	local JumpBoostVelocity2 = {Value = 5}
+	local JumpBoostCFrame2 = {Value = 1}
+	local JumpBoostTween3 = {Value = 25}
+	local JumpBoostTween2 = {Value = 4}
+	local JumpBoostNotifyDR = {Value = 3}
+	local JumpBoostLoop = {Enabled = false}
+	local JumpBoostArray = {Enabled = true}
+	local JumpBoostNotify = {Enabled = true}
+	local JumpBoostNotifyV = {Enabled = true}
+	local JumpBoostNotifyC = {Enabled = true}
+	local JumpBoostNotifyT = {Enabled = true}
+	local JumpBoostNotifyD = {Enabled = true}
+	local JumpBoostNotifyL = {Enabled = false}
+	local JumpBoostNotifyS = {Enabled = true}
+	local JumpBoostTable = {
+		Messages = {
+			Title = "JumpBoost",
+			Context = "Boosted",
+			Context2 = "Enable when you're alive",
+			Context3 = "Enable in settings to use"
+		},
+		Sliders = {
+			Velocity = JumpBoostVelocity.Value,
+			Velocity2 = JumpBoostVelocity2.Value/10,
+			CFrame = JumpBoostCFrame.Value,
+			CFrame2 = JumpBoostCFrame2.Value/10,
+			Tween = JumpBoostTween.Value,
+			Tween2 = JumpBoostTween2.Value/10,
+			Tween3 = JumpBoostTween3.Value/10,
+			Duration = JumpBoostNotifyDR.Value
+		}
+	}
+	local function JumpBoostDisable()
+		JumpBoost.ToggleButton(false)
+		return
+	end
+	local function SendWarning()
+		if JumpBoostNotify.Enabled and JumpBoostNotifyV.Enabled then
+			warningNotification(JumpBoostTable.Messages.Title,JumpBoostTable.Messages.Context,JumpBoostTable.Sliders.Duration)
+		end
+	end
+	local function SendWarning2()
+		if JumpBoostNotify.Enabled and JumpBoostNotifyV.Enabled then
+			warningNotification(JumpBoostTable.Messages.Title,JumpBoostTable.Messages.Context,JumpBoostTable.Sliders.Duration)
+		end
+	end
+	local function SendWarning3()
+		if JumpBoostNotifyL.Enabled then
+			SendWarning()
+		end
+	end
+	JumpBoost = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+		Name = JumpBoostSettings.Visual.Name,
+        HoverText = JumpBoostSettings.Visual.HoverText,
+		Function = function(EnableBoost)
+			if EnableBoost and getgenv().JumpBoostEnabled then
+				task.spawn(function()
+					if JumpBoostMode.Value == "Velocity" then
+						if entityLibrary.isAlive then
+							if not JumpBoostLoop.Enabled then
+								entityLibrary.character.HumanoidRootPart.Velocity += Vector3.new(0,JumpBoostTable.Sliders.Velocity,0)
+								SendWarning()
+								JumpBoostDisable()
+							else
+								repeat task.wait()
+									entityLibrary.character.HumanoidRootPart.Velocity += Vector3.new(0,JumpBoostTable.Sliders.Velocity,0)
+									SendWarning3()
+									task.wait(JumpBoostTable.Sliders.Velocity2)
+								until not JumpBoost.Enabled or not JumpBoostLoop.Enabled or not entityLibrary.isAlive or JumpBoostMode.Value ~= "Velocity"
+							end
+						else
+							SendWarning2()
+							JumpBoostDisable()
+						end
+					elseif JumpBoostMode.Value == "CFrame" then
+						if entityLibrary.isAlive then
+							if not JumpBoostLoop.Enabled then
+								entityLibrary.character.HumanoidRootPart.CFrame += Vector3.new(0,JumpBoostTable.Sliders.CFrame,0)
+								SendWarning()
+								JumpBoostDisable()
+							else
+								repeat task.wait()
+									entityLibrary.character.HumanoidRootPart.CFrame += Vector3.new(0,JumpBoostTable.Sliders.CFrame,0)
+									SendWarning3()
+									task.wait(JumpBoostTable.Sliders.CFrame2)
+								until not JumpBoost.Enabled or not JumpBoostLoop.Enabled or not entityLibrary.isAlive or JumpBoostMode.Value ~= "CFrame"
+							end
+						else
+							SendWarning2()
+							JumpBoostDisable()
+						end
+					elseif JumpBoostMode.Value == "Tween" then
+						if entityLibrary.isAlive then
+							if not JumpBoostLoop.Enabled then
+								tweenService:Create(entityLibrary.character.HumanoidRootPart,TweenInfo.new(JumpBoostTable.Sliders.Tween2),{
+									CFrame = entityLibrary.character.HumanoidRootPart.CFrame + Vector3.new(0,JumpBoostTable.Sliders.Tween,0)
+								}):Play()
+								SendWarning()
+								JumpBoostDisable()
+							else
+								repeat task.wait()
+									tweenService:Create(entityLibrary.character.HumanoidRootPart,TweenInfo.new(JumpBoostTable.Sliders.Tween2),{
+										CFrame = entityLibrary.character.HumanoidRootPart.CFrame + Vector3.new(0,JumpBoostTable.Sliders.Tween,0)
+									}):Play()
+									SendWarning3()
+									task.wait(JumpBoostTable.Sliders.Tween3)
+								until not JumpBoost.Enabled or not JumpBoostLoop.Enabled or not entityLibrary.isAlive or JumpBoostMode.Value ~= "Tween"
+							end
+						else
+							if JumpBoostNotify.Enabled and JumpBoostNotifyD.Enabled then
+								warningNotification(JumpBoostTable.Messages.Title,JumpBoostTable.Messages.Context2,JumpBoostTable.Sliders.Duration)
+							end
+							JumpBoostDisable()
+						end
+					end
+				end)
+			elseif EnableBoost and not getgenv().JumpBoostEnabled then
+				if JumpBoostNotify.Enabled and JumpBoostNotifyS.Enabled then
+					warningNotification(JumpBoostTable.Messages.Title,JumpBoostTable.Messages.Context3,JumpBoostTable.Sliders.Duration)
+				end
+				JumpBoostDisable()
+			end
+		end,
+        Default = JumpBoostSettings.Inside.Default,
+		ExtraText = function()
+			if JumpBoostArray.Enabled then
+				return JumpBoostMode.Value
+			end
+		end
+	})
+	JumpBoostMode = JumpBoost.CreateDropdown({
+		Name = "Mode",
+		List = {
+			"Velocity",
+			"CFrame",
+			"Tween"
+		},
+		HoverText = "Mode to boost you",
+		Function = function() end,
+	})
+	JumpBoostVelocity = JumpBoost.CreateSlider({
+		Name = "Velocity Boost",
+		Min = 1,
+		Max = 35,
+		HoverText = "Velocity boost amount",
+		Function = function() end,
+		Default = 35
+	})
+	JumpBoostCFrame = JumpBoost.CreateSlider({
+		Name = "CFrame Boost",
+		Min = 1,
+		Max = 35,
+		HoverText = "CFrame boost amount",
+		Function = function() end,
+		Default = 35
+	})
+	JumpBoostTween = JumpBoost.CreateSlider({
+		Name = "Tween Boost",
+		Min = 1,
+		Max = 500,
+		HoverText = "Tween boost amount",
+		Function = function() end,
+		Default = 500
+	})
+	JumpBoostVelocity2 = JumpBoost.CreateSlider({
+		Name = "Velocity Slowdown",
+		Min = 1,
+		Max = 10,
+		HoverText = "Slowdown between Velocity's loop",
+		Function = function() end,
+		Default = 5
+	})
+	JumpBoostCFrame2 = JumpBoost.CreateSlider({
+		Name = "CFrame Slowdown",
+		Min = 1,
+		Max = 10,
+		HoverText = "Slowdown between CFrame's loop",
+		Function = function() end,
+		Default = 1
+	})
+	JumpBoostTween3 = JumpBoost.CreateSlider({
+		Name = "Tween Slowdown",
+		Min = 1,
+		Max = 50,
+		HoverText = "Slowdown between Tween's loop",
+		Function = function() end,
+		Default = 25
+	})
+	JumpBoostTween2 = JumpBoost.CreateSlider({
+		Name = "Tween Duration",
+		Min = 1,
+		Max = 10,
+		HoverText = "Tween duration amount",
+		Function = function() end,
+		Default = 4
+	})
+	JumpBoostNotifyDR = JumpBoost.CreateSlider({
+		Name = "Notify Duration",
+		Min = 1,
+		Max = 10,
+		HoverText = "Notify duration amount",
+		Function = function() end,
+		Default = 3
+	})
+	JumpBoostLoop = JumpBoost.CreateToggle({
+		Name = "Loop",
+		Default = false,
+		HoverText = "Loops JumpBoost until it's disabled\nLower Values if you're using it",
+		Function = function() end,
+	})
+	JumpBoostArray = JumpBoost.CreateToggle({
+		Name = "ArrayList Show",
+		Default = true,
+		HoverText = "Shows JumpBoost's mode in the ArrayList",
+		Function = function() end,
+	})
+	JumpBoostNotify = JumpBoost.CreateToggle({
+		Name = "Notification",
+		Default = true,
+		HoverText = "Notifies you when JumpBoost actioned",
+		Function = function() end,
+	})
+	JumpBoostNotifyV = JumpBoost.CreateToggle({
+		Name = "Notify Velocity",
+		Default = true,
+		HoverText = "Notifies you when you got boosted\nwith Velocity mode",
+		Function = function() end,
+	})
+	JumpBoostNotifyC = JumpBoost.CreateToggle({
+		Name = "Notify CFrame",
+		Default = true,
+		HoverText = "Notifies you when you got boosted\nwith CFrame mode",
+		Function = function() end,
+	})
+	JumpBoostNotifyT = JumpBoost.CreateToggle({
+		Name = "Notify Tween",
+		Default = true,
+		HoverText = "Notifies you when you got boosted\nwith Tween mode",
+		Function = function() end,
+	})
+	JumpBoostNotifyD = JumpBoost.CreateToggle({
+		Name = "Notify Death",
+		Default = true,
+		HoverText = "Notifies you when you're dead\nand can't use JumpBoost",
+		Function = function() end,
+	})
+	JumpBoostNotifyL = JumpBoost.CreateToggle({
+		Name = "Notify Loop",
+		Default = false,
+		HoverText = "Notifies you when you got boosted\nwhile having Loop Toggle on",
+		Function = function() end,
+	})
+	JumpBoostNotifyS = JumpBoost.CreateToggle({
+		Name = "Notify Settings",
+		Default = true,
+		HoverText = "Notifies you when JumpBoostEnabled is false (disabled)\nand can't use JumpBoost",
+		Function = function() end,
+	})
+end)
+
+run(function()
+    DeathTP = {["Enabled"] = false}
+    local oldPos
+    local DeathTP
+    local teleportingToOldLocation = false
+    local charAdded = false
+    local function onGround()
+        if not playersService.LocalPlayer.Character or not playersService.LocalPlayer.Character:FindFirstChild("LeftFoot") then return false end
+        local raycastResult = game:GetService("Workspace"):Raycast(playersService.LocalPlayer.Character.LeftFoot.Position, Vector3.new(0,-5,0))
+        if raycastResult then raycastResult = game:GetService("Workspace"):Raycast(playersService.LocalPlayer.Character.RightFoot.Position, Vector3.new(0,-5,0)) end
+        if raycastResult then raycastResult = game:GetService("Workspace"):Raycast(playersService.LocalPlayer.Character.HumanoidRootPart.Position, Vector3.new(0,-5,0)) end
+        if not raycastResult then
+            return false
+        else
+            return true
+        end
+    end
+    DeathTP = GuiLibrary["ObjectsThatCanBeSaved"]["NovolineWindow"]["Api"]["CreateOptionsButton"]({
+        ["Name"] = "AutoDeathTP",
+        ["HoverText"] = "Teleports to your previous death location",
+        ["Function"] = function(callback)
+            if callback then
+                if not charAdded then
+                    charAdded = true
+                    playersService.LocalPlayer.CharacterAdded:Connect(function()
+                        task.spawn(function()
+                            repeat task.wait() until playersService.LocalPlayer.Character and playersService.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and playersService.LocalPlayer.Character:FindFirstChild("Humanoid")
+                            local char = playersService.LocalPlayer.Character
+                    
+                            if teleportingToOldLocation then
+                                game:GetService("TweenService"):Create(char.HumanoidRootPart, TweenInfo.new(1, Enum.EasingStyle.Quad), {CFrame = oldPos}):Play()
+                                warningNotification("AutoDeathTP", "Teleporting to death location ", 5)
+                                teleportingToOldLocation = false
+                            end
+                    
+                            char.Humanoid.Died:Connect(function()
+                                if DeathTP["Enabled"] then
+                                    teleportingToOldLocation = true
+                                end
+                            end)
+                        end)
+                    end)
+                end
+
+                playersService.LocalPlayer.Character.Humanoid.Died:Connect(function()
+                    if DeathTP["Enabled"] then
+                        teleportingToOldLocation = true
+                    end
+                end)
+
+                task.spawn(function()
+                    repeat task.wait()
+                        if onGround() and not teleportingToOldLocation then
+                            oldPos = playersService.LocalPlayer.Character.HumanoidRootPart.CFrame
+                        end
+                    until not DeathTP["Enabled"]
+                end)
+            end
+        end
+    })
+end)
+
+run(function()
+    local VelocityBoost = {["Enabled"] = false}
+	local Boost = {["Value"] = 500}
+    local Gravity = {["Enabled"] = false}
+    local GravityValue = {["Value"] = 100}
+    local NotificationDuration = {["Value"] = 3}
+    local BoostNotification = {["Enabled"] = false}
+    VelocityBoost = GuiLibrary["ObjectsThatCanBeSaved"]["NovolineWindow"]["Api"]["CreateOptionsButton"]({
+        ["Name"] = "VelocityBoost",
+        ["HoverText"] = "Velocity HighJump\nCustomizable",
+        ["Function"] = function(callback)
+            if callback then 
+				VelocityBoost.ToggleButton()
+				if Gravity["enabled"] then
+                    GuiLibrary.ObjectsThatCanBeSaved.GravityOptionsButton.Api.ToggleButton(true)
+				else
+					GuiLibrary.ObjectsThatCanBeSaved.GravityOptionsButton.Api.ToggleButton(false)
+                end
+                game:GetService("Players").LocalPlayer["Character"].PrimaryPart["Velocity"] = Vector3.new(0, Boost.Value, 0)
+                height = Boost["Value"] + GravityValue["Value"]
+                if BoostNotification["Enabled"] then
+                    warningNotification("VelocityBoost", "Jumped a total of "..height.." studs.", NotificationDuration.Value)
+                end
+            end
+        end
+    })
+    GravityValue = VelocityBoost["CreateSlider"]({
+        ["Name"] = "GravityValue",
+        ["Min"] = 1,
+        ["Max"] = 196,
+        ["Default"] = "100",
+        ["Function"] = function() end
+    })
+    Boost = VelocityBoost["CreateSlider"]({
+        ["Name"] = "Boost",
+        ["Min"] = 1,
+        ["Max"] = 600,
+        ["Default"] = "500",
+        ["Function"] = function() end
+    })
+    NotificationDuration = VelocityBoost["CreateSlider"]({
+        ["Name"] = "Notify Duration",
+        ["Min"] = 1,
+        ["Max"] = 10,
+        ["Default"] = "3",
+        ["Function"] = function() end
+    })
+    Gravity = VelocityBoost["CreateToggle"]({
+        ["Name"] = "EnableGravity",
+        ["Default"] = true,
+        ["Function"] = function(callback) end
+    })
+    BoostNotification = VelocityBoost["CreateToggle"]({
+        ["Name"] = "BoostNotification",
+        ["Default"] = true,
+        ["Function"] = function(callback) end
+    })
+end)																																																																																																																																																																																																				
