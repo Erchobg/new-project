@@ -10295,3 +10295,52 @@ run(function()
         Function = function(callback) BoostNotification.Enabled = callback end
     })
 end)																																																																																																																																																																																																																																																
+local connection
+-- by nebula
+run(function()
+    local SwordOutline
+    local enabledOutlines = false
+
+    local function onChildAdded(child)
+        if child:FindFirstChild("Handle") then
+            local highlight = Instance.new('Highlight')
+            highlight.Parent = child.Handle
+            highlight.FillTransparency = 1
+            spawn(function()
+                while enabledOutlines do
+                    highlight.OutlineColor = Color3.fromRGB(221, 193, 255)
+                    wait()
+                end
+            end)
+        end
+    end
+
+    local function enableOutlines()
+        local cam = game.Workspace.CurrentCamera
+        connection = cam.Viewmodel.ChildAdded:Connect(onChildAdded)
+    end
+
+    local function disableOutlines()
+        enabledOutlines = false
+        if connection then
+            connection:Disconnect()
+            connection = nil
+        end
+    end
+
+    SwordOutline = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+        Name = "SwordOutline",
+        Function = function(callback)
+            if callback then
+                enabledOutlines = true
+                spawn(function()
+                    enableOutlines()
+                    repeat task.wait() until not enabledOutlines
+                    disableOutlines()
+                end)
+            else
+                disableOutlines()
+            end
+        end
+    })
+end)
