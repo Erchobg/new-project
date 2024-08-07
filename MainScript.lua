@@ -283,16 +283,6 @@ local Blatant = GuiLibrary.CreateWindow({
 	Icon = "vape/assets/BlatantIcon.png",
 	IconSize = 16
 })
-local Exploits = GuiLibrary.CreateWindow({
-	Name = "Exploits",
-	Icon = "vape/assets/CombatIcon.png",
-	IconSize = 16
-})
-local Customization = GuiLibrary.CreateWindow({
-	Name = "Customization",
-	Icon = "vape/assets/WorldIcon.png",
-	IconSize = 16
-})
 local Novoline = GuiLibrary.CreateWindow({
 	Name = "Novoline",
 	Icon = "vape/assets/BlatantIcon.png",
@@ -340,19 +330,7 @@ GUI.CreateButton({
 	Function = function(callback) Blatant.SetVisible(callback) end,
 	Icon = "vape/assets/BlatantIcon.png",
 	IconSize = 16
-})
-GUI.CreateButton({
-	Name = "Exploits",
-	Function = function(callback) Exploits.SetVisible(callback) end,
-	Icon = "vape/assets/CombatIcon.png",
-	IconSize = 16
-})
-GUI.CreateButton({
-	Name = "Customization",
-	Function = function(callback) Customization.SetVisible(callback) end,
-	Icon = "vape/assets/WorldIcon.png",
-	IconSize = 16
-})			
+})	
 GUI.CreateButton({
 	Name = "Novoline",
 	Function = function(callback) Novoline.SetVisible(callback) end,
@@ -1606,9 +1584,7 @@ local windowSortOrder = {
 	RenderButton = 3,
 	UtilityButton = 4,
 	WorldButton = 5,
-	NovolineWindow = 7,
-	ExploitsWindow = 8,
-	CustomizationWindow = 9,																																					
+	NovolineWindow = 7,																																				
 	FriendsButton = 6,
 	TargetsButton = 7,
 	ProfilesButton = 8
