@@ -10015,89 +10015,8 @@ BetterBreadCrumbs = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOp
 })
 
 
-function IsAlive(player)
-    player = player or lplr
-    local character = player.Character
-    if not character then return false end
-    
-    local head = character:FindFirstChild("Head")
-    local humanoid = character:FindFirstChild("Humanoid")
-    
-    if not head or not humanoid or humanoid.Health < 0.11 then
-        return false
-    end
-    
-    return true
-end
 
-run(function()
-    local FloatDisabler = {Enabled = false}
-    FloatDisabler = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
-        Name = "Float Disabler",
-        Function = function(callback)
-            if callback then
-                FloatDisabler.Enabled = true
-                spawn(function()
-                    while task.wait() do
-                        if not FloatDisabler.Enabled then return end
-                        
-                        local flyEnabled = GuiLibrary.ObjectsThatCanBeSaved.FlyOptionsButton.Api.Enabled
-                        local infiniteFlyEnabled = GuiLibrary.ObjectsThatCanBeSaved.InfiniteFlyOptionsButton.Api.Enabled
-                        
-                        if flyEnabled or infiniteFlyEnabled then
-                            if IsAlive(lplr) then
-                                local character = lplr.Character
-                                character.Archivable = true
-                                local clone = character:Clone()
                                 
-                                clone.Parent = workspace
-                                clone.Head:ClearAllChildren()
-                                gameCamera.CameraSubject = clone:FindFirstChild("Humanoid")
-
-                                for _, part in ipairs(clone:GetChildren()) do
-                                    if part:IsA("BasePart") and part.Name ~= "HumanoidRootPart" then
-                                        part.Transparency = 1
-                                    elseif part:IsA("Accessory") then
-                                        part.Handle.Transparency = 1
-                                    end
-                                end
-
-                                character.HumanoidRootPart.CFrame = character.HumanoidRootPart.CFrame + Vector3.new(0, 100000, 0)
-
-                                local connection
-                                connection = game:GetService("RunService").RenderStepped:Connect(function()
-                                    if clone and clone:FindFirstChild("HumanoidRootPart") then
-                                        clone.HumanoidRootPart.Position = Vector3.new(
-                                            character.HumanoidRootPart.Position.X,
-                                            clone.HumanoidRootPart.Position.Y,
-                                            character.HumanoidRootPart.Position.Z
-                                        )
-                                    else
-                                        connection:Disconnect()
-                                    end
-                                end)
-
-                                task.wait(0.3)
-                                character.HumanoidRootPart.Velocity = Vector3.new(
-                                    character.HumanoidRootPart.Velocity.X,
-                                    -1,
-                                    character.HumanoidRootPart.Velocity.Z
-                                )
-                                character.HumanoidRootPart.CFrame = clone.HumanoidRootPart.CFrame
-                                gameCamera.CameraSubject = character:FindFirstChild("Humanoid")
-                                clone:Destroy()
-                                task.wait(0.15)
-                            end
-                        end
-                    end
-                end)
-            else
-                FloatDisabler.Enabled = false
-            end
-        end
-    })
-end)
-
 
 
 local function IsAlive(plr)
