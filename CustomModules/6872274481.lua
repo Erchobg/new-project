@@ -9773,7 +9773,7 @@ run(function()
 			end)
 		end
 	}
-	ThemeChanger = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+	ThemeChanger = GuiLibrary.ObjectsThatCanBeSaved.CustomizationWindow.Api.CreateOptionsButton({
 		["Name"] = "ThemeChanger",
 		["Function"] = function(callback) 
 			if callback then
@@ -9803,7 +9803,7 @@ run(function()
 end)
 run(function()
 	local insta = {Enabled = false}
-	insta = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+	insta = GuiLibrary.ObjectsThatCanBeSaved.ExploitsWindow.Api.CreateOptionsButton({
 		Name = "EmberExploit",
 		Function = function(callback)
 			if callback then
