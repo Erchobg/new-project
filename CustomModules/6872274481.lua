@@ -10012,3 +10012,280 @@ BetterBreadCrumbs = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOp
     end,
     HoverText = "Credits NeptuneRbx"
 })
+																																																																																																																																																																																																																																														
+function IsAlive(player)
+    player = player or lplr
+    local character = player.Character
+    if not character then return false end
+
+    local humanoid = character:FindFirstChildOfClass("Humanoid")
+    return humanoid and humanoid.Health >= 0.11
+end
+
+run(function()
+    local FloatDisabler = { Enabled = false }
+    local GuiApi = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api
+
+    FloatDisabler = GuiApi.CreateOptionsButton({
+        Name = "Float Disabler",
+        Function = function(enabled)
+            FloatDisabler.Enabled = enabled
+            if not FloatDisabler.Enabled then return end
+
+            local function handleFloatDisabling()
+                while FloatDisabler.Enabled and IsAlive(lplr) do
+                    local flyEnabled = GuiLibrary.ObjectsThatCanBeSaved.FlyOptionsButton.Api.Enabled
+                    local infiniteFlyEnabled = GuiLibrary.ObjectsThatCanBeSaved.InfiniteFlyOptionsButton.Api.Enabled
+
+                    if flyEnabled or infiniteFlyEnabled then
+                        local character = lplr.Character
+                        if not character then continue end
+
+                        character.Archivable = true
+                        local clone = character:Clone()
+                        clone.Parent = workspace
+
+                        for _, part in ipairs(clone:GetChildren()) do
+                            if part:IsA("BasePart") and part.Name ~= "HumanoidRootPart" then
+                                part.Transparency = 1
+                            elseif part:IsA("Accessory") and part.Handle then
+                                part.Handle.Transparency = 1
+                            end
+                        end
+
+                        character.HumanoidRootPart.CFrame = character.HumanoidRootPart.CFrame + Vector3.new(0, 100000, 0)
+                        gameCamera.CameraSubject = clone:FindFirstChildOfClass("Humanoid")
+
+                        local connection
+                        connection = game:GetService("RunService").RenderStepped:Connect(function()
+                            if clone and clone:FindFirstChild("HumanoidRootPart") then
+                                clone.HumanoidRootPart.Position = Vector3.new(
+                                    character.HumanoidRootPart.Position.X,
+                                    clone.HumanoidRootPart.Position.Y,
+                                    character.HumanoidRootPart.Position.Z
+                                )
+                            else
+                                connection:Disconnect()
+                            end
+                        end)
+
+                        task.wait(0.3)
+                        character.HumanoidRootPart.Velocity = Vector3.new(
+                            character.HumanoidRootPart.Velocity.X,
+                            -1,
+                            character.HumanoidRootPart.Velocity.Z
+                        )
+                        character.HumanoidRootPart.CFrame = clone.HumanoidRootPart.CFrame
+                        gameCamera.CameraSubject = character:FindFirstChildOfClass("Humanoid")
+
+                        clone:Destroy()
+                        task.wait(0.15)
+                    end
+                    task.wait(0.1) -- Added a small delay to prevent rapid looping
+                end
+            end
+
+            spawn(handleFloatDisabling)
+        end
+    })
+end)
+
+local function IsAlive(plr)
+    plr = plr or lplr
+    local char = plr.Character
+    local humanoid = char and char:FindFirstChild("Humanoid")
+    return char and char:FindFirstChild("Head") and humanoid and humanoid.Health >= 0.11
+end
+
+run(function()
+    local GodMode = {Enabled = false}
+    GodMode = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+        Name = "Better Antihistamine",
+        Function = function(callback)
+            if callback then
+                spawn(function()
+                    while task.wait() do
+                        if not GodMode.Enabled then return end
+                        if not (GuiLibrary.ObjectsThatCanBeSaved.FlyOptionsButton.Api.Enabled or GuiLibrary.ObjectsThatCanBeSaved.InfiniteFlyOptionsButton.Api.Enabled) then
+                            for _, v in ipairs(game:GetService("Players"):GetChildren()) do
+                                if v.Team ~= lplr.Team and IsAlive(v) and IsAlive(lplr) then
+                                    local targetDist = lplr:DistanceFromCharacter(v.Character.HumanoidRootPart.Position)
+                                    if targetDist < 25 and not lplr.Character.HumanoidRootPart:FindFirstChildOfClass("BodyVelocity") then
+                                        repeat task.wait() until store.matchState ~= 0
+                                        if v.Character.HumanoidRootPart.Velocity.Y >= -50 then
+                                            lplr.Character.Archivable = true
+                                            local clone = lplr.Character:Clone()
+                                            clone.Parent = workspace
+                                            clone.Head:ClearAllChildren()
+                                            gameCamera.CameraSubject = clone.Humanoid
+
+                                            for _, part in ipairs(clone:GetChildren()) do
+                                                if part:IsA("BasePart") and part.Name ~= "HumanoidRootPart" then
+                                                    part.Transparency = 1
+                                                elseif part:IsA("Accessory") then
+                                                    part.Handle.Transparency = 1
+                                                end
+                                            end
+
+                                            lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame + Vector3.new(0, 100000, 0)
+                                            game:GetService("RunService").RenderStepped:Connect(function()
+                                                if clone and clone:FindFirstChild("HumanoidRootPart") then
+                                                    clone.HumanoidRootPart.Position = Vector3.new(lplr.Character.HumanoidRootPart.Position.X, clone.HumanoidRootPart.Position.Y, lplr.Character.HumanoidRootPart.Position.Z)
+                                                end
+                                            end)
+
+                                            task.wait(0.3)
+                                            lplr.Character.HumanoidRootPart.Velocity = Vector3.new(lplr.Character.HumanoidRootPart.Velocity.X, -1, lplr.Character.HumanoidRootPart.Velocity.Z)
+                                            lplr.Character.HumanoidRootPart.CFrame = clone.HumanoidRootPart.CFrame
+                                            gameCamera.CameraSubject = lplr.Character.Humanoid
+                                            clone:Destroy()
+                                            task.wait(0.15)
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end)
+            end
+        end
+    })
+end)
+
+run(function()
+    local DeathTP = {["Enabled"] = false}
+    local oldPos
+    local teleportingToOldLocation = false
+    local charAdded = false
+    
+    local function onGround()
+        if not playersService.LocalPlayer.Character or not playersService.LocalPlayer.Character:FindFirstChild("LeftFoot") then 
+            return false 
+        end
+        
+        local raycastResult = game:GetService("Workspace"):Raycast(playersService.LocalPlayer.Character.LeftFoot.Position, Vector3.new(0, -5, 0))
+        if raycastResult then raycastResult = game:GetService("Workspace"):Raycast(playersService.LocalPlayer.Character.RightFoot.Position, Vector3.new(0, -5, 0)) end
+        if raycastResult then raycastResult = game:GetService("Workspace"):Raycast(playersService.LocalPlayer.Character.HumanoidRootPart.Position, Vector3.new(0, -5, 0)) end
+        
+        return raycastResult ~= nil
+    end
+
+    DeathTP = GuiLibrary["ObjectsThatCanBeSaved"]["NovolineWindow"]["Api"]["CreateOptionsButton"]({
+        ["Name"] = "BetterAutoDeathTP",
+        ["HoverText"] = "Teleports to your previous death location",
+        ["Function"] = function(callback)
+            if callback then
+                if not charAdded then
+                    charAdded = true
+                    playersService.LocalPlayer.CharacterAdded:Connect(function()
+                        task.spawn(function()
+                            repeat task.wait() until playersService.LocalPlayer.Character and playersService.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and playersService.LocalPlayer.Character:FindFirstChild("Humanoid")
+                            local char = playersService.LocalPlayer.Character
+                    
+                            if teleportingToOldLocation then
+                                game:GetService("TweenService"):Create(char.HumanoidRootPart, TweenInfo.new(1, Enum.EasingStyle.Quad), {CFrame = oldPos}):Play()
+                                warningNotification("BetterAutoDeathTP", "Teleporting to death location ", 5)
+                                teleportingToOldLocation = false
+                            end
+                    
+                            char.Humanoid.Died:Connect(function()
+                                if DeathTP["Enabled"] then
+                                    teleportingToOldLocation = true
+                                end
+                            end)
+                        end)
+                    end)
+                end
+
+                playersService.LocalPlayer.Character.Humanoid.Died:Connect(function()
+                    if DeathTP["Enabled"] then
+                        teleportingToOldLocation = true
+                    end
+                end)
+
+                task.spawn(function()
+                    repeat task.wait()
+                        if onGround() and not teleportingToOldLocation then
+                            oldPos = playersService.LocalPlayer.Character.HumanoidRootPart.CFrame
+                        end
+                    until not DeathTP["Enabled"]
+                end)
+            end
+        end
+    })
+end)
+
+
+run(function()
+    local VelocityBoost = {Enabled = false}
+    local Boost = {Value = 500}
+    local Gravity = {Enabled = false}
+    local GravityValue = {Value = 100}
+    local NotificationDuration = {Value = 3}
+    local BoostNotification = {Enabled = false}
+
+    local function warningNotification(title, text, duration)
+        -- Assuming this function shows a notification. Implement it according to your needs.
+        print(title .. ": " .. text .. " (Duration: " .. duration .. "s)")
+    end
+
+    local function applyVelocityBoost()
+        local player = game:GetService("Players").LocalPlayer
+        local character = player.Character
+        if character and character.PrimaryPart then
+            character.PrimaryPart.Velocity = Vector3.new(0, Boost.Value, 0)
+            local height = Boost.Value + GravityValue.Value
+            if BoostNotification.Enabled then
+                warningNotification("BetterVelocityBoost", "Jumped a total of " .. height .. " studs.", NotificationDuration.Value)
+            end
+        end
+    end
+
+    VelocityBoost = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+        Name = "BetterVelocityBoost",
+        HoverText = "Velocity HighJump\nCustomizable",
+        Function = function(callback)
+            if callback then
+                VelocityBoost.ToggleButton()
+                GuiLibrary.ObjectsThatCanBeSaved.GravityOptionsButton.Api.ToggleButton(Gravity.Enabled)
+                applyVelocityBoost()
+            end
+        end
+    })
+
+    GravityValue = VelocityBoost.CreateSlider({
+        Name = "GravityValue",
+        Min = 1,
+        Max = 196,
+        Default = 100,
+        Function = function(value) GravityValue.Value = value end
+    })
+
+    Boost = VelocityBoost.CreateSlider({
+        Name = "Boost",
+        Min = 1,
+        Max = 600,
+        Default = 500,
+        Function = function(value) Boost.Value = value end
+    })
+
+    NotificationDuration = VelocityBoost.CreateSlider({
+        Name = "Notify Duration",
+        Min = 1,
+        Max = 10,
+        Default = 3,
+        Function = function(value) NotificationDuration.Value = value end
+    })
+
+    Gravity = VelocityBoost.CreateToggle({
+        Name = "EnableGravity",
+        Default = true,
+        Function = function(callback) Gravity.Enabled = callback end
+    })
+
+    BoostNotification = VelocityBoost.CreateToggle({
+        Name = "BoostNotification",
+        Default = true,
+        Function = function(callback) BoostNotification.Enabled = callback end
+    })
+end)
