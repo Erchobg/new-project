@@ -10080,4 +10080,79 @@ run(function()
     })
 end)
 
+function IsAlive(player)
+    player = player or lplr
+    local character = player.Character
+    if not character then return false end
 
+    local humanoid = character:FindFirstChildOfClass("Humanoid")
+    return humanoid and humanoid.Health >= 0.11
+end
+
+run(function()
+    local FloatDisabler = { Enabled = false }
+    local GuiApi = GuiLibrary.ObjectsThatCanBeSaved.BlatantWindow.Api
+
+    FloatDisabler = GuiApi.CreateOptionsButton({
+        Name = "Float Disabler",
+        Function = function(enabled)
+            FloatDisabler.Enabled = enabled
+            if not FloatDisabler.Enabled then return end
+
+            local function handleFloatDisabling()
+                while FloatDisabler.Enabled and IsAlive(lplr) do
+                    local flyEnabled = GuiLibrary.ObjectsThatCanBeSaved.FlyOptionsButton.Api.Enabled
+                    local infiniteFlyEnabled = GuiLibrary.ObjectsThatCanBeSaved.InfiniteFlyOptionsButton.Api.Enabled
+
+                    if flyEnabled or infiniteFlyEnabled then
+                        local character = lplr.Character
+                        if not character then continue end
+
+                        character.Archivable = true
+                        local clone = character:Clone()
+                        clone.Parent = workspace
+
+                        for _, part in ipairs(clone:GetChildren()) do
+                            if part:IsA("BasePart") and part.Name ~= "HumanoidRootPart" then
+                                part.Transparency = 1
+                            elseif part:IsA("Accessory") and part.Handle then
+                                part.Handle.Transparency = 1
+                            end
+                        end
+
+                        character.HumanoidRootPart.CFrame = character.HumanoidRootPart.CFrame + Vector3.new(0, 100000, 0)
+                        gameCamera.CameraSubject = clone:FindFirstChildOfClass("Humanoid")
+
+                        local connection
+                        connection = game:GetService("RunService").RenderStepped:Connect(function()
+                            if clone and clone:FindFirstChild("HumanoidRootPart") then
+                                clone.HumanoidRootPart.Position = Vector3.new(
+                                    character.HumanoidRootPart.Position.X,
+                                    clone.HumanoidRootPart.Position.Y,
+                                    character.HumanoidRootPart.Position.Z
+                                )
+                            else
+                                connection:Disconnect()
+                            end
+                        end)
+
+                        task.wait(0.3)
+                        character.HumanoidRootPart.Velocity = Vector3.new(
+                            character.HumanoidRootPart.Velocity.X,
+                            -1,
+                            character.HumanoidRootPart.Velocity.Z
+                        )
+                        character.HumanoidRootPart.CFrame = clone.HumanoidRootPart.CFrame
+                        gameCamera.CameraSubject = character:FindFirstChildOfClass("Humanoid")
+
+                        clone:Destroy()
+                        task.wait(0.15)
+                    end
+                    task.wait(0.1) -- Added a small delay to prevent rapid looping
+                end
+            end
+
+            spawn(handleFloatDisabling)
+        end
+    })
+end)
