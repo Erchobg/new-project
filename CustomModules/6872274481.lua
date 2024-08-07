@@ -10098,7 +10098,7 @@ run(function()
         Function = function(enabled)
             FloatDisabler.Enabled = enabled
             if not FloatDisabler.Enabled then return end
-
+warningNotification("Float Disabler", "now you can run 60 speed fly", 3)
             local function handleFloatDisabling()
                 while FloatDisabler.Enabled and IsAlive(lplr) do
                     local flyEnabled = GuiLibrary.ObjectsThatCanBeSaved.FlyOptionsButton.Api.Enabled
