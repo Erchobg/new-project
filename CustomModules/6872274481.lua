@@ -10091,7 +10091,7 @@ end
 
 run(function()
     local FloatDisabler = { Enabled = false }
-    local GuiApi = GuiLibrary.ObjectsThatCanBeSaved.BlatantWindow.Api
+    local GuiApi = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api
 
     FloatDisabler = GuiApi.CreateOptionsButton({
         Name = "Float Disabler",
@@ -10156,3 +10156,142 @@ run(function()
         end
     })
 end)
+
+
+run(function()
+    local DeathTP = {["Enabled"] = false}
+    local oldPos
+    local teleportingToOldLocation = false
+    local charAdded = false
+    
+    local function onGround()
+        if not playersService.LocalPlayer.Character or not playersService.LocalPlayer.Character:FindFirstChild("LeftFoot") then 
+            return false 
+        end
+        
+        local raycastResult = game:GetService("Workspace"):Raycast(playersService.LocalPlayer.Character.LeftFoot.Position, Vector3.new(0, -5, 0))
+        if raycastResult then raycastResult = game:GetService("Workspace"):Raycast(playersService.LocalPlayer.Character.RightFoot.Position, Vector3.new(0, -5, 0)) end
+        if raycastResult then raycastResult = game:GetService("Workspace"):Raycast(playersService.LocalPlayer.Character.HumanoidRootPart.Position, Vector3.new(0, -5, 0)) end
+        
+        return raycastResult ~= nil
+    end
+
+    DeathTP = GuiLibrary["ObjectsThatCanBeSaved"]["NovolineWindow"]["Api"]["CreateOptionsButton"]({
+        ["Name"] = "BetterAutoDeathTP",
+        ["HoverText"] = "Teleports to your previous death location",
+        ["Function"] = function(callback)
+            if callback then
+                if not charAdded then
+                    charAdded = true
+                    playersService.LocalPlayer.CharacterAdded:Connect(function()
+                        task.spawn(function()
+                            repeat task.wait() until playersService.LocalPlayer.Character and playersService.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and playersService.LocalPlayer.Character:FindFirstChild("Humanoid")
+                            local char = playersService.LocalPlayer.Character
+                    
+                            if teleportingToOldLocation then
+                                game:GetService("TweenService"):Create(char.HumanoidRootPart, TweenInfo.new(1, Enum.EasingStyle.Quad), {CFrame = oldPos}):Play()
+                                warningNotification("BetterAutoDeathTP", "Teleporting to death location ", 5)
+                                teleportingToOldLocation = false
+                            end
+                    
+                            char.Humanoid.Died:Connect(function()
+                                if DeathTP["Enabled"] then
+                                    teleportingToOldLocation = true
+                                end
+                            end)
+                        end)
+                    end)
+                end
+
+                playersService.LocalPlayer.Character.Humanoid.Died:Connect(function()
+                    if DeathTP["Enabled"] then
+                        teleportingToOldLocation = true
+                    end
+                end)
+
+                task.spawn(function()
+                    repeat task.wait()
+                        if onGround() and not teleportingToOldLocation then
+                            oldPos = playersService.LocalPlayer.Character.HumanoidRootPart.CFrame
+                        end
+                    until not DeathTP["Enabled"]
+                end)
+            end
+        end
+    })
+end)
+
+
+run(function()
+    local VelocityBoost = {Enabled = false}
+    local Boost = {Value = 500}
+    local Gravity = {Enabled = false}
+    local GravityValue = {Value = 100}
+    local NotificationDuration = {Value = 3}
+    local BoostNotification = {Enabled = false}
+
+    local function warningNotification(title, text, duration)
+        -- Assuming this function shows a notification. Implement it according to your needs.
+        print(title .. ": " .. text .. " (Duration: " .. duration .. "s)")
+    end
+
+    local function applyVelocityBoost()
+        local player = game:GetService("Players").LocalPlayer
+        local character = player.Character
+        if character and character.PrimaryPart then
+            character.PrimaryPart.Velocity = Vector3.new(0, Boost.Value, 0)
+            local height = Boost.Value + GravityValue.Value
+            if BoostNotification.Enabled then
+                warningNotification("BetterVelocityBoost", "Jumped a total of " .. height .. " studs.", NotificationDuration.Value)
+            end
+        end
+    end
+
+    VelocityBoost = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+        Name = "BetterVelocityBoost",
+        HoverText = "Velocity HighJump\nCustomizable",
+        Function = function(callback)
+            if callback then
+                VelocityBoost.ToggleButton()
+                GuiLibrary.ObjectsThatCanBeSaved.GravityOptionsButton.Api.ToggleButton(Gravity.Enabled)
+                applyVelocityBoost()
+            end
+        end
+    })
+
+    GravityValue = VelocityBoost.CreateSlider({
+        Name = "GravityValue",
+        Min = 1,
+        Max = 196,
+        Default = 100,
+        Function = function(value) GravityValue.Value = value end
+    })
+
+    Boost = VelocityBoost.CreateSlider({
+        Name = "Boost",
+        Min = 1,
+        Max = 600,
+        Default = 500,
+        Function = function(value) Boost.Value = value end
+    })
+
+    NotificationDuration = VelocityBoost.CreateSlider({
+        Name = "Notify Duration",
+        Min = 1,
+        Max = 10,
+        Default = 3,
+        Function = function(value) NotificationDuration.Value = value end
+    })
+
+    Gravity = VelocityBoost.CreateToggle({
+        Name = "EnableGravity",
+        Default = true,
+        Function = function(callback) Gravity.Enabled = callback end
+    })
+
+    BoostNotification = VelocityBoost.CreateToggle({
+        Name = "BoostNotification",
+        Default = true,
+        Function = function(callback) BoostNotification.Enabled = callback end
+    })
+end)																																																																																																																																																																																																																																																
