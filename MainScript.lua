@@ -283,6 +283,16 @@ local Blatant = GuiLibrary.CreateWindow({
 	Icon = "vape/assets/BlatantIcon.png",
 	IconSize = 16
 })
+local Exploits = GuiLibrary.CreateWindow({
+	Name = "Exploits",
+	Icon = "vape/assets/CombatIcon.png",
+	IconSize = 16
+})
+local Customization = GuiLibrary.CreateWindow({
+	Name = "Customization",
+	Icon = "vape/assets/WorldIcon.png",
+	IconSize = 16
+})
 local Novoline = GuiLibrary.CreateWindow({
 	Name = "Novoline",
 	Icon = "vape/assets/BlatantIcon.png",
@@ -331,6 +341,18 @@ GUI.CreateButton({
 	Icon = "vape/assets/BlatantIcon.png",
 	IconSize = 16
 })
+GUI.CreateButton({
+	Name = "Exploits",
+	Function = function(callback) Exploits.SetVisible(callback) end,
+	Icon = "vape/assets/CombatIcon.png",
+	IconSize = 16
+})
+GUI.CreateButton({
+	Name = "Customization",
+	Function = function(callback) Customization.SetVisible(callback) end,
+	Icon = "vape/assets/WorldIcon.png",
+	IconSize = 16
+})			
 GUI.CreateButton({
 	Name = "Novoline",
 	Function = function(callback) Novoline.SetVisible(callback) end,
