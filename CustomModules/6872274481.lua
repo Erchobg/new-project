@@ -10646,3 +10646,18 @@ run(function()
         HoverText = "🔥Novoline Custom Vape"
     })
 end)																																																																																																																																																																																																																																																										
+run(function()
+	InfiniteJump = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+		Name = "InfiniteJump",
+		Function = function(callback)
+			if callback then
+				local Player = game.Players.LocalPlayer
+				local UIS = game:GetService("UserInputService")
+				
+				UIS.JumpRequest:Connect(function()
+					Player.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
+				end)
+			end
+		end
+	})
+end)
