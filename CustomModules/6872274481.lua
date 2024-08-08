@@ -9829,14 +9829,29 @@ run(function()
 	insta = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
 		Name = "InfiniteJump",
 		Function = function(callback)
+			local function enableInfiniteJump(humanoid)
+				_G.InfiniteJumpConnection = game:GetService("UserInputService").JumpRequest:Connect(function()
+					humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+				end)
+			end
+
 			if callback then
 				local player = game.Players.LocalPlayer
-				local humanoid = player.Character and player.Character:FindFirstChildOfClass("Humanoid")
 
+				player.CharacterAdded:Connect(function(character)
+					if _G.InfiniteJumpConnection then
+						_G.InfiniteJumpConnection:Disconnect()
+					end
+
+					local humanoid = character:FindFirstChildOfClass("Humanoid")
+					if humanoid then
+						enableInfiniteJump(humanoid)
+					end
+				end)
+
+				local humanoid = player.Character and player.Character:FindFirstChildOfClass("Humanoid")
 				if humanoid then
-					_G.InfiniteJumpConnection = game:GetService("UserInputService").JumpRequest:Connect(function()
-						humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
-					end)
+					enableInfiniteJump(humanoid)
 				end
 			else
 				if _G.InfiniteJumpConnection then
@@ -9845,10 +9860,9 @@ run(function()
 				end
 			end
 		end,
-		HoverText = "🔥stop patching these"
+		HoverText = "🔥"
 	})
 end)
-
 run(function()
 	local AutoUpgradeEra = {}
 	AutoUpgradeEra = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
