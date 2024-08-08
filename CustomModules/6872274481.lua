@@ -10454,3 +10454,44 @@ run(function()
         HoverText = "🔥nice purple trail 🤤"
     })
 end)																																																																																																																																																																																																																																																								
+
+	run(function()
+    local insta = {Enabled = false}
+    insta = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+        Name = "Outline",
+        Function = function(callback)
+            if callback then
+                spawn(function()
+                    while task.wait() do
+                        if not insta.Enabled then return end
+
+                        if lplr.Character then
+                            local character = lplr.Character
+                            for _, part in ipairs(character:GetChildren()) do
+                                if part:IsA("BasePart") then
+                                    local highlight = Instance.new("Highlight", part)
+                                    highlight.FillTransparency = 1
+                                    highlight.OutlineTransparency = 0
+                                    highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+
+                                    spawn(function()
+                                        while task.wait(0.1) do
+                                            if not insta.Enabled then
+                                                highlight:Destroy()
+                                                return
+                                            end
+                                            highlight.OutlineColor = Color3.fromHSV(tick() % 5 / 5, 1, 1)
+                                        end
+                                    end)
+                                end
+                            end
+                        end
+                    end
+                end)
+            else
+                insta.Enabled = false
+            end
+        end,
+        HoverText = "🔥nice purple trail 🤤"
+    })
+end)																																																																																																																																																																																																																																																								
