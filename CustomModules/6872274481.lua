@@ -10088,15 +10088,17 @@ run(function()
     })
 end)
 
-function IsAlive(player)
+-- Function to check if the player is alive
+local function IsAlive(player)
     player = player or lplr
-    local character = player.Character
+    local character = player and player.Character
     if not character then return false end
 
     local humanoid = character:FindFirstChildOfClass("Humanoid")
-    return humanoid and humanoid.Health >= 0.11
+    return humanoid and humanoid.Health > 0
 end
 
+-- Main execution loop
 run(function()
     local FloatDisabler = { Enabled = false }
     local GuiApi = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api
@@ -10106,7 +10108,11 @@ run(function()
         Function = function(enabled)
             FloatDisabler.Enabled = enabled
             if not FloatDisabler.Enabled then return end
-warningNotification("Float Disabler", "now you can run 60 speed fly", 3)
+
+            warningNotification("Float Disabler", "Now you can run 60-speed fly", 3)
+	warningNotification("Float Disabler", "Don't use fly to long", 3)
+warningNotification("Float Disabler", "You will get anticheated if you use it too long", 3)																																																																																																																																																																																																																																																					
+
             local function handleFloatDisabling()
                 while FloatDisabler.Enabled and IsAlive(lplr) do
                     local flyEnabled = GuiLibrary.ObjectsThatCanBeSaved.FlyOptionsButton.Api.Enabled
@@ -10120,17 +10126,20 @@ warningNotification("Float Disabler", "now you can run 60 speed fly", 3)
                         local clone = character:Clone()
                         clone.Parent = workspace
 
+                        -- Make all parts and accessories except HumanoidRootPart invisible
                         for _, part in ipairs(clone:GetChildren()) do
                             if part:IsA("BasePart") and part.Name ~= "HumanoidRootPart" then
                                 part.Transparency = 1
-                            elseif part:IsA("Accessory") and part.Handle then
+                            elseif part:IsA("Accessory") and part:FindFirstChild("Handle") then
                                 part.Handle.Transparency = 1
                             end
                         end
 
+                        -- Teleport original character up and set camera to the clone
                         character.HumanoidRootPart.CFrame = character.HumanoidRootPart.CFrame + Vector3.new(0, 100000, 0)
                         gameCamera.CameraSubject = clone:FindFirstChildOfClass("Humanoid")
 
+                        -- Synchronize the clone's position with the original character
                         local connection
                         connection = game:GetService("RunService").RenderStepped:Connect(function()
                             if clone and clone:FindFirstChild("HumanoidRootPart") then
@@ -10144,19 +10153,25 @@ warningNotification("Float Disabler", "now you can run 60 speed fly", 3)
                             end
                         end)
 
+                        -- Add slight delay to avoid detection
                         task.wait(0.3)
+
+                        -- Set the character's velocity to counteract the lift
                         character.HumanoidRootPart.Velocity = Vector3.new(
                             character.HumanoidRootPart.Velocity.X,
                             -1,
                             character.HumanoidRootPart.Velocity.Z
                         )
+
+                        -- Teleport character back to the clone's position and reset camera
                         character.HumanoidRootPart.CFrame = clone.HumanoidRootPart.CFrame
                         gameCamera.CameraSubject = character:FindFirstChildOfClass("Humanoid")
 
+                        -- Cleanup
                         clone:Destroy()
                         task.wait(0.15)
                     end
-                    task.wait(0.1) -- Added a small delay to prevent rapid looping
+                    task.wait(0.1) -- Small delay to prevent rapid looping
                 end
             end
 
