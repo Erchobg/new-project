@@ -9824,34 +9824,31 @@ run(function()
 	})
 end)
 
-
 run(function()
-	local infinitejump = {};
-	local infinitejumpmode = {Value = 'Normal'};
-	infinitejump = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton
-		Name = 'InfiniteJump',
-		HoverText = 'Makes you never touch grass when jumping!',
-		Function = function(calling)
-			if calling then 
-				table.insert(infinitejump.Connections, inputservice.JumpRequest:Connect(function()
-					if isAlive(lplr, true) and not isflying() then 
-						local humanoid = lplr.Character:FindFirstChildOfClass('Humanoid');
-						if infinitejumpmode.Value == 'Normal' then 
-							humanoid:ChangeState(Enum.HumanoidStateType.Jumping);
-						else 
-							lplr.Character.PrimaryPart.Velocity = Vector3.new(lplr.Character.PrimaryPart.Velocity.X, humanoid.UseJumpPower and humanoid.JumpPower or 50, lplr.Character.PrimaryPart.Velocity.X);
-						end
-					end
-				end))
+	local insta = {Enabled = false}
+	insta = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+		Name = "InfiniteJump",
+		Function = function(callback)
+			if callback then
+				local player = game.Players.LocalPlayer
+				local humanoid = player.Character and player.Character:FindFirstChildOfClass("Humanoid")
+
+				if humanoid then
+					_G.InfiniteJumpConnection = game:GetService("UserInputService").JumpRequest:Connect(function()
+						humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+					end)
+				end
+			else
+				if _G.InfiniteJumpConnection then
+					_G.InfiniteJumpConnection:Disconnect()
+					_G.InfiniteJumpConnection = nil
+				end
 			end
-		end
-	})
-	infinitejumpmode = infinitejump.CreateDropdown({
-		Name = 'Mode',
-		List = {'Normal', 'Velocity'},
-		Function = void
+		end,
+		HoverText = "🔥stop patching these"
 	})
 end)
+
 run(function()
 	local AutoUpgradeEra = {}
 	AutoUpgradeEra = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
@@ -10657,86 +10654,5 @@ run(function()
         HoverText = "🔥Novoline Custom Vape"
     })
 end)																																																																																																																																																																																																																																																										
--- sup erco qwerty said i can use zephyr disabler but it was too hard to take it and function it properly so we took his pingspoof instead now get the fuck out you filthy filthy skid
 
-run(function()
-	local tws = game:GetService("TweenService")
-	local PingSpoof = {Enabled = false}
-	local PingSpoofDelay = {Value = 50}
-	local PingSpoofPart = {Enabled = true}
-	local clonepos
-	local bticks = 0
-	local Blinking = false
-	local show = false
-
-	local function roundup(num)
-		return math.ceil(num)
-	end
-
-	PingSpoof = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
-		Name = "PingSpoofer",
-		Function = function(callback)
-			if callback then 
-				bticks = 0
-				clonepos = Instance.new("Part",workspace)
-				clonepos.Position = lplr.Character.HumanoidRootPart.Position
-				clonepos.CanCollide = false
-				clonepos.Anchored = true
-				clonepos.Size = Vector3.new(3.9,5,3.9)
-				clonepos.Transparency = PingSpoofPart.Enabled and 0.65 or 1
-				clonepos.Name = "SkibidiPing"
-				RunLoops:BindToHeartbeat("PingSpoof",function()
-					clonepos.Transparency = PingSpoofPart.Enabled and 0.65 or 1
-					bticks = bticks + 1
-					if entityLibrary.isAlive then
-						if bticks >= (PingSpoofDelay.Value) then
-							sethiddenproperty(entityLibrary.character.HumanoidRootPart, "NetworkIsSleeping", false)
-							bticks = 0
-							Blinking = false
-							show = true
-						elseif bticks >= (roundup(PingSpoofDelay.Value / 50)) then
-							show = true
-						else
-							sethiddenproperty(entityLibrary.character.HumanoidRootPart, "NetworkIsSleeping", true)
-							Blinking = true
-							show = false
-						end
-					end
-					if clonepos and show then -- bticks == (roundup(PingSpoofDelay.Value / 1000))
-						local twsp = (PingSpoofDelay.Value / 1000)
-						local tweenInfo = TweenInfo.new(twsp)
-
-						local tween = tws:Create(clonepos, tweenInfo, {Position = lplr.Character.HumanoidRootPart.Position})
-						tween:Play()
-					end
-				end)
-			else 
-				RunLoops:UnbindFromHeartbeat("PingSpoof")
-				if clonepos then
-					clonepos:Destroy()
-					clonepos = nil
-				end
-			end
-		end,
-		HoverText = "Helps PingSpoof the anticheat",
-		ExtraText = function()
-			return PingSpoofDelay.Value
-		end
-	})
-	PingSpoofDelay = PingSpoof.CreateSlider({
-		Name = "Delay",
-		Min = 0,
-		Max = 300,
-		Default = 50,
-		Function = function() end
-	})
-	PingSpoofPart = PingSpoof.CreateToggle({
-		Name = "Show Part",
-		Function = function(callback)
-			if clonepos then
-				clonepos.Transparency = callback and 0.65 or 1
-			end
-		end
-	})
-end)
-																																																																																																																																																																																																																																																													
+																																																																																																																																																																																																																																																										
