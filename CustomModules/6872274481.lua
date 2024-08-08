@@ -9824,22 +9824,33 @@ run(function()
 	})
 end)
 
-run(function()
-	InfiniteJump = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
-		Name = "InfiniteJump",
-		Function = function(callback)
-			if callback then
 
+run(function()
+	local infinitejump = {};
+	local infinitejumpmode = {Value = 'Normal'};
+	infinitejump = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton
+		Name = 'InfiniteJump',
+		HoverText = 'Makes you never touch grass when jumping!',
+		Function = function(calling)
+			if calling then 
+				table.insert(infinitejump.Connections, inputservice.JumpRequest:Connect(function()
+					if isAlive(lplr, true) and not isflying() then 
+						local humanoid = lplr.Character:FindFirstChildOfClass('Humanoid');
+						if infinitejumpmode.Value == 'Normal' then 
+							humanoid:ChangeState(Enum.HumanoidStateType.Jumping);
+						else 
+							lplr.Character.PrimaryPart.Velocity = Vector3.new(lplr.Character.PrimaryPart.Velocity.X, humanoid.UseJumpPower and humanoid.JumpPower or 50, lplr.Character.PrimaryPart.Velocity.X);
+						end
+					end
+				end))
 			end
 		end
 	})
-	game:GetService("UserInputService").JumpRequest:Connect(function()
-		if not InfiniteJump.Enabled then return end
-		if lplr.Character and lplr.Character:FindFirstChildOfClass("Humanoid") then
-			local hum = lplr.Character:FindFirstChildOfClass("Humanoid")
-			hum:ChangeState("Jumping")
-		end
-	end)         
+	infinitejumpmode = infinitejump.CreateDropdown({
+		Name = 'Mode',
+		List = {'Normal', 'Velocity'},
+		Function = void
+	})
 end)
 run(function()
 	local AutoUpgradeEra = {}
