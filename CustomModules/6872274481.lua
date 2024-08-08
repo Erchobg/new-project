@@ -10472,7 +10472,7 @@ run(function()
                     targetHUD.Parent = PlayerGui
                     local frame = Instance.new("Frame")
                     frame.Size = UDim2.new(0, 200, 0, 100)
-                    frame.Position = UDim2.new(1, -210, 0.5, -50)
+                    frame.Position = UDim2.new(1, -210, 0.5, -50)  -- Position on the middle right side
                     frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
                     frame.BackgroundTransparency = 0.5
                     frame.BorderSizePixel = 0
@@ -10501,7 +10501,12 @@ run(function()
                     healthFill.Size = UDim2.new(1, 0, 1, 0)
                     healthFill.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
                     healthFill.Parent = healthBar
-                    
+
+                    -- Add rounded corners to the health bar
+                    local healthBarCorner = Instance.new("UICorner")
+                    healthBarCorner.CornerRadius = UDim.new(0, 5)
+                    healthBarCorner.Parent = healthBar
+
                     local avatarImage = Instance.new("ImageLabel")
                     avatarImage.Size = UDim2.new(0, 50, 0, 50)
                     avatarImage.Position = UDim2.new(0, 10, 0, 50)
@@ -10515,6 +10520,11 @@ run(function()
                 targetHUD.Enabled = false
                 
                 local function updateTargetHUD(player)
+                    if not shared.VapeFullyLoaded then
+                        targetHUD.Enabled = false
+                        return
+                    end
+                    
                     if not player or not player.Character or not player.Character:FindFirstChild("Humanoid") then
                         targetHUD.Enabled = false
                         return
@@ -10539,7 +10549,18 @@ run(function()
                     end
                     targetHUD.Enabled = false
                 end
+
+                local function onCharacterAdded(character)
+                    -- Re-enable HUD when respawned
+                    if InfiniteJump.Function then
+                        targetHUD.Enabled = true
+                    end
+                end
+
+                -- Connect character added event
+                LocalPlayer.CharacterAdded:Connect(onCharacterAdded)
                 
+                -- Initial HUD check
                 game:GetService("RunService").RenderStepped:Connect(onPlayerClose)
                 
                 InfiniteJump.Function = function(isEnabled)
