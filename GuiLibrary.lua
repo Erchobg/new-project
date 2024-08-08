@@ -393,7 +393,7 @@ if shared.VapeExecuted then
 	vertext.Active = false
 	vertext.TextSize = 19
 	vertext.BackgroundTransparency = 1
-	vertext.Text = "v"..VERSION
+	vertext.Text = "Current Build:"..VERSION
 	vertext.TextXAlignment = Enum.TextXAlignment.Left
 	vertext.TextYAlignment = Enum.TextYAlignment.Top
 	vertext.Position = UDim2.new(1, -(vertextsize.X) - 20, 1, -19)
