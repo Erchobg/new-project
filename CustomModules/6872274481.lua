@@ -10615,3 +10615,34 @@ run(function()
         HoverText = "🔥chatgpting this bitch"
     })
 end)
+-- by nebula																																																																																																																																																																																																																																																										
+run(function()
+    InfiniteJump = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+        Name = "Watermark",
+        Function = function(callback)
+            if callback then
+                local Players = game:GetService("Players")
+                local LocalPlayer = Players.LocalPlayer
+                local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+                
+                local function createWatermark()
+                    local watermark = Instance.new("ScreenGui")
+                    watermark.Name = "Watermark"
+                    watermark.Parent = PlayerGui
+                    local label = Instance.new("TextLabel")
+                    label.Size = UDim2.new(0, 200, 0, 50)
+                    label.Position = UDim2.new(1, -210, 0, 10)
+                    label.BackgroundTransparency = 1
+                    label.TextColor3 = Color3.fromRGB(255, 255, 255)
+                    label.TextStrokeTransparency = 0.8
+                    label.Text = "Novoline Custom Vape"
+                    label.TextScaled = true
+                    label.Parent = watermark
+                end
+                
+                createWatermark()
+            end
+        end,
+        HoverText = "🔥Novoline Custom Vape"
+    })
+end)																																																																																																																																																																																																																																																										
