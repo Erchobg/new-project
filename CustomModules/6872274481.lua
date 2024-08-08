@@ -20,6 +20,7 @@ local vapeEvents = setmetatable({}, {
 })
 local vapeTargetInfo = shared.VapeTargetInfo
 local vapeInjected = true
+local novover = "V2""
 
 local bedwars = {}
 local store = {
@@ -10646,3 +10647,30 @@ run(function()
         HoverText = "🔥Novoline Custom Vape"
     })
 end)																																																																																																																																																																																																																																																										
+run(function()
+    InfiniteJump = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+        Name = "ScytheDisabler",
+        Function = function(callback)
+            if callback then
+                local running = true
+                spawn(function()
+                    while running do
+                        local args = {
+                            [1] = {
+                                ["direction"] = Vector3.new(math.random(), math.random(), math.random())
+                            }
+                        }
+                        game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged.ScytheDash:FireServer(unpack(args))
+                        wait(0.1) -- Adjust the wait time as needed
+                    end
+                end)
+                
+                InfiniteJump.Function = function(isEnabled)
+                    running = isEnabled
+                end
+            end
+        end,
+        HoverText = "🔥Scythe Disabler"
+    })
+end)
+																																																																																																																																																																																																																																																											
