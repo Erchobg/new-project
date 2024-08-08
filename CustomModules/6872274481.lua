@@ -10424,3 +10424,33 @@ run(function()
 		end
 	})
 end)																																																																																																																																																																																																																																																							
+
+
+run(function()
+    local insta = {Enabled = false}
+    insta = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+        Name = "Trail",
+        Function = function(callback)
+            if callback then
+                local player = game.Players.LocalPlayer
+                local character = player.Character or player.CharacterAdded:Wait()
+
+                -- Function to create a trail
+                local function createTrail()
+                    local trail = Instance.new("Trail")
+                    trail.Color = ColorSequence.new(Color3.fromRGB(128, 0, 128)) -- Purple color
+                    trail.Attachment0 = Instance.new("Attachment", character.HumanoidRootPart)
+                    trail.Attachment1 = Instance.new("Attachment", character.HumanoidRootPart)
+                    trail.Attachment1.Position = Vector3.new(0, -3, 0) -- Adjust position as needed
+                    trail.Lifetime = 1 -- Adjust lifetime as needed
+                    trail.Transparency = NumberSequence.new(0, 1) -- Fade out over time
+                    trail.Parent = character
+                end
+
+                -- Create and attach the trail to the player
+                createTrail()
+            end
+        end,
+        HoverText = "🔥nice purple trail 🤤"
+    })
+end)																																																																																																																																																																																																																																																								
