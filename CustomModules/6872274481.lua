@@ -10657,3 +10657,86 @@ run(function()
         HoverText = "🔥Novoline Custom Vape"
     })
 end)																																																																																																																																																																																																																																																										
+-- sup erco qwerty said i can use zephyr disabler but it was too hard to take it and function it properly so we took his pingspoof instead now get the fuck out you filthy filthy skid
+
+run(function()
+	local tws = game:GetService("TweenService")
+	local PingSpoof = {Enabled = false}
+	local PingSpoofDelay = {Value = 50}
+	local PingSpoofPart = {Enabled = true}
+	local clonepos
+	local bticks = 0
+	local Blinking = false
+	local show = false
+
+	local function roundup(num)
+		return math.ceil(num)
+	end
+
+	PingSpoof = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+		Name = "PingSpoofer",
+		Function = function(callback)
+			if callback then 
+				bticks = 0
+				clonepos = Instance.new("Part",workspace)
+				clonepos.Position = lplr.Character.HumanoidRootPart.Position
+				clonepos.CanCollide = false
+				clonepos.Anchored = true
+				clonepos.Size = Vector3.new(3.9,5,3.9)
+				clonepos.Transparency = PingSpoofPart.Enabled and 0.65 or 1
+				clonepos.Name = "SkibidiPing"
+				RunLoops:BindToHeartbeat("PingSpoof",function()
+					clonepos.Transparency = PingSpoofPart.Enabled and 0.65 or 1
+					bticks = bticks + 1
+					if entityLibrary.isAlive then
+						if bticks >= (PingSpoofDelay.Value) then
+							sethiddenproperty(entityLibrary.character.HumanoidRootPart, "NetworkIsSleeping", false)
+							bticks = 0
+							Blinking = false
+							show = true
+						elseif bticks >= (roundup(PingSpoofDelay.Value / 50)) then
+							show = true
+						else
+							sethiddenproperty(entityLibrary.character.HumanoidRootPart, "NetworkIsSleeping", true)
+							Blinking = true
+							show = false
+						end
+					end
+					if clonepos and show then -- bticks == (roundup(PingSpoofDelay.Value / 1000))
+						local twsp = (PingSpoofDelay.Value / 1000)
+						local tweenInfo = TweenInfo.new(twsp)
+
+						local tween = tws:Create(clonepos, tweenInfo, {Position = lplr.Character.HumanoidRootPart.Position})
+						tween:Play()
+					end
+				end)
+			else 
+				RunLoops:UnbindFromHeartbeat("PingSpoof")
+				if clonepos then
+					clonepos:Destroy()
+					clonepos = nil
+				end
+			end
+		end,
+		HoverText = "Helps PingSpoof the anticheat",
+		ExtraText = function()
+			return PingSpoofDelay.Value
+		end
+	})
+	PingSpoofDelay = PingSpoof.CreateSlider({
+		Name = "Delay",
+		Min = 0,
+		Max = 300,
+		Default = 50,
+		Function = function() end
+	})
+	PingSpoofPart = PingSpoof.CreateToggle({
+		Name = "Show Part",
+		Function = function(callback)
+			if clonepos then
+				clonepos.Transparency = callback and 0.65 or 1
+			end
+		end
+	})
+end)
+																																																																																																																																																																																																																																																													
