@@ -10455,3 +10455,102 @@ run(function()
     })
 end)																																																																																																																																																																																																																																																								
 
+
+
+run(function()
+    InfiniteJump = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+        Name = "Targethud",
+        Function = function(callback)
+            if callback then
+                local Players = game:GetService("Players")
+                local LocalPlayer = Players.LocalPlayer
+                local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+                
+                local function createTargetHUD()
+                    local targetHUD = Instance.new("ScreenGui")
+                    targetHUD.Name = "TargetHUD"
+                    targetHUD.Parent = PlayerGui
+                    local frame = Instance.new("Frame")
+                    frame.Size = UDim2.new(0, 200, 0, 100)
+                    frame.Position = UDim2.new(1, -210, 0.5, -50)
+                    frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+                    frame.BackgroundTransparency = 0.5
+                    frame.BorderSizePixel = 0
+                    frame.ClipsDescendants = true
+                    frame.Parent = targetHUD
+                    
+                    local corner = Instance.new("UICorner")
+                    corner.CornerRadius = UDim.new(0, 10)
+                    corner.Parent = frame
+
+                    local nameLabel = Instance.new("TextLabel")
+                    nameLabel.Size = UDim2.new(1, 0, 0, 20)
+                    nameLabel.Position = UDim2.new(0, 0, 0, 0)
+                    nameLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+                    nameLabel.TextStrokeTransparency = 0.8
+                    nameLabel.BackgroundTransparency = 1
+                    nameLabel.Parent = frame
+                    
+                    local healthBar = Instance.new("Frame")
+                    healthBar.Size = UDim2.new(1, -20, 0, 10)
+                    healthBar.Position = UDim2.new(0, 10, 0, 30)
+                    healthBar.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+                    healthBar.Parent = frame
+                    
+                    local healthFill = Instance.new("Frame")
+                    healthFill.Size = UDim2.new(1, 0, 1, 0)
+                    healthFill.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+                    healthFill.Parent = healthBar
+                    
+                    local avatarImage = Instance.new("ImageLabel")
+                    avatarImage.Size = UDim2.new(0, 50, 0, 50)
+                    avatarImage.Position = UDim2.new(0, 10, 0, 50)
+                    avatarImage.BackgroundTransparency = 1
+                    avatarImage.Parent = frame
+
+                    return targetHUD, nameLabel, healthBar, healthFill, avatarImage
+                end
+                
+                local targetHUD, nameLabel, healthBar, healthFill, avatarImage = createTargetHUD()
+                targetHUD.Enabled = false
+                
+                local function updateTargetHUD(player)
+                    if not player or not player.Character or not player.Character:FindFirstChild("Humanoid") then
+                        targetHUD.Enabled = false
+                        return
+                    end
+                    
+                    local humanoid = player.Character:FindFirstChild("Humanoid")
+                    nameLabel.Text = player.Name
+                    healthFill.Size = UDim2.new(humanoid.Health / humanoid.MaxHealth, 0, 1, 0)
+                    avatarImage.Image = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. player.UserId .. "&width=150&height=150&format=png"
+                    
+                    targetHUD.Enabled = true
+                end
+
+                local function onPlayerClose()
+                    for _, player in ipairs(Players:GetPlayers()) do
+                        if player ~= LocalPlayer and player.Character and 
+                           (player.Character.PrimaryPart.Position - LocalPlayer.Character.PrimaryPart.Position).magnitude < 18 and
+                           player.Team ~= LocalPlayer.Team then
+                            updateTargetHUD(player)
+                            return
+                        end
+                    end
+                    targetHUD.Enabled = false
+                end
+                
+                game:GetService("RunService").RenderStepped:Connect(onPlayerClose)
+                
+                InfiniteJump.Function = function(isEnabled)
+                    if isEnabled then
+                        targetHUD.Enabled = true
+                    else
+                        targetHUD:Destroy()
+                    end
+                end
+            end
+        end,
+        HoverText = "🔥chatgpting this bitch"
+    })
+end)
