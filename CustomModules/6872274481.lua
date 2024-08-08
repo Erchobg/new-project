@@ -10471,16 +10471,16 @@ run(function()
                     targetHUD.Name = "TargetHUD"
                     targetHUD.Parent = PlayerGui
                     local frame = Instance.new("Frame")
-                    frame.Size = UDim2.new(0, 200, 0, 100)
-                    frame.Position = UDim2.new(1, -210, 0.5, -50)  -- Position on the middle right side
-                    frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-                    frame.BackgroundTransparency = 0.5
+                    frame.Size = UDim2.new(0, 200, 0, 140)
+                    frame.Position = UDim2.new(1, -210, 0.5, -70)  -- Position on the middle right side
+                    frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)  -- Black color
+                    frame.BackgroundTransparency = 0.3  -- Slight transparency
                     frame.BorderSizePixel = 0
                     frame.ClipsDescendants = true
                     frame.Parent = targetHUD
                     
                     local corner = Instance.new("UICorner")
-                    corner.CornerRadius = UDim.new(0, 10)
+                    corner.CornerRadius = UDim.new(0, 20)  -- Very round corners
                     corner.Parent = frame
 
                     local nameLabel = Instance.new("TextLabel")
@@ -10502,7 +10502,7 @@ run(function()
                     healthFill.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
                     healthFill.Parent = healthBar
 
-                    -- Add rounded corners to the health bar
+                    -- Add very rounded corners to the health bar
                     local healthBarCorner = Instance.new("UICorner")
                     healthBarCorner.CornerRadius = UDim.new(0, 5)
                     healthBarCorner.Parent = healthBar
@@ -10513,10 +10513,32 @@ run(function()
                     avatarImage.BackgroundTransparency = 1
                     avatarImage.Parent = frame
 
-                    return targetHUD, nameLabel, healthBar, healthFill, avatarImage
+                    -- Winning label
+                    local winningLabel = Instance.new("TextLabel")
+                    winningLabel.Size = UDim2.new(1, 0, 0, 20)
+                    winningLabel.Position = UDim2.new(0, 0, 0, 80)
+                    winningLabel.TextColor3 = Color3.fromRGB(0, 255, 0)
+                    winningLabel.TextStrokeTransparency = 0.8
+                    winningLabel.BackgroundTransparency = 1
+                    winningLabel.Text = "Winning!"
+                    winningLabel.Visible = false  -- Hidden by default
+                    winningLabel.Parent = frame
+
+                    -- Losing label
+                    local losingLabel = Instance.new("TextLabel")
+                    losingLabel.Size = UDim2.new(1, 0, 0, 20)
+                    losingLabel.Position = UDim2.new(0, 0, 0, 100)
+                    losingLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
+                    losingLabel.TextStrokeTransparency = 0.8
+                    losingLabel.BackgroundTransparency = 1
+                    losingLabel.Text = "Losing!"
+                    losingLabel.Visible = false  -- Hidden by default
+                    losingLabel.Parent = frame
+
+                    return targetHUD, nameLabel, healthBar, healthFill, avatarImage, winningLabel, losingLabel
                 end
                 
-                local targetHUD, nameLabel, healthBar, healthFill, avatarImage = createTargetHUD()
+                local targetHUD, nameLabel, healthBar, healthFill, avatarImage, winningLabel, losingLabel = createTargetHUD()
                 targetHUD.Enabled = false
                 
                 local function updateTargetHUD(player)
@@ -10531,9 +10553,20 @@ run(function()
                     end
                     
                     local humanoid = player.Character:FindFirstChild("Humanoid")
+                    local localHumanoid = LocalPlayer.Character:FindFirstChild("Humanoid")
+                    
                     nameLabel.Text = player.Name
                     healthFill.Size = UDim2.new(humanoid.Health / humanoid.MaxHealth, 0, 1, 0)
                     avatarImage.Image = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. player.UserId .. "&width=150&height=150&format=png"
+                    
+                    -- Show winning label if the local player's health is higher
+                    if localHumanoid and localHumanoid.Health > humanoid.Health then
+                        winningLabel.Visible = true
+                        losingLabel.Visible = false
+                    else
+                        winningLabel.Visible = false
+                        losingLabel.Visible = true
+                    end
                     
                     targetHUD.Enabled = true
                 end
@@ -10551,16 +10584,23 @@ run(function()
                 end
 
                 local function onCharacterAdded(character)
+                    local humanoid = character:WaitForChild("Humanoid")
+                    
+                    -- Ensure the HUD is only enabled after the player is fully loaded
+                    humanoid.AncestryChanged:Connect(function()
+                        if humanoid.Parent == character then
+                            targetHUD.Enabled = InfiniteJump.Function and true or false
+                        end
+                    end)
+                    
                     -- Re-enable HUD when respawned
-                    if InfiniteJump.Function then
-                        targetHUD.Enabled = true
-                    end
+                    targetHUD.Enabled = InfiniteJump.Function and true or false
                 end
 
-                -- Connect character added event
+                -- Connect character added event for local player
                 LocalPlayer.CharacterAdded:Connect(onCharacterAdded)
                 
-                -- Initial HUD check
+                -- Connect to RenderStepped to continuously check for nearby players
                 game:GetService("RunService").RenderStepped:Connect(onPlayerClose)
                 
                 InfiniteJump.Function = function(isEnabled)
