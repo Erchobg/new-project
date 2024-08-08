@@ -20,7 +20,6 @@ local vapeEvents = setmetatable({}, {
 })
 local vapeTargetInfo = shared.VapeTargetInfo
 local vapeInjected = true
-local novover = "V2"
 
 local bedwars = {}
 local store = {
