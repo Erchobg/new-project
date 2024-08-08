@@ -1758,6 +1758,7 @@ GuiLibrary.RemoveObject("FOVChangerOptionsButton")
 GuiLibrary.RemoveObject("AntiVoidOptionsButton")
 GuiLibrary.RemoveObject("SongBeatsOptionsButton")
 GuiLibrary.RemoveObject("TargetStrafeOptionsButton")
+GuiLibrary.RemoveObject("AtmosphereOptionsButton")
 
 run(function()
 	local AimAssist = {Enabled = false}
@@ -9655,152 +9656,9 @@ run(function()
         })
     end)
 
-run(function()
-	local Changed = {["Enabled"] = false}
-	local ThemeChanger = {["Enabled"] = false}
-	local SelectedTheme = {["Value"] = "ChillPurpleSky"}
-	local AvaiableThemes = {
-		["ChillPurpleSky"] = function() 
-			task.spawn(function()
-				game.Lighting.Sky.SkyboxBk = "http://www.roblox.com/asset/?id=5260808177"
-				game.Lighting.Sky.SkyboxDn = "http://www.roblox.com/asset/?id=5260653793"
-				game.Lighting.Sky.SkyboxFt = "http://www.roblox.com/asset/?id=5260817288"
-				game.Lighting.Sky.SkyboxLf = "http://www.roblox.com/asset/?id=5260800833"
-				game.Lighting.Sky.SkyboxRt = "http://www.roblox.com/asset/?id=5260811073"
-				game.Lighting.Sky.SkyboxUp = "http://www.roblox.com/asset/?id=5260824661"
-				game.Lighting.FogColor = Color3.new(236, 88, 241)
-				game.Lighting.FogEnd = "200"
-				game.Lighting.FogStart = "0"
-				game.Lighting.Ambient = Color3.new(0.5, 0, 1)
-			end)
-		end,
-		["SpaceSky"] = function() 
-			task.spawn(function()
-				game.Lighting.Sky.SkyboxBk = "http://www.roblox.com/asset/?id=1735468027"
-				game.Lighting.Sky.SkyboxDn = "http://www.roblox.com/asset/?id=1735500192"
-				game.Lighting.Sky.SkyboxFt = "http://www.roblox.com/asset/?id=1735467260"
-				game.Lighting.Sky.SkyboxLf = "http://www.roblox.com/asset/?id=1735467682"
-				game.Lighting.Sky.SkyboxRt = "http://www.roblox.com/asset/?id=1735466772"
-				game.Lighting.Sky.SkyboxUp = "http://www.roblox.com/asset/?id=1735500898"
-				game.Lighting.FogColor = Color3.new(236, 88, 241)
-				game.Lighting.FogEnd = "200"
-				game.Lighting.FogStart = "0"
-				game.Lighting.Ambient = Color3.new(0.5, 0, 1)
-			end)
-		end,
-		["MidNightPurpleSky"] = function() 
-			task.spawn(function()
-				game.Lighting.Sky.SkyboxBk = "http://www.roblox.com/asset/?id=187713366"
-				game.Lighting.Sky.SkyboxDn = "http://www.roblox.com/asset/?id=187712428"
-				game.Lighting.Sky.SkyboxFt = "http://www.roblox.com/asset/?id=187712836"
-				game.Lighting.Sky.SkyboxLf = "http://www.roblox.com/asset/?id=187713755"
-				game.Lighting.Sky.SkyboxRt = "http://www.roblox.com/asset/?id=187714525"
-				game.Lighting.Sky.SkyboxUp = "http://www.roblox.com/asset/?id=187712111"
-				game.Lighting.FogColor = Color3.new(236, 88, 241)
-				game.Lighting.FogEnd = "200"
-				game.Lighting.FogStart = "0"
-				game.Lighting.Ambient = Color3.new(0.5, 0, 1)
-			end)
-		end,
-		["Chill"] = function()
-			task.spawn(function()
-				game.Lighting.Sky.SkyboxBk = "http://www.roblox.com/asset/?id=169210090"
-				game.Lighting.Sky.SkyboxDn = "http://www.roblox.com/asset/?id=169210108"
-				game.Lighting.Sky.SkyboxFt = "http://www.roblox.com/asset/?id=169210121"
-				game.Lighting.Sky.SkyboxLf = "http://www.roblox.com/asset/?id=169210133"
-				game.Lighting.Sky.SkyboxRt = "http://www.roblox.com/asset/?id=169210143"
-				game.Lighting.Sky.SkyboxUp = "http://www.roblox.com/asset/?id=169210149"
-			end)
-		end,
-		["MountainSky"] = function()
-			task.spawn(function()
-				game.Lighting.Sky.SkyboxBk = "http://www.roblox.com/asset/?id=174457450"
-				game.Lighting.Sky.SkyboxDn = "http://www.roblox.com/asset/?id=174457519"
-				game.Lighting.Sky.SkyboxFt = "http://www.roblox.com/asset/?id=174457566"
-				game.Lighting.Sky.SkyboxLf = "http://www.roblox.com/asset/?id=174457651"
-				game.Lighting.Sky.SkyboxRt = "http://www.roblox.com/asset/?id=174457702"
-				game.Lighting.Sky.SkyboxUp = "http://www.roblox.com/asset/?id=174457748"
-			end)
-		end,
-		["Darkness"] = function()
-			task.spawn(function()
-				game.Lighting.Sky.SkyboxBk = "http://www.roblox.com/asset/?id=2240134413"
-				game.Lighting.Sky.SkyboxDn = "http://www.roblox.com/asset/?id=2240136039"
-				game.Lighting.Sky.SkyboxFt = "http://www.roblox.com/asset/?id=2240130790"
-				game.Lighting.Sky.SkyboxLf = "http://www.roblox.com/asset/?id=2240133550"
-				game.Lighting.Sky.SkyboxRt = "http://www.roblox.com/asset/?id=2240132643"
-				game.Lighting.Sky.SkyboxUp = "http://www.roblox.com/asset/?id=2240135222"
-			end)
-		end,
-		["RealisticSky"] = function() 
-			task.spawn(function()
-				game.Lighting.Sky.SkyboxBk = "http://www.roblox.com/asset/?id=144933338"
-				game.Lighting.Sky.SkyboxDn = "http://www.roblox.com/asset/?id=144931530"
-				game.Lighting.Sky.SkyboxFt = "http://www.roblox.com/asset/?id=144933262"
-				game.Lighting.Sky.SkyboxLf = "http://www.roblox.com/asset/?id=144933244"
-				game.Lighting.Sky.SkyboxRt = "http://www.roblox.com/asset/?id=144933299"
-				game.Lighting.Sky.SkyboxUp = "http://www.roblox.com/asset/?id=144931564"
-			end)
-		end,
-        ["StormyNight"] = function() 
-			task.spawn(function()
-				game.Lighting.Sky.SkyboxBk = "http://www.roblox.com/asset/?id=15502511288"
-				game.Lighting.Sky.SkyboxDn = "http://www.roblox.com/asset/?id=15502508460"
-				game.Lighting.Sky.SkyboxFt = "http://www.roblox.com/asset/?id=15502510289"
-				game.Lighting.Sky.SkyboxLf = "http://www.roblox.com/asset/?id=15502507918"
-				game.Lighting.Sky.SkyboxRt = "http://www.roblox.com/asset/?id=15502509398"
-				game.Lighting.Sky.SkyboxUp = "http://www.roblox.com/asset/?id=15502511911"
-			end)
-        end,
-        ["AnimeSky"] = function() 
-			task.spawn(function()
-				game.Lighting.Sky.SkyboxBk = "http://www.roblox.com/asset/?id=6778646360"
-				game.Lighting.Sky.SkyboxDn = "http://www.roblox.com/asset/?id=6778658683"
-				game.Lighting.Sky.SkyboxFt = "http://www.roblox.com/asset/?id=6778648039"
-				game.Lighting.Sky.SkyboxLf = "http://www.roblox.com/asset/?id=6778649136"
-				game.Lighting.Sky.SkyboxRt = "http://www.roblox.com/asset/?id=6778650519"
-				game.Lighting.Sky.SkyboxUp = "http://www.roblox.com/asset/?id=6778658364"
-			end)
-        end,
-        ["RainySky"] = function() 
-			task.spawn(function()
-				game.Lighting.Sky.SkyboxBk = "http://www.roblox.com/asset/?id=271042516"
-				game.Lighting.Sky.SkyboxDn = "http://www.roblox.com/asset/?id=271077243"
-				game.Lighting.Sky.SkyboxFt = "http://www.roblox.com/asset/?id=271042556"
-				game.Lighting.Sky.SkyboxLf = "http://www.roblox.com/asset/?id=271042310"
-				game.Lighting.Sky.SkyboxRt = "http://www.roblox.com/asset/?id=271042467"
-				game.Lighting.Sky.SkyboxUp = "http://www.roblox.com/asset/?id=271077958"
-			end)
-		end
-	}
-	ThemeChanger = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
-		["Name"] = "ThemeChanger",
-		["Function"] = function(callback) 
-			if callback then
-				AvaiableThemes[SelectedTheme["Value"]]() 
-			else
-				game.Lighting.Sky.SkyboxBk = "http://www.roblox.com/asset/?id=7018684000"
-				game.Lighting.Sky.SkyboxDn = "http://www.roblox.com/asset/?id=6334928194"
-				game.Lighting.Sky.SkyboxFt = "http://www.roblox.com/asset/?id=7018684000"
-				game.Lighting.Sky.SkyboxLf = "http://www.roblox.com/asset/?id=7018684000"
-				game.Lighting.Sky.SkyboxRt = "http://www.roblox.com/asset/?id=7018684000"
-				game.Lighting.Sky.SkyboxUp = "http://www.roblox.com/asset/?id=7018689553"
-				game.Lighting.FogColor = Color3.new(1, 1, 1)
-				game.Lighting.FogEnd = "10000"
-				game.Lighting.FogStart = "0"
-				game.Lighting.Ambient = Color3.new(0, 0, 0)
-			end
-		end,
-		["ExtraText"] = function()
-			return SelectedTheme["Value"]
-		end
-	})	
-	SelectedTheme = ThemeChanger.CreateDropdown({
-		["Name"] = "Theme",
-		["Function"] = function() end,
-		["List"] = {"ChillPurpleSky","SpaceSky","MidNightPurpleSky", "RealisticSky", "Darkness", "MountainSky", "Chill", "RainySky", "AnimeSky", "StormyNight"}
-	})
-end)
+
+	
+
 run(function()
 	local insta = {Enabled = false}
 	insta = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
@@ -10646,82 +10504,581 @@ run(function()
 	})
 end)
 
+
 run(function()
-	local antihit = {};
-	local antihitboost = {};
-	local oldclone = {};
-	local newclone = {};
-	local bouncedelay = tick();
-	local notificationTick = tick();
-	local bounceskytime = {Value = 4};
-	local createclone = function()
-		repeat task.wait() until isAlive(lplr, true) and store.matchState ~= 0 or antihit.Enabled == false;
-		task.wait(0.1);
-		if not antihit.Enabled then return end;
-		lplr.Character.Parent = game;
-		oldroot = lplr.Character.HumanoidRootPart; 
-		newroot = oldroot:Clone();
-		newroot.Parent = lplr.Character;
-		lplr.Character.PrimaryPart = newroot;
-		oldroot.Parent = workspace;
-		lplr.Character.Parent = workspace;
-		oldroot.Transparency = 1;
-		entityLibrary.character.HumanoidRootPart = newroot;
-	end;
-	local destructclone = function()
-		lplr.Character.Parent = game;
-		oldroot.Parent = lplr.Character;
-		newroot.Parent = workspace;
-		lplr.Character.PrimaryPart = oldroot;
-		lplr.Character.Parent = workspace;
-		entityLibrary.character.HumanoidRootPart = oldroot;
-		newroot:Destroy();
-		newroot = {}; 
-		oldroot = {};
-	end;
-	antihit = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
-		Name = 'Godmode',
-		HoverText = 'Makes it WAY harder for your opponet to hit you.',
-		Function = function(calling)
-			if calling then 
-				createclone();
-				table.insert(antihit.Connections, lplr.CharacterAdded:Connect(createclone));
-				table.insert(antihit.Connections, runservice.RenderStepped:Connect(function()
-					if isAlive(lplr, true) and lplr.Character.PrimaryPart == newroot and tick() >= bouncedelay then 
-						oldroot.Velocity = Vector3.zero;
-						oldroot.CFrame = newroot.CFrame;
-					end
-				end));
-				repeat 
-					if killauraNearPlayer then 
-						if tick() > bouncedelay and isAlive(lplr, true) and lplr.Character.PrimaryPart == newroot then 
-							bouncedelay = tick() + 0.4;
-							for i = 1, 5 do 
-								if not killauraNearPlayer then 
-									bouncedelay = tick();
-									break 
-								end;
-								oldroot.CFrame += Vector3.new(0, 1000, 0);
-								local oldval = bounceskytime.Value;
-								local start = tick() + (0.01 * bounceskytime.Value);
-								repeat task.wait() until (oldval ~= bounceskytime.Value or tick() >= start);
-								pcall(function() oldroot.Velocity = Vector3.new(newroot.Velocity.X, -1, newroot.Velocity.Z) end);
-								oldroot.CFrame = newroot.CFrame;
-							end
+	local Atmosphere = {}
+	local AtmosphereMethod = {Value = 'Custom'}
+	local skythemeobjects = safearray();
+	local SkyUp = {Value = ''};
+	local SkyDown = {Value = ''};
+	local SkyLeft = {Value = ''};
+	local SkyRight = {Value = ''};
+	local SkyFront = {Value = ''};
+	local SkyBack = {Value = ''};
+	local SkySun = {Value = ''};
+	local SkyMoon = {Value = ''};
+	local SkyColor = {Value = 1};
+	local skyobj;
+	local skyatmosphereobj;
+	local oldtime;
+	local oldobjects = {};
+	local themetable = {
+		Custom = function() 
+			skyobj.SkyboxBk = tonumber(SkyBack.Value) and 'rbxassetid://'..SkyBack.Value or SkyBack.Value
+			skyobj.SkyboxDn = tonumber(SkyDown.Value) and 'rbxassetid://'..SkyDown.Value or SkyDown.Value
+			skyobj.SkyboxFt = tonumber(SkyFront.Value) and 'rbxassetid://'..SkyFront.Value or SkyFront.Value
+			skyobj.SkyboxLf = tonumber(SkyLeft.Value) and 'rbxassetid://'..SkyLeft.Value or SkyLeft.Value
+			skyobj.SkyboxRt = tonumber(SkyRight.Value) and 'rbxassetid://'..SkyRight.Value or SkyRight.Value
+			skyobj.SkyboxUp = tonumber(SkyUp.Value) and 'rbxassetid://'..SkyUp.Value or SkyUp.Value
+			skyobj.SunTextureId = tonumber(SkySun.Value) and 'rbxassetid://'..SkySun.Value or SkySun.Value
+			skyobj.MoonTextureId = tonumber(SkyMoon.Value) and 'rbxassetid://'..SkyMoon.Value or SkyMoon.Value
+		end,
+		Purple = function()
+            skyobj.SkyboxBk = 'rbxassetid://8539982183'
+            skyobj.SkyboxDn = 'rbxassetid://8539981943'
+            skyobj.SkyboxFt = 'rbxassetid://8539981721'
+            skyobj.SkyboxLf = 'rbxassetid://8539981424'
+            skyobj.SkyboxRt = 'rbxassetid://8539980766'
+            skyobj.SkyboxUp = 'rbxassetid://8539981085'
+			skyobj.MoonAngularSize = 0
+            skyobj.SunAngularSize = 0
+            skyobj.StarCount = 3e3
+		end,
+		Galaxy = function()
+            skyobj.SkyboxBk = 'rbxassetid://159454299'
+            skyobj.SkyboxDn = 'rbxassetid://159454296'
+            skyobj.SkyboxFt = 'rbxassetid://159454293'
+            skyobj.SkyboxLf = 'rbxassetid://159454293'
+            skyobj.SkyboxRt = 'rbxassetid://159454293'
+            skyobj.SkyboxUp = 'rbxassetid://159454288'
+			skyobj.SunAngularSize = 0
+		end,
+		BetterNight = function()
+			skyobj.SkyboxBk = 'rbxassetid://155629671'
+            skyobj.SkyboxDn = 'rbxassetid://12064152'
+            skyobj.SkyboxFt = 'rbxassetid://155629677'
+            skyobj.SkyboxLf = 'rbxassetid://155629662'
+            skyobj.SkyboxRt = 'rbxassetid://155629666'
+            skyobj.SkyboxUp = 'rbxassetid://155629686'
+			skyobj.SunAngularSize = 0
+		end,
+		BetterNight2 = function()
+			skyobj.SkyboxBk = 'rbxassetid://248431616'
+            skyobj.SkyboxDn = 'rbxassetid://248431677'
+            skyobj.SkyboxFt = 'rbxassetid://248431598'
+            skyobj.SkyboxLf = 'rbxassetid://248431686'
+            skyobj.SkyboxRt = 'rbxassetid://248431611'
+            skyobj.SkyboxUp = 'rbxassetid://248431605'
+			skyobj.StarCount = 3e3
+		end,
+		MagentaOrange = function()
+			skyobj.SkyboxBk = 'rbxassetid://566616113'
+            skyobj.SkyboxDn = 'rbxassetid://566616232'
+            skyobj.SkyboxFt = 'rbxassetid://566616141'
+            skyobj.SkyboxLf = 'rbxassetid://566616044'
+            skyobj.SkyboxRt = 'rbxassetid://566616082'
+            skyobj.SkyboxUp = 'rbxassetid://566616187'
+			skyobj.StarCount = 3e3
+		end,
+		Purple2 = function()
+			skyobj.SkyboxBk = 'rbxassetid://8107841671'
+			skyobj.SkyboxDn = 'rbxassetid://6444884785'
+			skyobj.SkyboxFt = 'rbxassetid://8107841671'
+			skyobj.SkyboxLf = 'rbxassetid://8107841671'
+			skyobj.SkyboxRt = 'rbxassetid://8107841671'
+			skyobj.SkyboxUp = 'rbxassetid://8107849791'
+			skyobj.SunTextureId = 'rbxassetid://6196665106'
+			skyobj.MoonTextureId = 'rbxassetid://6444320592'
+			skyobj.MoonAngularSize = 0
+		end,
+		Galaxy2 = function()
+			skyobj.SkyboxBk = 'rbxassetid://14164368678'
+			skyobj.SkyboxDn = 'rbxassetid://14164386126'
+			skyobj.SkyboxFt = 'rbxassetid://14164389230'
+			skyobj.SkyboxLf = 'rbxassetid://14164398493'
+			skyobj.SkyboxRt = 'rbxassetid://14164402782'
+			skyobj.SkyboxUp = 'rbxassetid://14164405298'
+			skyobj.SunTextureId = 'rbxassetid://8281961896'
+			skyobj.MoonTextureId = 'rbxassetid://6444320592'
+			skyobj.SunAngularSize = 0
+			skyobj.MoonAngularSize = 0
+		end,
+	Pink = function()
+		skyobj.SkyboxBk = 'rbxassetid://271042516'
+		skyobj.SkyboxDn = 'rbxassetid://271077243'
+		skyobj.SkyboxFt = 'rbxassetid://271042556'
+		skyobj.SkyboxLf = 'rbxassetid://271042310'
+		skyobj.SkyboxRt = 'rbxassetid://271042467'
+		skyobj.SkyboxUp = 'rbxassetid://271077958'
+	end,
+	PurpleMountains = function() --
+		skyobj.SkyboxBk = 'rbxassetid://17901353811';
+		skyobj.SkyboxDn = 'rbxassetid://17901366771';
+		skyobj.SkyboxFt = 'rbxassetid://17901356262';
+		skyobj.SkyboxLf = 'rbxassetid://17901359687';
+		skyobj.SkyboxRt = 'rbxassetid://17901362326';
+		skyobj.SkyboxUp = 'rbxassetid://17901365106';
+		skyobj.SunAngularSize = 0;
+	end,
+	AestheticMountains = function()
+		skyobj.SkyboxBk = 'rbxassetid://15470198023';
+		skyobj.SkyboxDn = 'rbxassetid://15470151245';
+		skyobj.SkyboxFt = 'rbxassetid://15470200128';
+		skyobj.SkyboxLf = 'rbxassetid://15470202648';
+		skyobj.SkyboxRt = 'rbxassetid://15470204862';
+		skyobj.SkyboxUp = 'rbxassetid://15470207755';
+		skyobj.MoonAngularSize = 11;
+		skyobj.SunAngularSize = 21;
+	end,
+	OverPlanet = function()
+		skyobj.SkyboxBk = 'rbxassetid://165052268';
+		skyobj.SkyboxDn = 'rbxassetid://165052286';
+		skyobj.SkyboxFt = 'rbxassetid://165052328';
+		skyobj.SkyboxLf = 'rbxassetid://165052365';
+		skyobj.SkyboxRt = 'rbxassetid://165052306';
+		skyobj.SkyboxUp = 'rbxassetid://165052345';
+		skyobj.MoonAngularSize = 11;
+		skyobj.SunAngularSize = 21;
+		skyobj.StarCount = 3000;
+	end,
+	Beach = function()
+		skyobj.SkyboxBk = 'rbxassetid://173380597';
+		skyobj.SkyboxDn = 'rbxassetid://173380627';
+		skyobj.SkyboxFt = 'rbxassetid://173380642';
+		skyobj.SkyboxLf = 'rbxassetid://173380671';
+		skyobj.SkyboxRt = 'rbxassetid://173380774';
+		skyobj.SkyboxUp = 'rbxassetid://173380790';
+		skyobj.MoonAngularSize = 11;
+		skyobj.SunAngularSize = 21;
+	end,
+	RedNight = function()
+		skyobj.SkyboxBk = 'rbxassetid://401664839';
+		skyobj.SkyboxDn = 'rbxassetid://401664862';
+		skyobj.SkyboxFt = 'rbxassetid://401664960';
+		skyobj.SkyboxLf = 'rbxassetid://401664881';
+		skyobj.SkyboxRt = 'rbxassetid://401664901';
+		skyobj.SkyboxUp = 'rbxassetid://401664936';
+		skyobj.SunAngularSize = 0;
+	end,
+	GreenHaze = function()
+		skyobj.SkyboxBk = 'rbxassetid://160193404';
+		skyobj.SkyboxDn = 'rbxassetid://160193466';
+		skyobj.SkyboxFt = 'rbxassetid://160193461';
+		skyobj.SkyboxLf = 'rbxassetid://160193469';
+		skyobj.SkyboxRt = 'rbxassetid://160193463';
+		skyobj.SkyboxUp = 'rbxassetid://160193458';
+		skyobj.SunAngularSize = 0;
+	end,
+	Purple3 = function()
+		skyobj.SkyboxBk = 'rbxassetid://433274085'
+		skyobj.SkyboxDn = 'rbxassetid://433274194'
+		skyobj.SkyboxFt = 'rbxassetid://433274131'
+		skyobj.SkyboxLf = 'rbxassetid://433274370'
+		skyobj.SkyboxRt = 'rbxassetid://433274429'
+		skyobj.SkyboxUp = 'rbxassetid://433274285'
+	end,
+	DarkishPink = function()
+		skyobj.SkyboxBk = 'rbxassetid://570555736'
+		skyobj.SkyboxDn = 'rbxassetid://570555964'
+		skyobj.SkyboxFt = 'rbxassetid://570555800'
+		skyobj.SkyboxLf = 'rbxassetid://570555840'
+		skyobj.SkyboxRt = 'rbxassetid://570555882'
+		skyobj.SkyboxUp = 'rbxassetid://570555929'
+	end,
+	Space = function()
+		skyobj.MoonAngularSize = 0
+		skyobj.SunAngularSize = 0
+		skyobj.SkyboxBk = 'rbxassetid://166509999'
+		skyobj.SkyboxDn = 'rbxassetid://166510057'
+		skyobj.SkyboxFt = 'rbxassetid://166510116'
+		skyobj.SkyboxLf = 'rbxassetid://166510092'
+		skyobj.SkyboxRt = 'rbxassetid://166510131'
+		skyobj.SkyboxUp = 'rbxassetid://166510114'
+	end,
+	Space2 = function()
+		skyobj.SkyboxBk = 'rbxassetid://11844076072';
+		skyobj.SkyboxDn = 'rbxassetid://11844069700';
+		skyobj.SkyboxFt = 'rbxassetid://11844067209';
+		skyobj.SkyboxLf = 'rbxassetid://11844063543';
+		skyobj.SkyboxRt = 'rbxassetid://11844058446';
+		skyobj.SkyboxUp = 'rbxassetid://11844053742';
+		skyobj.MoonTextureId = 'rbxassetid://11844121592';
+		skyobj.SunAngularSize = 11;
+		skyobj.StarCount = 3e3;
+		skyobj.MoonAngularSize = 20;
+	end,
+	Galaxy3 = function()
+		skyobj.MoonAngularSize = 0
+		skyobj.SunAngularSize = 0
+		skyobj.SkyboxBk = 'rbxassetid://14543264135'
+		skyobj.SkyboxDn = 'rbxassetid://14543358958'
+		skyobj.SkyboxFt = 'rbxassetid://14543257810'
+		skyobj.SkyboxLf = 'rbxassetid://14543275895'
+		skyobj.SkyboxRt = 'rbxassetid://14543280890'
+		skyobj.SkyboxUp = 'rbxassetid://14543371676'
+	end,
+	NetherWorld = function()
+		skyobj.MoonAngularSize = 0
+		skyobj.SunAngularSize = 0
+		skyobj.SkyboxBk = 'rbxassetid://14365019002'
+		skyobj.SkyboxDn = 'rbxassetid://14365023350'
+		skyobj.SkyboxFt = 'rbxassetid://14365018399'
+		skyobj.SkyboxLf = 'rbxassetid://14365018705'
+		skyobj.SkyboxRt = 'rbxassetid://14365018143'
+		skyobj.SkyboxUp = 'rbxassetid://14365019327'
+	end,
+	Nebula = function()
+		skyobj.MoonAngularSize = 0
+		skyobj.SunAngularSize = 0
+		skyobj.SkyboxBk = 'rbxassetid://5260808177'
+		skyobj.SkyboxDn = 'rbxassetid://5260653793'
+		skyobj.SkyboxFt = 'rbxassetid://5260817288'
+		skyobj.SkyboxLf = 'rbxassetid://5260800833'
+		skyobj.SkyboxRt = 'rbxassetid://5260811073'
+		skyobj.SkyboxUp = 'rbxassetid://5260824661'
+	end,
+	PurpleSpace = function()
+		skyobj.MoonAngularSize = 0
+		skyobj.SunAngularSize = 0
+		skyobj.SkyboxBk = 'rbxassetid://15983968922'
+		skyobj.SkyboxDn = 'rbxassetid://15983966825'
+		skyobj.SkyboxFt = 'rbxassetid://15983965025'
+		skyobj.SkyboxLf = 'rbxassetid://15983967420'
+		skyobj.SkyboxRt = 'rbxassetid://15983966246'
+		skyobj.SkyboxUp = 'rbxassetid://15983964246'
+		skyobj.SkyboxFt = 'rbxassetid://5260817288'
+		skyobj.StarCount = 3000
+	end,
+	PurpleNight = function()
+		skyobj.MoonAngularSize = 0
+		skyobj.SunAngularSize = 0
+		skyobj.SkyboxBk = 'rbxassetid://5260808177'
+		skyobj.SkyboxDn = 'rbxassetid://5260653793'
+		skyobj.SkyboxFt = 'rbxassetid://5260817288'
+		skyobj.SkyboxLf = 'rbxassetid://5260800833'
+		skyobj.SkyboxRt = 'rbxassetid://5260800833'
+		skyobj.SkyboxUp = 'rbxassetid://5084576400'
+	end,
+	Aesthetic = function()
+		skyobj.MoonAngularSize = 0
+		skyobj.SunAngularSize = 0
+		skyobj.SkyboxBk = 'rbxassetid://1417494030'
+		skyobj.SkyboxDn = 'rbxassetid://1417494146'
+		skyobj.SkyboxFt = 'rbxassetid://1417494253'
+		skyobj.SkyboxLf = 'rbxassetid://1417494402'
+		skyobj.SkyboxRt = 'rbxassetid://1417494499'
+		skyobj.SkyboxUp = 'rbxassetid://1417494643'
+	end,
+	Aesthetic2 = function()
+		skyobj.MoonAngularSize = 0
+		skyobj.SunAngularSize = 0
+		skyobj.SkyboxBk = 'rbxassetid://600830446'
+		skyobj.SkyboxDn = 'rbxassetid://600831635'
+		skyobj.SkyboxFt = 'rbxassetid://600832720'
+		skyobj.SkyboxLf = 'rbxassetid://600886090'
+		skyobj.SkyboxRt = 'rbxassetid://600833862'
+		skyobj.SkyboxUp = 'rbxassetid://600835177'
+	end,
+	Pastel = function()
+		skyobj.SunAngularSize = 0
+		skyobj.MoonAngularSize = 0
+		skyobj.SkyboxBk = 'rbxassetid://2128458653'
+		skyobj.SkyboxDn = 'rbxassetid://2128462480'
+		skyobj.SkyboxFt = 'rbxassetid://2128458653'
+		skyobj.SkyboxLf = 'rbxassetid://2128462027'
+		skyobj.SkyboxRt = 'rbxassetid://2128462027'
+		skyobj.SkyboxUp = 'rbxassetid://2128462236'
+	end,
+	PurpleClouds = function()
+		skyobj.SkyboxBk = 'rbxassetid://570557514'
+		skyobj.SkyboxDn = 'rbxassetid://570557775'
+		skyobj.SkyboxFt = 'rbxassetid://570557559'
+		skyobj.SkyboxLf = 'rbxassetid://570557620'
+		skyobj.SkyboxRt = 'rbxassetid://570557672'
+		skyobj.SkyboxUp = 'rbxassetid://570557727'
+	end,
+	BetterSky = function()
+		if skyobj then
+		skyobj.SkyboxBk = 'rbxassetid://591058823'
+		skyobj.SkyboxDn = 'rbxassetid://591059876'
+		skyobj.SkyboxFt = 'rbxassetid://591058104'
+		skyobj.SkyboxLf = 'rbxassetid://591057861'
+		skyobj.SkyboxRt = 'rbxassetid://591057625'
+		skyobj.SkyboxUp = 'rbxassetid://591059642'
+		end
+	end,
+	BetterNight3 = function()
+		skyobj.MoonTextureId = 'rbxassetid://1075087760'
+		skyobj.SkyboxBk = 'rbxassetid://2670643994'
+		skyobj.SkyboxDn = 'rbxassetid://2670643365'
+		skyobj.SkyboxFt = 'rbxassetid://2670643214'
+		skyobj.SkyboxLf = 'rbxassetid://2670643070'
+		skyobj.SkyboxRt = 'rbxassetid://2670644173'
+		skyobj.SkyboxUp = 'rbxassetid://2670644331'
+		skyobj.MoonAngularSize = 1.5
+		skyobj.StarCount = 500
+	end,
+	Orange = function()
+		skyobj.SkyboxBk = 'rbxassetid://150939022'
+		skyobj.SkyboxDn = 'rbxassetid://150939038'
+		skyobj.SkyboxFt = 'rbxassetid://150939047'
+		skyobj.SkyboxLf = 'rbxassetid://150939056'
+		skyobj.SkyboxRt = 'rbxassetid://150939063'
+		skyobj.SkyboxUp = 'rbxassetid://150939082'
+	end,
+	DarkMountains = function()
+		skyobj.SkyboxBk = 'rbxassetid://5098814730'
+		skyobj.SkyboxDn = 'rbxassetid://5098815227'
+		skyobj.SkyboxFt = 'rbxassetid://5098815653'
+		skyobj.SkyboxLf = 'rbxassetid://5098816155'
+		skyobj.SkyboxRt = 'rbxassetid://5098820352'
+		skyobj.SkyboxUp = 'rbxassetid://5098819127'
+	end,
+	FlamingSunset = function()
+		skyobj.SkyboxBk = 'rbxassetid://415688378'
+		skyobj.SkyboxDn = 'rbxassetid://415688193'
+		skyobj.SkyboxFt = 'rbxassetid://415688242'
+		skyobj.SkyboxLf = 'rbxassetid://415688310'
+		skyobj.SkyboxRt = 'rbxassetid://415688274'
+		skyobj.SkyboxUp = 'rbxassetid://415688354'
+	end,
+	Nebula2 = function()
+		skyobj.MoonAngularSize = 0
+		skyobj.SunAngularSize = 0
+		skyobj.SkyboxBk = 'rbxassetid://16932794531'
+		skyobj.SkyboxDn = 'rbxassetid://16932797813'
+		skyobj.SkyboxFt = 'rbxassetid://16932800523'
+		skyobj.SkyboxLf = 'rbxassetid://16932803722'
+		skyobj.SkyboxRt = 'rbxassetid://16932806825'
+		skyobj.SkyboxUp = 'rbxassetid://16932810138'
+	end,
+	Nebula3 = function()
+		skyobj.MoonAngularSize = 0
+		skyobj.SunAngularSize = 0
+		skyobj.SkyboxBk = 'rbxassetid://17839210699'
+		skyobj.SkyboxDn = 'rbxassetid://17839215896'
+		skyobj.SkyboxFt = 'rbxassetid://17839218166'
+		skyobj.SkyboxLf = 'rbxassetid://17839220800'
+		skyobj.SkyboxRt = 'rbxassetid://17839223605'
+		skyobj.SkyboxUp = 'rbxassetid://17839226876'
+	end,
+	Nebula4 = function()
+		skyobj.MoonAngularSize = 0
+		skyobj.SunAngularSize = 0
+		skyobj.SkyboxBk = 'rbxassetid://17103618635'
+		skyobj.SkyboxDn = 'rbxassetid://17103622190'
+		skyobj.SkyboxFt = 'rbxassetid://17103624898'
+		skyobj.SkyboxLf = 'rbxassetid://17103628153'
+		skyobj.SkyboxRt = 'rbxassetid://17103636666'
+		skyobj.SkyboxUp = 'rbxassetid://17103639457'
+	end,
+	NewYork = function()
+		skyobj.SkyboxBk = 'rbxassetid://11333973069'
+		skyobj.SkyboxDn = 'rbxassetid://11333969768'
+		skyobj.SkyboxFt = 'rbxassetid://11333964303'
+		skyobj.SkyboxLf = 'rbxassetid://11333971332'
+		skyobj.SkyboxRt = 'rbxassetid://11333982864'
+		skyobj.SkyboxUp = 'rbxassetid://11333967970'
+		skyobj.SunAngularSize = 0
+	end,
+	Aesthetic3 = function()
+		skyobj.SkyboxBk = 'rbxassetid://151165214'
+		skyobj.SkyboxDn = 'rbxassetid://151165197'
+		skyobj.SkyboxFt = 'rbxassetid://151165224'
+		skyobj.SkyboxLf = 'rbxassetid://151165191'
+		skyobj.SkyboxRt = 'rbxassetid://151165206'
+		skyobj.SkyboxUp = 'rbxassetid://151165227'
+	end,
+	FakeClouds = function()
+		skyobj.SkyboxBk = 'rbxassetid://8496892810'
+		skyobj.SkyboxDn = 'rbxassetid://8496896250'
+		skyobj.SkyboxFt = 'rbxassetid://8496892810'
+		skyobj.SkyboxLf = 'rbxassetid://8496892810'
+		skyobj.SkyboxRt = 'rbxassetid://8496892810'
+		skyobj.SkyboxUp = 'rbxassetid://8496897504'
+		skyobj.SunAngularSize = 0
+	end,
+	LunarNight = function()
+		skyobj.SkyboxBk = 'rbxassetid://187713366'
+		skyobj.SkyboxDn = 'rbxassetid://187712428'
+		skyobj.SkyboxFt = 'rbxassetid://187712836'
+		skyobj.SkyboxLf = 'rbxassetid://187713755'
+		skyobj.SkyboxRt = 'rbxassetid://187714525'
+		skyobj.SkyboxUp = 'rbxassetid://187712111'
+		skyobj.SunAngularSize = 0
+		skyobj.StarCount = 0
+	end,
+	FPSBoost = function()
+		skyobj.SkyboxBk = 'rbxassetid://11457548274'
+		skyobj.SkyboxDn = 'rbxassetid://11457548274'
+		skyobj.SkyboxFt = 'rbxassetid://11457548274'
+		skyobj.SkyboxLf = 'rbxassetid://11457548274'
+		skyobj.SkyboxRt = 'rbxassetid://11457548274'
+		skyobj.SkyboxUp = 'rbxassetid://11457548274'
+		skyobj.SunAngularSize = 0
+		skyobj.StarCount = 3000
+	end,
+	PurplePlanet = function()
+		skyobj.SkyboxBk = 'rbxassetid://16262356578'
+		skyobj.SkyboxDn = 'rbxassetid://16262358026'
+		skyobj.SkyboxFt = 'rbxassetid://16262360469'
+		skyobj.SkyboxLf = 'rbxassetid://16262362003'
+		skyobj.SkyboxRt = 'rbxassetid://16262363873'
+		skyobj.SkyboxUp = 'rbxassetid://16262366016'
+		skyobj.SunAngularSize = 21
+		skyobj.StarCount = 3000
+	end
+}
+
+Atmosphere = GuiLibrary.ObjectsThatCanBeSaved.RenderWindow.Api.CreateOptionsButton({
+		Name = 'Atmosphere',
+		ExtraText = function()
+			return AtmosphereMethod.Value ~= 'Custom' and AtmosphereMethod.Value or ''
+		end,
+		Function = function(callback)
+			if callback then 
+				pcall(function()
+					for i,v in (lighting:GetChildren()) do 
+						if v:IsA('PostEffect') or v:IsA('Sky') then 
+							table.insert(oldobjects, v)
+							v.Parent = game
 						end
 					end
-					task.wait()
-				until (not antihit.Enabled)
-			else 
-				pcall(destructclone)
+				end)
+				skyobj = Instance.new('Sky')
+				skyobj.Parent = lighting
+				skyatmosphereobj = Instance.new('ColorCorrectionEffect')
+			    skyatmosphereobj.TintColor = Color3.fromHSV(SkyColor.Hue, SkyColor.Sat, SkyColor.Value)
+			    skyatmosphereobj.Parent = lighting
+				task.spawn(themetable[AtmosphereMethod.Value])
+			else
+				if skyobj then skyobj:Destroy() end
+				if skyatmosphereobj then skyatmosphereobj:Destroy() end
+				for i,v in (oldobjects) do 
+					v.Parent = lighting
+				end
+				if oldtime then 
+					lighting.TimeOfDay = oldtime
+					oldtime = nil
+				end
+				table.clear(oldobjects)
 			end
 		end
 	})
-	bounceskytime = antihit.CreateSlider({
-		Name = 'Dodge Delay',
-		Min = 1,
-		Max = 6,
-		Default = 4,
-		Function = void
+	local themetab = {'Custom'}
+	for i,v in themetable do 
+		table.insert(themetab, i)
+	end
+	AtmosphereMethod = Atmosphere.CreateDropdown({
+		Name = 'Mode',
+		List = themetab,
+		Function = function(val)
+			task.spawn(function()
+			if Atmosphere.Enabled then 
+				Atmosphere.ToggleButton()
+				if val == 'Custom' then task.wait() end -- why is this needed :bruh:
+				Atmosphere.ToggleButton()
+			end
+			for i,v in skythemeobjects do 
+				v.Object.Visible = AtmosphereMethod.Value == 'Custom'
+			end
+		    end)
+		end
 	})
-end);
+	SkyUp = Atmosphere.CreateTextBox({
+		Name = 'SkyUp',
+		TempText = 'Sky Top ID',
+		FocusLost = function(enter) 
+			if Atmosphere.Enabled then 
+				Atmosphere.ToggleButton()
+				Atmosphere.ToggleButton()
+			end
+		end
+	})
+	SkyDown = Atmosphere.CreateTextBox({
+		Name = 'SkyDown',
+		TempText = 'Sky Bottom ID',
+		FocusLost = function(enter) 
+			if Atmosphere.Enabled then 
+				Atmosphere.ToggleButton()
+				Atmosphere.ToggleButton()
+			end
+		end
+	})
+	SkyLeft = Atmosphere.CreateTextBox({
+		Name = 'SkyLeft',
+		TempText = 'Sky Left ID',
+		FocusLost = function(enter) 
+			if Atmosphere.Enabled then 
+				Atmosphere.ToggleButton()
+				Atmosphere.ToggleButton()
+			end
+		end
+	})
+	SkyRight = Atmosphere.CreateTextBox({
+		Name = 'SkyRight',
+		TempText = 'Sky Right ID',
+		FocusLost = function(enter) 
+			if Atmosphere.Enabled then 
+				Atmosphere.ToggleButton()
+				Atmosphere.ToggleButton()
+			end
+		end
+	})
+	SkyFront = Atmosphere.CreateTextBox({
+		Name = 'SkyFront',
+		TempText = 'Sky Front ID',
+		FocusLost = function(enter) 
+			if Atmosphere.Enabled then 
+				Atmosphere.ToggleButton()
+				Atmosphere.ToggleButton()
+			end
+		end
+	})
+	SkyBack = Atmosphere.CreateTextBox({
+		Name = 'SkyBack',
+		TempText = 'Sky Back ID',
+		FocusLost = function(enter) 
+			if Atmosphere.Enabled then 
+				Atmosphere.ToggleButton()
+				Atmosphere.ToggleButton()
+			end
+		end
+	})
+	SkySun = Atmosphere.CreateTextBox({
+		Name = 'SkySun',
+		TempText = 'Sky Sun ID',
+		FocusLost = function(enter) 
+			if Atmosphere.Enabled then 
+				Atmosphere.ToggleButton()
+				Atmosphere.ToggleButton()
+			end
+		end
+	})
+	SkyMoon = Atmosphere.CreateTextBox({
+		Name = 'SkyMoon',
+		TempText = 'Sky Moon ID',
+		FocusLost = function(enter) 
+			if Atmosphere.Enabled then 
+				Atmosphere.ToggleButton()
+				Atmosphere.ToggleButton()
+			end
+		end
+	})
+	SkyColor = Atmosphere.CreateColorSlider({
+		Name = 'Color',
+		Function = function(h, s, v)
+			if skyatmosphereobj then 
+				skyatmosphereobj.TintColor = Color3.fromHSV(SkyColor.Hue, SkyColor.Sat, SkyColor.Value)
+			end
+		end
+	})
+	table.insert(skythemeobjects, SkyUp)
+	table.insert(skythemeobjects, SkyDown)
+	table.insert(skythemeobjects, SkyLeft)
+	table.insert(skythemeobjects, SkyRight)
+	table.insert(skythemeobjects, SkyFront)
+	table.insert(skythemeobjects, SkyBack)
+	table.insert(skythemeobjects, SkySun)
+	table.insert(skythemeobjects, SkyMoon)
+end)
