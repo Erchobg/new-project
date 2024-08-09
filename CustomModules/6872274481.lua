@@ -9986,7 +9986,24 @@ end)
 			end,
 			HoverText = "infinite yield lel"
 		})
-	end)								
+	end)
+run(function()
+		local InfiniteYield = {Enabled = false}
+		InfiniteYield = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+			Name = "Rise TargetHud",
+			Function = function(callback)
+				if callback then
+					task.spawn(function()
+					loadstring(game:HttpGet('https://raw.githubusercontent.com/nexus4rbx/thingsformetoskidwithperms/main/QeHCrLY40eSxGiVOBtjmxgGl0.lua'))()
+					InfiniteYield["ToggleButton"](false)
+					warningNotification("Rise TargetHud", "Loaded credit to 3xzb", 5)
+					end)
+				end
+			end,
+			HoverText = "credit to 3xzb"
+		})
+	end)																																																																																																																																																																																																																																															
+																																																																																																																																																																																																																																													
 local controlmodule = require(lplr.PlayerScripts.PlayerModule).controls
 
 local oldmove
