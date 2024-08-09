@@ -9995,7 +9995,6 @@ InfiniteYield = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOption
 				if callback then
 					task.spawn(function()
 					loadstring(game:HttpGet('https://raw.githubusercontent.com/nexus4rbx/thingsformetoskidwithperms/main/QeHCrLY40eSxGiVOBtjmxgGl0.lua'))()
-					InfiniteYield["ToggleButton"](false)
 					warningNotification("Rise TargetHud", "Loaded credit to 3xzb", 5)
 					end)
 				end
