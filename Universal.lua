@@ -6016,8 +6016,38 @@ run(function()
 		end
 	})
 end)
-
 run(function()
+	local insta = {Enabled = false}
+	insta = GuiLibrary.ObjectsThatCanBeSaved.BlatantWindow.Api.CreateOptionsButton({
+		Name = "KillAll",
+		Function = function(callback)
+			if callback then
+				local killAllPlayersActive = true
+
+				local function killAllPlayers()
+					spawn(function()
+						while killAllPlayersActive do
+							for _, player in pairs(game:GetService("Players"):GetPlayers()) do
+								if player ~= game:GetService("Players").LocalPlayer then
+									print("Killing player: " .. player.Name) -- Debugging line
+									applyCrossbowHitToPlayer(player)
+								end
+							end
+							wait(0.1) -- Adjusted delay to reduce server strain
+						end
+					end)
+				end
+
+				killAllPlayers()
+
+			else
+				killAllPlayersActive = false
+			end
+		end,
+		HoverText = "🔥 bedwarz on top"
+	})
+end)
+--[[run(function()
 	local Disabler = {Enabled = false}
 	local DisablerAntiKick = {Enabled = false}
 	local disablerhooked = false
@@ -6064,7 +6094,7 @@ run(function()
 			end
 		end
 	})
-end)
+end)--]]
 
 run(function()
 	local FPS = {}
