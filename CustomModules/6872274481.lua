@@ -9988,8 +9988,8 @@ end)
 		})
 	end)
 run(function()
-		local InfiniteYield = {Enabled = false}
-		InfiniteYield = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+local InfiniteYield = {Enabled = false}
+InfiniteYield = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
 			Name = "Rise TargetHud",
 			Function = function(callback)
 				if callback then
