@@ -10684,4 +10684,52 @@ run(function()
     })
 end)																																																																																																																																																																																																																																																										
 
-																																																																																																																																																																																																																																																										
+run(function()
+    local insta = {Enabled = false}
+    insta = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+        Name = "Voidware Detector",
+        Function = function(callback)
+            if callback then
+                local Players = game:GetService("Players")
+                local lplr = Players.LocalPlayer
+                local TweenService = game:GetService("TweenService")
+
+                local function warningNotification(title, message, duration)
+                    GuiLibrary.CreateNotification(title, message, duration)
+                end
+
+                local function onPlayerChatted(player, message)
+                    if string.lower(message) == "voidware" then
+                        warningNotification("Voidware Detector", "Check chat, voidware autotoxic detection was triggered by " .. player.Name, 3)
+                        player.CharacterAdded:Connect(function(character)
+                            local humanoid = character:WaitForChild("Humanoid")
+                            humanoid.Died:Connect(function()
+                                player.CharacterAdded:Connect(function(newCharacter)
+                                    local rootPart = newCharacter:WaitForChild("HumanoidRootPart")
+                                    local targetPosition = Vector3.new(0, 100, 0) -- Adjust target position as needed
+                                    local tweenInfo = TweenInfo.new(2, Enum.EasingStyle.Linear)
+                                    local tween = TweenService:Create(rootPart, tweenInfo, {CFrame = CFrame.new(targetPosition)})
+                                    tween:Play()
+                                    warningNotification("Voidware Detector", player.Name .. " is using playertp or bedtp or an autowin, they are most likely using voidware", 3)
+                                end)
+                            end)
+                        end)
+                    end
+                end
+
+                for _, player in pairs(Players:GetPlayers()) do
+                    player.Chatted:Connect(function(message)
+                        onPlayerChatted(player, message)
+                    end)
+                end
+
+                Players.PlayerAdded:Connect(function(player)
+                    player.Chatted:Connect(function(message)
+                        onPlayerChatted(player, message)
+                    end)
+                end)
+            end
+        end,
+        HoverText = "🔥"
+    })
+end)																																																																																																																																																																																																																																																										
