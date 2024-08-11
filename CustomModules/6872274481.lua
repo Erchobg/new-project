@@ -10665,3 +10665,18 @@ run(function()
         HoverText = "🔥"
     })
 end)																																																																																																																																																																																																																																																										
+run(function()
+local InfiniteYield = {Enabled = false}
+InfiniteYield = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+			Name = "HotbarMods",
+			Function = function(callback)
+				if callback then
+					task.spawn(function()
+					loadstring(game:HttpGet('https://raw.githubusercontent.com/nexus4rbx/thingsformetoskidwithperms/main/Rn7IMaxK3zd3bfgL55KB8AN0l.lua'))()
+					warningNotification("HotbarMods", "Loaded credit to 3xzb", 5)
+					end)
+				end
+			end,
+			HoverText = "credit to 3xzb"
+		})
+	end)		
