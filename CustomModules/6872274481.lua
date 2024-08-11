@@ -7522,7 +7522,7 @@ run(function()
 						if killed == lplr then
 							if (not leavesaid) and killer ~= lplr and AutoToxicDeath.Enabled then
 								leavesaid = true
-								local custommsg = #AutoToxicPhrases3.ObjectList > 0 and AutoToxicPhrases3.ObjectList[math.random(1, #AutoToxicPhrases3.ObjectList)] or "My gaming chair expired midfight, thats why you won <name> | vxpe on top"
+								local custommsg = #AutoToxicPhrases3.ObjectList > 0 and AutoToxicPhrases3.ObjectList[math.random(1, #AutoToxicPhrases3.ObjectList)] or "My gaming chair expired midfight, thats why you won <name> | Novoline on top"
 								if custommsg then
 									custommsg = custommsg:gsub("<name>", (killer.DisplayName or killer.Name))
 								end
@@ -7534,9 +7534,9 @@ run(function()
 							end
 						else
 							if killer == lplr and AutoToxicFinalKill.Enabled then
-								local custommsg = #AutoToxicPhrases2.ObjectList > 0 and AutoToxicPhrases2.ObjectList[math.random(1, #AutoToxicPhrases2.ObjectList)] or "L <name> | vxpe on top"
+								local custommsg = #AutoToxicPhrases2.ObjectList > 0 and AutoToxicPhrases2.ObjectList[math.random(1, #AutoToxicPhrases2.ObjectList)] or "L <name> | Novoline on top"
 								if custommsg == lastsaid then
-									custommsg = #AutoToxicPhrases2.ObjectList > 0 and AutoToxicPhrases2.ObjectList[math.random(1, #AutoToxicPhrases2.ObjectList)] or "L <name> | vxpe on top"
+									custommsg = #AutoToxicPhrases2.ObjectList > 0 and AutoToxicPhrases2.ObjectList[math.random(1, #AutoToxicPhrases2.ObjectList)] or "L <name> | Novoline on top"
 								else
 									lastsaid = custommsg
 								end
@@ -7562,7 +7562,7 @@ run(function()
 							end
 						end
 						if AutoToxicWin.Enabled then
-							local custommsg = #AutoToxicPhrases.ObjectList > 0 and AutoToxicPhrases.ObjectList[math.random(1, #AutoToxicPhrases.ObjectList)] or "EZ L TRASH KIDS | vxpe on top"
+							local custommsg = #AutoToxicPhrases.ObjectList > 0 and AutoToxicPhrases.ObjectList[math.random(1, #AutoToxicPhrases.ObjectList)] or "This win was easier then snapping a twig | Novoline on top"
 							if textChatService.ChatVersion == Enum.ChatVersion.TextChatService then
 								textChatService.ChatInputBarConfiguration.TargetTextChannel:SendAsync(custommsg)
 							else
@@ -7577,7 +7577,7 @@ run(function()
 						if custommsg then
 							custommsg = custommsg:gsub("<name>", (plr.DisplayName or plr.Name))
 						end
-						local msg = custommsg or "Imagine lagbacking L "..(plr.DisplayName or plr.Name).." | vxpe on top"
+						local msg = custommsg or "Imagine getting flagged L "..(plr.DisplayName or plr.Name).." | Novoline on top"
 						if textChatService.ChatVersion == Enum.ChatVersion.TextChatService then
 							textChatService.ChatInputBarConfiguration.TargetTextChannel:SendAsync(msg)
 						else
@@ -7597,7 +7597,7 @@ run(function()
 								if custommsg then
 									custommsg = custommsg:gsub("<name>", (plr.DisplayName or plr.Name))
 								end
-								local msg = custommsg or "I don't care about the fact that I'm hacking, I care about you dying in a block game. L "..(plr.DisplayName or plr.Name).." | vxpe on top"
+								local msg = custommsg or "I don't care about the fact that I'm exploiting, I care about you dying in a block game. L "..(plr.DisplayName or plr.Name).." | Novoline on top"
 								if textChatService.ChatVersion == Enum.ChatVersion.TextChatService then
 									textChatService.ChatInputBarConfiguration.TargetTextChannel:SendAsync(msg)
 								else
@@ -10664,18 +10664,3 @@ run(function()
         HoverText = "🔥"
     })
 end)																																																																																																																																																																																																																																																										
-run(function()
-local InfiniteYield = {Enabled = false}
-InfiniteYield = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
-			Name = "HotbarMods",
-			Function = function(callback)
-				if callback then
-					task.spawn(function()
-					loadstring(game:HttpGet('https://raw.githubusercontent.com/nexus4rbx/thingsformetoskidwithperms/main/QeHCrLY40eSxGiVOBtjmxgGl0.lua'))()
-					warningNotification("HotbarMods", "Loaded credit to 3xzb", 5)
-					end)
-				end
-			end,
-			HoverText = "credit to 3xzb"
-		})
-	end)		
