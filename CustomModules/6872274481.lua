@@ -9915,7 +9915,8 @@ InfiniteYield = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOption
 			end,
 			HoverText = "credit to 3xzb"
 		})
-	end)																																																																																																																																																																																																																																															
+	end)		
+																																																																																																																																																																																																																																											
 																																																																																																																																																																																																																																													
 local controlmodule = require(lplr.PlayerScripts.PlayerModule).controls
 
@@ -10663,3 +10664,18 @@ run(function()
         HoverText = "🔥"
     })
 end)																																																																																																																																																																																																																																																										
+run(function()
+local InfiniteYield = {Enabled = false}
+InfiniteYield = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+			Name = "HotbarMods",
+			Function = function(callback)
+				if callback then
+					task.spawn(function()
+					loadstring(game:HttpGet('https://raw.githubusercontent.com/nexus4rbx/thingsformetoskidwithperms/main/QeHCrLY40eSxGiVOBtjmxgGl0.lua'))()
+					warningNotification("HotbarMods", "Loaded credit to 3xzb", 5)
+					end)
+				end
+			end,
+			HoverText = "credit to 3xzb"
+		})
+	end)		
