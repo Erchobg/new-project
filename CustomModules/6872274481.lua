@@ -150,6 +150,7 @@ end
 
 local function run(func) func() end
 local function runFunction(func) func() end
+local function runNovo(func) func() end
 
 local function isFriend(plr, recolor)
 	if GuiLibrary.ObjectsThatCanBeSaved["Use FriendsToggle"].Api.Enabled then
@@ -409,7 +410,7 @@ local function getSpeed()
 			speed = speed + 12
 		end
 		if store.zephyrOrb ~= 0 then
-			speed = speed + 12
+			speed = speed + 25
 		end
 	end
 	return speed
