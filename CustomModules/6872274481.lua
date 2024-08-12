@@ -10681,3 +10681,74 @@ InfiniteYield = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOption
 			HoverText = "credit to 3xzb"
 		})
 	end)		
+
+run(function()
+				pcall(GuiLibrary.RemoveObject, "ShaderOptionsButton")
+				local Shader = {Enabled = false}
+				local BlurSize = {Value = 2}
+				local ShaderTintSlider
+				local ShaderBlur
+				local ShaderTint
+				local oldlightingsettings = {
+					["Brightness"] = lightingService.Brightness,
+					["ColorShift_Top"] = lightingService.ColorShift_Top,
+					["ColorShift_Bottom"] = lightingService.ColorShift_Bottom,
+					["OutdoorAmbient"] = lightingService.OutdoorAmbient,
+					["ClockTime"] = lightingService.ClockTime,
+					["ExposureCompensation"] = lightingService.ExposureCompensation,
+					["ShadowSoftness"] = lightingService.ShadowSoftness,
+					["Ambient"] = lightingService.Ambient
+				}
+				Shader = GuiLibrary.ObjectsThatCanBeSaved.WorldWindow.Api.CreateOptionsButton({
+					Name = "Shader",
+					HoverText = "pro shader",
+					ExtraText = function() return "Vanilla" end,
+					Approved = true,
+					Function = function(callback)
+						if callback then 
+							task.spawn(function()
+								pcall(function()
+								ShaderBlur = Instance.new("BlurEffect")
+								ShaderBlur.Parent = lightingService
+								ShaderBlur.Size = 4
+								end)
+								pcall(function()
+									ShaderTint = Instance.new("ColorCorrectionEffect")
+									ShaderTint.Parent = lightingService
+									ShaderTint.Saturation = -0.2
+				                    ShaderTint.TintColor = Color3.fromRGB(255, 224, 219)
+								end)
+								pcall(function()
+				                    lightingService.ColorShift_Bottom = Color3.fromRGB(172, 18, 255)
+									lightingService.ColorShift_Top = Color3.fromRGB(172, 18, 255)
+									lightingService.OutdoorAmbient = Color3.fromRGB(172, 18, 255)
+									lightingService.ClockTime = 8.7
+									lightingService.FogColor = Color3.fromRGB(172, 18, 255)
+									lightingService.FogEnd = 1000
+									lightingService.FogStart = 0
+									lightingService.ExposureCompensation = 0.24
+									lightingService.ShadowSoftness = 0
+									lightingService.Ambient = Color3.fromRGB(59, 33, 27)
+								end)
+							end)
+						else
+							pcall(function() ShaderBlur:Destroy() end)
+							pcall(function() ShaderTint:Destroy() end)
+							pcall(function()
+							lightingService.Brightness = oldlightingsettings.Brightness
+							lightingService.ColorShift_Top = oldlightingsettings.ColorShift_Top
+							lightingService.ColorShift_Bottom = oldlightingsettings.ColorShift_Bottom
+							lightingService.OutdoorAmbient = oldlightingsettings.OutdoorAmbient
+							lightingService.ClockTime = oldlightingsettings.ClockTime
+							lightingService.ExposureCompensation = oldlightingsettings.ExposureCompensation
+							lightingService.ShadowSoftness = oldlightingsettings.ShadowSoftnesss
+							lightingService.Ambient = oldlightingsettings.Ambient
+							lightingService.FogColor = oldthemesettings.FogColor
+							lightingService.FogStart = oldthemesettings.FogStart
+							lightingService.FogEnd = oldthemesettings.FogEnd
+							end)
+						end
+					end
+				})	
+			end)
+																																																																																																																																																																																																																																																												
