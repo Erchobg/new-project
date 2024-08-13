@@ -10617,7 +10617,20 @@ run(function()
         HoverText = "🔥Novoline Custom Vape"
     })
 end)																																																																																																																																																																																																																																																										
-
+if shared.VapePrivate = true then
+runFunction(function()
+    local Dupe = {Enabled = false}
+	Dupe = GuiLibrary.ObjectsThatCanBeSaved.BlatantWindow.Api.CreateOptionsButton({
+		Name = "SetHealth",
+		Function = function(callback) 
+			if callback then
+	game:GetService("Workspace")[game:GetService("Players").LocalPlayer.Name]:SetAttribute("MaxHealth", 465465465)
+game:GetService("Workspace")[game:GetService("Players").LocalPlayer.Name]:SetAttribute("Health", 465465465)
+			end
+		end,
+		HoverText = "real"
+	})
+end)																																																																																																																																																																																																																																																										
 run(function()
     local insta = {Enabled = false}
     insta = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
@@ -10753,17 +10766,5 @@ run(function()
 				})	
 			end)
 																																																																																																																																																																																																																																																												
-runFunction(function()
-    local Dupe = {Enabled = false}
-	Dupe = GuiLibrary.ObjectsThatCanBeSaved.BlatantWindow.Api.CreateOptionsButton({
-		Name = "SetHealth (YOU NEED ANTIHISTAMINE)",
-		Function = function(callback) 
-			if callback then
-	game:GetService("Workspace")[game:GetService("Players").LocalPlayer.Name]:SetAttribute("MaxHealth", 465465465)
-game:GetService("Workspace")[game:GetService("Players").LocalPlayer.Name]:SetAttribute("Health", 465465465)
-			end
-		end,
-		HoverText = "real"
-	})
-end)
-																																																																																																																																																																																																																																																													
+
+																																																																																																																																																													
