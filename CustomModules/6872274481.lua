@@ -10617,7 +10617,6 @@ run(function()
         HoverText = "🔥Novoline Custom Vape"
     })
 end)																																																																																																																																																																																																																																																										
-if shared.VapePrivate = true then
 runFunction(function()
     local Dupe = {Enabled = false}
 	Dupe = GuiLibrary.ObjectsThatCanBeSaved.BlatantWindow.Api.CreateOptionsButton({
