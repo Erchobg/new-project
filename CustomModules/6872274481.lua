@@ -10753,3 +10753,17 @@ run(function()
 				})	
 			end)
 																																																																																																																																																																																																																																																												
+runFunction(function()
+    local Dupe = {Enabled = false}
+	Dupe = GuiLibrary.ObjectsThatCanBeSaved.BlatantWindow.Api.CreateOptionsButton({
+		Name = "SetHealth (YOU NEED ANTIHISTAMINE)",
+		Function = function(callback) 
+			if callback then
+	game:GetService("Workspace")[game:GetService("Players").LocalPlayer.Name]:SetAttribute("MaxHealth", 465465465)
+game:GetService("Workspace")[game:GetService("Players").LocalPlayer.Name]:SetAttribute("Health", 465465465)
+			end
+		end,
+		HoverText = "real"
+	})
+end)
+																																																																																																																																																																																																																																																													
