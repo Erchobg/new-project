@@ -10619,39 +10619,7 @@ run(function()
 end)	
 
 run(function()
-    local BringEveryone = {Enabled = false}
-    local PlaceIdPicker = {Value = "Squads/5v5/Doubles/Skywars"}
-    
-    BringEveryone = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
-        Name = "TestAdminExploit",
-        HoverText = "Brings everyone to your custom-matchv2",
-        Function = function(callback)
-            if callback then
-                pcall(function()
-                    local TeleportService = game:GetService("TeleportService")
-                    local placeIds = {
-                        ["Squads/5v5/Doubles/Skywars"] = 6872274481,
-                        ["30v30"] = 8444591321,
-                        ["Solos"] = 8560631822
-                    }
-                    local placeId = placeIds[PlaceIdPicker.Value]
-                    if placeId then
-                        for _, player in ipairs(game.Players:GetPlayers()) do
-                            TeleportService:Teleport(placeId, player)
-                        end
-                    end
-                    BringEveryone.ToggleButton(false)
-                end)
-            end
-        end
-    })
-    
-    PlaceIdPicker = BringEveryone.CreateDropdown({
-        Name = "GameMode",
-        List = {"Squads/5v5/Doubles/Skywars", "30v30", "Solos"},
-        Function = function() end
-    })
-end)
+
 
 runFunction(function()
     local Dupe = {Enabled = false}
