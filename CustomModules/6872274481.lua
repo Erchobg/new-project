@@ -10428,7 +10428,7 @@ end)
 
 
 
-run(function()
+--[[run(function()
     InfiniteJump = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
         Name = "Targethud",
         Function = function(callback)
@@ -10585,7 +10585,7 @@ run(function()
         end,
         HoverText = "🔥chatgpting this bitch"
     })
-end)
+end)--]]
 -- by nebula																																																																																																																																																																																																																																																										
 run(function()
     InfiniteJump = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
