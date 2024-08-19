@@ -9895,7 +9895,7 @@ end)
 			Function = function(callback)
 				if callback then
 					task.spawn(function()
-					loadstring(game:HttpGet('https://raw.githubusercontent.com/SkireScripts/Ouxie/main/Projects/simplebypass.lua'))()
+				loadstring(game:HttpGet("https://raw.githubusercontent.com/hellohellohell012321/KAWAII-BYPASS/main/kawaii-bypass",true))()
 					InfiniteYield["ToggleButton"](false)
 					warningNotification("Chat Bypass", "Loaded", 5)
 					end)
@@ -9974,14 +9974,9 @@ BetterBreadCrumbs = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOp
                                 
 
 
-local function IsAlive(plr)
-    plr = plr or lplr
-    local char = plr.Character
-    local humanoid = char and char:FindFirstChild("Humanoid")
-    return char and char:FindFirstChild("Head") and humanoid and humanoid.Health >= 0.11
-end
 
-run(function()
+
+--[[run(function()
     local GodMode = {Enabled = false}
     GodMode = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
         Name = "Better Antihistamine",
@@ -10034,7 +10029,7 @@ run(function()
             end
         end
     })
-end)
+end)--]]
 
 -- Function to check if the player is alive
 local function IsAlive(player)
