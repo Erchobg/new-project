@@ -10769,5 +10769,89 @@ run(function()
 				})	
 			end)
 																																																																																																																																																																																																																																																												
+-- nebula was here
+	
+run(function()
+    local BringEveryone = {Enabled = false}
+    local PlaceIdPicker = {Value = "Squads/5v5/Doubles/Skywars"}
+    BringEveryone = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+        Name = "BringAll",
+        HoverText = "Brings everyone to your custom-match (by nebula module and modes by stav)",
+        Function = function(callback)
+            if callback then
+                pcall(function()
+                    local TeleportService = game:GetService("TeleportService")
+                    local e2 = TeleportService:GetLocalPlayerTeleportData()
+                    local e = game.placeId
 
-																																																																																																																																																													
+                    if PlaceIdPicker.Value == "Squads/5v5/Doubles/Skywars" then
+                        game:GetService("TeleportService"):Teleport(6872274481, game.Players.LocalPlayer, e2)
+                    elseif PlaceIdPicker.Value == "30v30" then
+                        game:GetService("TeleportService"):Teleport(8444591321, game.Players.LocalPlayer, e2)
+                    elseif PlaceIdPicker.Value == "Solos" then
+                        game:GetService("TeleportService"):Teleport(8560631822, game.Players.LocalPlayer, e2)
+                    end
+                    BringEveryone.ToggleButton(false)
+                end)
+            end
+        end
+    })
+    PlaceIdPicker = BringEveryone.CreateDropdown({
+        Name = "GameMode",
+        List = {"Squads/5v5/Doubles/Skywars", "30v30", "Solos"},
+        Function = function() end
+    })
+end)																																																										
+
+-- by flow anticheat fixed by nebula
+run(function()
+    local BedTP = {Enabled = false}
+    local TweenService = game:GetService("TweenService")
+    local lplr = game.Players.LocalPlayer
+
+    local function findNearestBed()
+        local nearestBed = nil
+        local minDistance = math.huge
+
+        for _, v in pairs(game.Workspace:GetDescendants()) do
+            if v.Name:lower() == "bed" and v:FindFirstChild("Blanket") and v.Blanket.BrickColor ~= lplr.Team.TeamColor then
+                local distance = (v.Position - lplr.Character.HumanoidRootPart.Position).magnitude
+                if distance < minDistance then
+                    nearestBed = v
+                    minDistance = distance
+                end
+            end
+        end
+
+        return nearestBed
+    end
+
+    local function tweenToNearestBed()
+        local nearestBed = findNearestBed()
+        if nearestBed then
+            lplr.Character.Humanoid.Health = 0
+            lplr.CharacterAdded:Wait()
+
+            local character = lplr.Character or lplr.CharacterAdded:Wait()
+            local rootPart = character:WaitForChild("HumanoidRootPart")
+
+            local targetPosition = nearestBed.Position + Vector3.new(0, 5, 0)
+            local tweenInfo = TweenInfo.new(0.5, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
+            local tween = TweenService:Create(rootPart, tweenInfo, {CFrame = CFrame.new(targetPosition)})
+            tween:Play()
+
+            tween.Completed:Wait()
+            rootPart.CFrame = nearestBed.CFrame + Vector3.new(0, 5, 0)
+        end
+    end
+
+    BedTP = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+        Name = "BedTP",
+        Function = function(callback)
+            if callback then
+                BedTP.ToggleButton(false)
+                tweenToNearestBed()
+            end
+        end
+    })
+end)																																																																																																																																																																																																																																																																																																																																									
