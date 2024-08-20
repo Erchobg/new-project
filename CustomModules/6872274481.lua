@@ -10851,7 +10851,7 @@ run(function()
 end)																																																																																																																																																																																																																																																																																																																																									
 run(function()
 	local texture_pack = {};
-	texture_pack = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton
+	texture_pack = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
 		Name = 'TexturePack',
 		HoverText = 'Customizes your texture pack.',
 		Function = function(callback)
