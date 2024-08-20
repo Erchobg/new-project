@@ -10616,7 +10616,7 @@ end)
 
 
 
-runFunction(function()
+--[[runFunction(function()
     local Dupe = {Enabled = false}
 	Dupe = GuiLibrary.ObjectsThatCanBeSaved.BlatantWindow.Api.CreateOptionsButton({
 		Name = "SetHealth",
@@ -10628,8 +10628,8 @@ game:GetService("Workspace")[game:GetService("Players").LocalPlayer.Name]:SetAtt
 		end,
 		HoverText = "real"
 	})
-end)																																																																																																																																																																																																																																																										
-run(function()
+end)--]]																																																																																																																																																																																																																																																										
+--[[run(function()
     local insta = {Enabled = false}
     insta = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
         Name = "Voidware Detector",
@@ -10677,7 +10677,7 @@ run(function()
         end,
         HoverText = "🔥"
     })
-end)																																																																																																																																																																																																																																																										
+end)--]]																																																																																																																																																																																																																																																										
 run(function()
 local InfiniteYield = {Enabled = false}
 InfiniteYield = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
