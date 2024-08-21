@@ -10849,7 +10849,7 @@ run(function()
         end
     })
 end)																																																																																																																																																																																																																																																																																																																																									
-run(function()
+--[[run(function()
 	local texture_pack = {};
 	texture_pack = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
 		Name = 'TexturePack',
@@ -11219,5 +11219,5 @@ run(function()
 		HoverText = 'Mode to render the texture pack.',
 		Function = function() end;
 	});
-end);
+end);--]] -- removed 
 																																																																																																																																																																																																																																																																
