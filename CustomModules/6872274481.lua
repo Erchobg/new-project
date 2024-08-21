@@ -9035,7 +9035,7 @@ task.spawn(function()
 end)
 
 
-local function Pay2Code(func) func() end
+--[[local function Pay2Code(func) func() end
 
 getgenv().JumpBoostEnabled = true
 getgenv().JumpBoostDefault = false
@@ -9312,9 +9312,9 @@ Pay2Code(function()
 		HoverText = "Notifies you when JumpBoostEnabled is false (disabled)\nand can't use JumpBoost",
 		Function = function() end,
 	})
-end)
+end)--]]
 
-run(function()
+--[[run(function()
     DeathTP = {["Enabled"] = false}
     local oldPos
     local DeathTP
@@ -9374,9 +9374,9 @@ run(function()
             end
         end
     })
-end)
+end)--]]
 
-run(function()
+--[[run(function()
     local VelocityBoost = {["Enabled"] = false}
 	local Boost = {["Value"] = 500}
     local Gravity = {["Enabled"] = false}
@@ -9433,7 +9433,7 @@ run(function()
         ["Default"] = true,
         ["Function"] = function(callback) end
     })
-end)
+end)--]]
 -- GTFO nigger 
 run(function()
         local TweenService = game:GetService("TweenService")
@@ -10031,18 +10031,10 @@ BetterBreadCrumbs = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOp
     })
 end)--]]
 
--- Function to check if the player is alive
-local function IsAlive(player)
-    player = player or lplr
-    local character = player and player.Character
-    if not character then return false end
 
-    local humanoid = character:FindFirstChildOfClass("Humanoid")
-    return humanoid and humanoid.Health > 0
-end
 
 -- Main execution loop
-run(function()
+--[[run(function()
     local FloatDisabler = { Enabled = false }
     local GuiApi = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api
 
@@ -10121,10 +10113,10 @@ warningNotification("Float Disabler", "You will get anticheated if you use it to
             spawn(handleFloatDisabling)
         end
     })
-end)
+end)--]]
 
 
-run(function()
+--[[run(function()
     local DeathTP = {["Enabled"] = false}
     local oldPos
     local teleportingToOldLocation = false
@@ -10185,10 +10177,10 @@ run(function()
             end
         end
     })
-end)
+end)--]]
 
 
-run(function()
+--[[run(function()
     local VelocityBoost = {Enabled = false}
     local Boost = {Value = 500}
     local Gravity = {Enabled = false}
@@ -10260,7 +10252,7 @@ run(function()
         Default = true,
         Function = function(callback) BoostNotification.Enabled = callback end
     })
-end)																																																																																																																																																																																																																																																
+end)--]]																																																																																																																																																																																																																																																
 local connection
 -- by nebula
 run(function()
@@ -11221,3 +11213,47 @@ end)
 	});
 end);--]] -- removed 
 																																																																																																																																																																																																																																																																
+runFunction(function()
+        local TPHighJump = {Enabled = false}
+
+        local function PerformHighJump()
+            local character = game.Players.LocalPlayer.Character
+            local humanoidRootPart = character and character:FindFirstChild("HumanoidRootPart")
+            
+            if humanoidRootPart then
+                local jumpDistance = TPHighJumpDistance.Value
+                local initialHeight = humanoidRootPart.Position.Y
+                for i = 1, 3 do  
+                    humanoidRootPart.CFrame = CFrame.new(humanoidRootPart.Position + Vector3.new(0, jumpDistance, 0))
+                    wait(0.1) 
+                    
+                    local currentHeight = humanoidRootPart.Position.Y - initialHeight
+                    warningNotification("TPHighJump", "Currently " .. tostring(currentHeight) .. " studs in the air", 3)
+                end
+            end
+        end
+
+        TPHighJump = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+            Name = "TPHighJump",
+            Function = function(callback)
+                if callback then
+                    PerformHighJump()
+
+            wait(0.6)
+            TPHighJump.ToggleButton(false)
+
+                end
+            end,
+            HoverText = "x3 the number that you put in height"
+        })
+
+        TPHighJumpDistance = TPHighJump.CreateSlider({
+            Name = "Jump Height (studs)",
+            Min = 1,
+            Max = 350,
+            Default = 50,
+            Function = function(value)
+                TPHighJumpDistance.Value = value
+            end
+        })
+    end)
