@@ -10337,7 +10337,7 @@ local function createDot(position, color, lifetime)
 end
 
 BetterBreadCrumbs = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
-    Name = "BetterBreadCrumbs",
+    Name = "BetterBreadcrumbs",
     Function = function(callback)
         if callback then
             BetterBreadCrumbs.connection = game:GetService("RunService").RenderStepped:Connect(function()
@@ -10966,7 +10966,7 @@ end)--]]
     })
 end)--]]
 -- by nebula																																																																																																																																																																																																																																																										
-run(function()
+--[[run(function()
     InfiniteJump = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
         Name = "Watermark",
         Function = function(callback)
@@ -10995,7 +10995,7 @@ run(function()
         end,
         HoverText = "🔥Novoline Custom Vape"
     })
-end)	
+end)--]]	
 
 
 
