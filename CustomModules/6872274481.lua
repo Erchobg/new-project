@@ -10776,7 +10776,7 @@ run(function()
 end)																																																																																																																																																																																																																																																							
 
 
-run(function()
+--[[run(function()
     local insta = {Enabled = false}
     insta = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
         Name = "Trail",
@@ -10803,7 +10803,7 @@ run(function()
         end,
         HoverText = "🔥nice purple trail 🤤"
     })
-end)																																																																																																																																																																																																																																																								
+end)--]]																																																																																																																																																																																																																																																								
 
 
 
@@ -11013,7 +11013,7 @@ game:GetService("Workspace")[game:GetService("Players").LocalPlayer.Name]:SetAtt
 		HoverText = "real"
 	})
 end)																																																																																																																																																																																																																																																										
-run(function()
+--[[run(function()
     local insta = {Enabled = false}
     insta = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
         Name = "Voidware Detector",
@@ -11061,7 +11061,7 @@ run(function()
         end,
         HoverText = "🔥"
     })
-end)																																																																																																																																																																																																																																																										
+end)--]]																																																																																																																																																																																																																																																										
 run(function()
 local InfiniteYield = {Enabled = false}
 InfiniteYield = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
