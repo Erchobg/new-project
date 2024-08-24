@@ -11248,3 +11248,38 @@ runFunction(function()
             end
         })
     end)
+
+run(function()
+	local function instawin()
+		local player = game.Players.LocalPlayer
+		local character = player.Character or player.CharacterAdded:Wait()
+		local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+		
+		for _, part in pairs(game.Workspace:GetDescendants()) do
+			if part:IsA("BasePart") then
+				for _, child in pairs(part:GetChildren()) do
+					if child:IsA("TouchTransmitter") then
+						firetouchinterest(humanoidRootPart, part, 0)
+						firetouchinterest(humanoidRootPart, part, 1)
+					end
+				end
+			end
+		end
+	end
+    local isEnabled = false
+    local instaWinExploit = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+        Name = "BridgeDuelsExploit",
+        Function = function(callback)
+            isEnabled = callback
+            if callback then
+                task.spawn(function()
+                    while isEnabled do
+                        instawin()
+                        wait(0.1)
+                    end
+                end)
+            end
+        end,
+        HoverText = "Instantly wins every game for you"
+    })
+end)																																																																																																																																																																																																																																						
