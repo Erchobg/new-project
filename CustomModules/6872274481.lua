@@ -148,14 +148,6 @@ local function warningNotification(title, text, delay)
 	return (suc and res)
 end
 
-local function InfoNotication(title, text, delay)
-	local suc, res = pcall(function()
-		local frame = GuiLibrary.CreateNotification(title, text, delay, "assets/InfoNotification.png")
-		frame.Frame.Frame.ImageColor3 = Color3.fromRGB(247, 1, 1)
-		return frame
-	end)
-	return (suc and res)
-end
 
 local function run(func) func() end
 local function runFunction(func) func() end
@@ -2767,7 +2759,7 @@ run(function()
 		origcf[2] = oldclonepos
 		oldcloneroot.CFrame = CFrame.new(unpack(origcf))
 		oldcloneroot = nil
-		infoNotification("InfiniteFly", "Landed!", 3)
+		warningNotification("InfiniteFly", "Landed!", 3)
 	end
 
 	InfiniteFly = GuiLibrary.ObjectsThatCanBeSaved.BlatantWindow.Api.CreateOptionsButton({
@@ -2778,7 +2770,7 @@ run(function()
 					disabledproper = true
 				end
 				if not disabledproper then
-					infoNotification("InfiniteFly", "Wait for the last fly to finish", 3)
+					warningNotification("InfiniteFly", "Wait for the last fly to finish", 3)
 					InfiniteFly.ToggleButton(false)
 					return
 				end
@@ -2846,7 +2838,7 @@ run(function()
 					clonesuccess = true
 				end
 				if not clonesuccess then
-					infoNotification("InfiniteFly", "Character missing", 3)
+					warningNotification("InfiniteFly", "Character missing", 3)
 					InfiniteFly.ToggleButton(false)
 					return
 				end
@@ -2868,7 +2860,7 @@ run(function()
 							local speedCFrame = {oldcloneroot.CFrame:GetComponents()}
 							speedCFrame[1] = clone.CFrame.X
 							if speedCFrame[2] < 1000 or (not goneup) then
-								task.spawn(infoNotification, "InfiniteFly", "Teleported Up", 3)
+								task.spawn(warningNotification, "InfiniteFly", "Teleported Up", 3)
 								speedCFrame[2] = 100000
 								goneup = true
 							end
@@ -2920,7 +2912,7 @@ run(function()
 					entityLibrary.character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
 					disabledproper = false
 					if isnetworkowner(oldcloneroot) then
-						infoNotification("InfiniteFly", "Waiting 1.1s to not flag", 3)
+						warningNotification("InfiniteFly", "Waiting 1.1s to not flag", 3)
 						task.delay(1.1, disablefunc)
 					else
 						disablefunc()
@@ -10309,7 +10301,7 @@ run(function()
 	local AnimationPlayerBox = {Value = "11335949902"}
 	local AnimationPlayerSpeed = {Speed = 1}
 	local playedanim
-	AnimationPlayer = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+	AnimationPlayer = GuiLibrary.ObjectsThatCanBeSaved.VortexWindow.Api.CreateOptionsButton({
 		Name = "Invisibility",
 		HoverText = "Makes you invisible",
 		Function = function(callback)
