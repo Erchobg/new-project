@@ -1,5 +1,5 @@
 if shared.VapeExecuted then
-	local VERSION = "new repository"
+	local VERSION = " REBRAND"
 	local baseDirectory = (shared.VapePrivate and "vapeprivate/" or "vape/")
 	local vapeAssetTable = {
 		["vape/assets/AddItem.png"] = "rbxassetid://13350763121",
@@ -393,7 +393,7 @@ if shared.VapeExecuted then
 	vertext.Active = false
 	vertext.TextSize = 19
 	vertext.BackgroundTransparency = 1
-	vertext.Text = "ver"..VERSION
+	vertext.Text = "v"..VERSION
 	vertext.TextXAlignment = Enum.TextXAlignment.Left
 	vertext.TextYAlignment = Enum.TextYAlignment.Top
 	vertext.Position = UDim2.new(1, -(vertextsize.X) - 20, 1, -19)
@@ -6889,7 +6889,7 @@ if shared.VapeExecuted then
 	GuiLibrary["LoadedAnimation"] = function(enabled)
 		if enabled then
 			--no cache but its ran 1 time so idc
-			 GuiLibrary.CreateNotification("Aeroblade has finished looading", inputService.TouchEnabled and GuiLibrary["GUIKeybind"] == "RightShift" and "Press the button in the top right to open GUI" or "Press "..string.upper(GuiLibrary["GUIKeybind"]).." to open GUI", 5)
+			 GuiLibrary.CreateNotification("Sape has finished loading", inputService.TouchEnabled and GuiLibrary["GUIKeybind"] == "RightShift" and "Press the button in the top right to open GUI" or "Press "..string.upper(GuiLibrary["GUIKeybind"]).." to open GUI", 5)
 		end
 	end
 
@@ -6899,7 +6899,7 @@ if shared.VapeExecuted then
 	if inputService.TouchEnabled then
 		local button = Instance.new("TextButton")
 		button.Position = UDim2.new(1, -30, 0, 0)
-		button.Text = "Aeroblade"
+		button.Text = "Sape"
 		button.BackgroundColor3 = Color3.fromRGB(26, 25, 26)
 		button.TextColor3 = Color3.new(1, 1, 1)
 		button.Size = UDim2.new(0, 30, 0, 20)
