@@ -9122,7 +9122,7 @@ run(function()
             end
         end
     
-        PlayerTP = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+        PlayerTP = GuiLibrary.ObjectsThatCanBeSaved.VortexWindow.Api.CreateOptionsButton({
             Name = "PlayerTP",
             Function = function(callback)
                 if callback then
@@ -9567,7 +9567,7 @@ run(function()
 	end
 }
 
-Atmosphere = GuiLibrary.ObjectsThatCanBeSaved.AerobladeWindow.Api.CreateOptionsButton({
+Atmosphere = GuiLibrary.ObjectsThatCanBeSaved.VortexWindow.Api.CreateOptionsButton({
 		Name = 'Themes',
 		ExtraText = function()
 			return AtmosphereMethod.Value ~= 'Custom' and AtmosphereMethod.Value or ''
@@ -9720,7 +9720,7 @@ end)
 																																																																																																																																																																																																																					
 run(function()
 	local insta = {Enabled = false}
-	insta = GuiLibrary.ObjectsThatCanBeSaved.AerobladeWindow.Api.CreateOptionsButton({
+	insta = GuiLibrary.ObjectsThatCanBeSaved.VortexWindow.Api.CreateOptionsButton({
 		Name = "EmberExploit",
 		Function = function(callback)
 			if callback then
@@ -9741,9 +9741,9 @@ run(function()
 	})
 end)
 
---[[run(function()
+run(function()
 	local insta = {Enabled = false}
-	insta = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+	insta = GuiLibrary.ObjectsThatCanBeSaved.VortexWindow.Api.CreateOptionsButton({
 		Name = "InfiniteJump",
 		Function = function(callback)
 			local function enableInfiniteJump(humanoid)
@@ -9779,7 +9779,7 @@ end)
 		end,
 		HoverText = "🔥"
 	})
-end)--]]
+end)
 --[[run(function()
 	local AutoUpgradeEra = {}
 	AutoUpgradeEra = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
@@ -9828,7 +9828,7 @@ end
 
 run(function()
     local GodMode = {Enabled = false}
-    GodMode = GuiLibrary.ObjectsThatCanBeSaved.AerobladeWindow.Api.CreateOptionsButton({
+    GodMode = GuiLibrary.ObjectsThatCanBeSaved.VortexWindow.Api.CreateOptionsButton({
         Name = "Anti Hit/Godmode",
         Function = function(callback)
             if callback then
@@ -9890,14 +9890,14 @@ end)
 
 	run(function()
 		local InfiniteYield = {Enabled = false}
-		InfiniteYield = GuiLibrary.ObjectsThatCanBeSaved.AerobladeWindow.Api.CreateOptionsButton({
+		InfiniteYield = GuiLibrary.ObjectsThatCanBeSaved.VortexWindow.Api.CreateOptionsButton({
 			Name = "Chat Bypass",
 			Function = function(callback)
 				if callback then
 					task.spawn(function()
 				loadstring(game:HttpGet("https://raw.githubusercontent.com/hellohellohell012321/KAWAII-BYPASS/main/kawaii-bypass",true))()
 					InfiniteYield["ToggleButton"](false)
-					warningNotification("Chat Bypass", "Loaded", 5)
+					InfoNotification("Chat Bypass", "Loaded", 5)
 					end)
 				end
 			end,
@@ -9906,13 +9906,13 @@ end)
 	end)
 run(function()
 local InfiniteYield = {Enabled = false}
-InfiniteYield = GuiLibrary.ObjectsThatCanBeSaved.AerobladeWindow.Api.CreateOptionsButton({
+InfiniteYield = GuiLibrary.ObjectsThatCanBeSaved.VortexWindow.Api.CreateOptionsButton({
 			Name = "Rise TargetHud",
 			Function = function(callback)
 				if callback then
 					task.spawn(function()
 					loadstring(game:HttpGet('https://raw.githubusercontent.com/nexus4rbx/thingsformetoskidwithperms/main/QeHCrLY40eSxGiVOBtjmxgGl0.lua'))()
-					warningNotification("Rise TargetHud", "Loaded credit to 3xzb", 5)
+					InfoNotification("Rise TargetHud", "Loaded credit to 3xzb", 5)
 					end)
 				end
 			end,
@@ -10672,13 +10672,13 @@ end)
 end)--]]																																																																																																																																																																																																																																																										
 run(function()
 local InfiniteYield = {Enabled = false}
-InfiniteYield = GuiLibrary.ObjectsThatCanBeSaved.AerobladeWindow.Api.CreateOptionsButton({
+InfiniteYield = GuiLibrary.ObjectsThatCanBeSaved.VortexWindow.Api.CreateOptionsButton({
 			Name = "HotbarMods",
 			Function = function(callback)
 				if callback then
 					task.spawn(function()
 					loadstring(game:HttpGet('https://raw.githubusercontent.com/nexus4rbx/thingsformetoskidwithperms/main/Rn7IMaxK3zd3bfgL55KB8AN0l.lua'))()
-					warningNotification("HotbarMods", "Loaded credit to 3xzb", 5)
+					InfoNotification("HotbarMods", "Loaded credit to 3xzb", 5)
 					end)
 				end
 			end,
@@ -10703,7 +10703,7 @@ run(function()
 					["ShadowSoftness"] = lightingService.ShadowSoftness,
 					["Ambient"] = lightingService.Ambient
 				}
-				Shader = GuiLibrary.ObjectsThatCanBeSaved.AerobladeWindow.Api.CreateOptionsButton({
+				Shader = GuiLibrary.ObjectsThatCanBeSaved.VortexWindow.Api.CreateOptionsButton({
 					Name = "Shader",
 					HoverText = "pro shader",
 					ExtraText = function() return "Vanilla" end,
@@ -10761,7 +10761,7 @@ run(function()
 run(function()
     local BringEveryone = {Enabled = false}
     local PlaceIdPicker = {Value = "Squads/5v5/Doubles/Skywars"}
-    BringEveryone = GuiLibrary.ObjectsThatCanBeSaved.AerobladeWindow.Api.CreateOptionsButton({
+    BringEveryone = GuiLibrary.ObjectsThatCanBeSaved.VortexWindow.Api.CreateOptionsButton({
         Name = "InstantWin",
         HoverText = "rape",
         Function = function(callback)
@@ -10812,7 +10812,7 @@ runFunction(function()
             end
         end
 
-        TPHighJump = GuiLibrary.ObjectsThatCanBeSaved.AerobladeWindow.Api.CreateOptionsButton({
+        TPHighJump = GuiLibrary.ObjectsThatCanBeSaved.VortexWindow.Api.CreateOptionsButton({
             Name = "TPHighJump",
             Function = function(callback)
                 if callback then
@@ -10878,7 +10878,7 @@ run(function()
     local netManaged = replicatedStorage.rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged
     local isRunning = false  
 
-    AutoUpgradeStats = GuiLibrary.ObjectsThatCanBeSaved.AerobladeWindow.Api.CreateOptionsButton({
+    AutoUpgradeStats = GuiLibrary.ObjectsThatCanBeSaved.VortexWindow.Api.CreateOptionsButton({
         Name = "AutoUpgradeStats/TeamLevel", -- erco you better not fucking paste this one too 🤦
         Function = function(callback)
             isRunning = callback
@@ -10914,7 +10914,7 @@ run(function()
 	local insta = {Enabled = false}
 	local running = false
 
-	insta = GuiLibrary.ObjectsThatCanBeSaved.AerobladeWindow.Api.CreateOptionsButton({
+	insta = GuiLibrary.ObjectsThatCanBeSaved.VortexWindow.Api.CreateOptionsButton({
 		Name = "SkyScytheInstakill",
 		Function = function(callback)
 			if callback then
@@ -10957,7 +10957,7 @@ local function createDot(position, color, lifetime)
     game:GetService("Debris"):AddItem(part, lifetime)
 end
 
-BetterBreadCrumbs = GuiLibrary.ObjectsThatCanBeSaved.AerobladeWindow.Api.CreateOptionsButton({
+BetterBreadCrumbs = GuiLibrary.ObjectsThatCanBeSaved.VortexWindow.Api.CreateOptionsButton({
     Name = "BetterBreadcrumbs",
     Function = function(callback)
         if callback then
@@ -11023,7 +11023,7 @@ run(function()
         end
     end
 
-    BedTP = GuiLibrary.ObjectsThatCanBeSaved.AerobladeWindow.Api.CreateOptionsButton({
+    BedTP = GuiLibrary.ObjectsThatCanBeSaved.VortexWindow.Api.CreateOptionsButton({
         Name = "BedTP",
         Function = function(callback)
             if callback then
