@@ -56,8 +56,8 @@ local store = {
 		universalLagbacks = 0
 	},
 	whitelist = {
-		chatStrings1 = {helloimusingnovoline = "vape"},
-		chatStrings2 = {vape = "helloimusingnovoline"},
+		chatStrings1 = {helloimusingaeroblade = "vape"},
+		chatStrings2 = {vape = "helloimusingaeroblade"},
 		clientUsers = {},
 		oldChatFunctions = {}
 	},
@@ -103,7 +103,7 @@ end
 
 local function vapeGithubRequest(scripturl)
 	if not isfile("vape/"..scripturl) then
-		local suc, res = pcall(function() return game:HttpGet("https://raw.githubusercontent.com/nexus4rbx/NovolineForRoblox/"..readfile("vape/commithash.txt").."/"..scripturl, true) end)
+		local suc, res = pcall(function() return game:HttpGet("https://raw.githubusercontent.com/novoline4rbx/Aeroblade/"..readfile("vape/commithash.txt").."/"..scripturl, true) end)
 		assert(suc, res)
 		assert(res ~= "404: Not Found", res)
 		if scripturl:find(".lua") then res = "--This watermark is used to delete the file if its cached, remove it to make the file persist after commits.\n"..res end
@@ -142,7 +142,16 @@ end
 local function warningNotification(title, text, delay)
 	local suc, res = pcall(function()
 		local frame = GuiLibrary.CreateNotification(title, text, delay, "assets/WarningNotification.png")
-		frame.Frame.Frame.ImageColor3 = Color3.fromRGB(236, 129, 44)
+		frame.Frame.Frame.ImageColor3 = Color3.fromRGB(247, 1, 1)
+		return frame
+	end)
+	return (suc and res)
+end
+
+local function InfoNotication(title, text, delay)
+	local suc, res = pcall(function()
+		local frame = GuiLibrary.CreateNotification(title, text, delay, "assets/InfoNotification.png")
+		frame.Frame.Frame.ImageColor3 = Color3.fromRGB(247, 1, 1)
 		return frame
 	end)
 	return (suc and res)
@@ -1669,12 +1678,12 @@ do
 	end)
 	local textlabel = Instance.new("TextLabel")
 	textlabel.Size = UDim2.new(1, 0, 0, 36)
-	textlabel.Text = "nebulaware return"
+	textlabel.Text = "aeroblade"
 	textlabel.BackgroundTransparency = 1
 	textlabel.ZIndex = 10
 	textlabel.TextStrokeTransparency = 0
 	textlabel.TextScaled = true
-	textlabel.Font = Enum.Font.SourceSans
+	textlabel.Font = Enum.Font.FredokaOne
 	textlabel.TextColor3 = Color3.new(1, 1, 1)
 	textlabel.Position = UDim2.new(0, 0, 1, -36)
 	textlabel.Parent = GuiLibrary.MainGui.ScaledGui.ClickGui
@@ -2758,7 +2767,7 @@ run(function()
 		origcf[2] = oldclonepos
 		oldcloneroot.CFrame = CFrame.new(unpack(origcf))
 		oldcloneroot = nil
-		warningNotification("InfiniteFly", "Landed!", 3)
+		infoNotification("InfiniteFly", "Landed!", 3)
 	end
 
 	InfiniteFly = GuiLibrary.ObjectsThatCanBeSaved.BlatantWindow.Api.CreateOptionsButton({
@@ -2769,7 +2778,7 @@ run(function()
 					disabledproper = true
 				end
 				if not disabledproper then
-					warningNotification("InfiniteFly", "Wait for the last fly to finish", 3)
+					infoNotification("InfiniteFly", "Wait for the last fly to finish", 3)
 					InfiniteFly.ToggleButton(false)
 					return
 				end
@@ -2837,7 +2846,7 @@ run(function()
 					clonesuccess = true
 				end
 				if not clonesuccess then
-					warningNotification("InfiniteFly", "Character missing", 3)
+					infoNotification("InfiniteFly", "Character missing", 3)
 					InfiniteFly.ToggleButton(false)
 					return
 				end
@@ -2859,7 +2868,7 @@ run(function()
 							local speedCFrame = {oldcloneroot.CFrame:GetComponents()}
 							speedCFrame[1] = clone.CFrame.X
 							if speedCFrame[2] < 1000 or (not goneup) then
-								task.spawn(warningNotification, "InfiniteFly", "Teleported Up", 3)
+								task.spawn(infoNotification, "InfiniteFly", "Teleported Up", 3)
 								speedCFrame[2] = 100000
 								goneup = true
 							end
@@ -2911,7 +2920,7 @@ run(function()
 					entityLibrary.character.Humanoid:ChangeState(Enum.HumanoidStateType.Landed)
 					disabledproper = false
 					if isnetworkowner(oldcloneroot) then
-						warningNotification("InfiniteFly", "Waiting 1.1s to not flag", 3)
+						infoNotification("InfiniteFly", "Waiting 1.1s to not flag", 3)
 						task.delay(1.1, disablefunc)
 					else
 						disablefunc()
@@ -3640,9 +3649,9 @@ run(function()
 		HoverText = "Times animation with hit attempt"
 	})
 	killauranovape = Killaura.CreateToggle({
-		Name = "No Vape",
+		Name = "No Aeroblade",
 		Function = function() end,
-		HoverText = "no hit vape user"
+		HoverText = "no hit aeroblade user"
 	})
 	killauranovape.Object.Visible = false
 end)
@@ -5080,7 +5089,7 @@ run(function()
 	local GameFixer = {Enabled = false}
 	local GameFixerHit = {Enabled = false}
 	GameFixer = GuiLibrary.ObjectsThatCanBeSaved.RenderWindow.Api.CreateOptionsButton({
-		Name = "GameFixer",
+		Name = "HitFix",
 		Function = function(callback)
 			debug.setconstant(bedwars.SwordController.swingSwordAtMouse, 23, callback and 'raycast' or 'Raycast')
 			debug.setupvalue(bedwars.SwordController.swingSwordAtMouse, 4, callback and bedwars.QueryUtil or workspace)
@@ -6879,7 +6888,7 @@ run(function()
 	end
 
 	AutoConsume = GuiLibrary.ObjectsThatCanBeSaved.UtilityWindow.Api.CreateOptionsButton({
-		Name = "AutoConsume",
+		Name = "AutoEat",
 		Function = function(callback)
 			if callback then
 				table.insert(AutoConsume.Connections, vapeEvents.InventoryAmountChanged.Event:Connect(AutoConsumeFunc))
@@ -7493,7 +7502,7 @@ run(function()
 			if callback then
 				table.insert(AutoToxic.Connections, vapeEvents.BedwarsBedBreak.Event:Connect(function(bedTable)
 					if AutoToxicBedDestroyed.Enabled and bedTable.brokenBedTeam.id == lplr:GetAttribute("Team") then
-						local custommsg = #AutoToxicPhrases6.ObjectList > 0 and AutoToxicPhrases6.ObjectList[math.random(1, #AutoToxicPhrases6.ObjectList)] or "How dare you break my bed >:( <name> | Novoline on top"
+						local custommsg = #AutoToxicPhrases6.ObjectList > 0 and AutoToxicPhrases6.ObjectList[math.random(1, #AutoToxicPhrases6.ObjectList)] or "How dare you break my bed >:( <name> | Aeroblade on top"
 																																																													
 						if custommsg then
 							custommsg = custommsg:gsub("<name>", (bedTable.player.DisplayName or bedTable.player.Name))
@@ -7504,7 +7513,7 @@ run(function()
 							replicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(custommsg, 'All')
 						end
 					elseif AutoToxicBedBreak.Enabled and bedTable.player.UserId == lplr.UserId then
-						local custommsg = #AutoToxicPhrases7.ObjectList > 0 and AutoToxicPhrases7.ObjectList[math.random(1, #AutoToxicPhrases7.ObjectList)] or "nice bed <teamname> | Novoline on top"
+						local custommsg = #AutoToxicPhrases7.ObjectList > 0 and AutoToxicPhrases7.ObjectList[math.random(1, #AutoToxicPhrases7.ObjectList)] or "yooooo cool bed <teamname> :) | Aeroblade on top"
 						if custommsg then
 							local team = bedwars.QueueMeta[store.queueType].teams[tonumber(bedTable.brokenBedTeam.id)]
 							local teamname = team and team.displayName:lower() or "white"
@@ -7525,7 +7534,7 @@ run(function()
 						if killed == lplr then
 							if (not leavesaid) and killer ~= lplr and AutoToxicDeath.Enabled then
 								leavesaid = true
-								local custommsg = #AutoToxicPhrases3.ObjectList > 0 and AutoToxicPhrases3.ObjectList[math.random(1, #AutoToxicPhrases3.ObjectList)] or "My gaming chair expired midfight, thats why you won <name> | Novoline on top"
+								local custommsg = #AutoToxicPhrases3.ObjectList > 0 and AutoToxicPhrases3.ObjectList[math.random(1, #AutoToxicPhrases3.ObjectList)] or "My gaming chair expired midfight, thats why you won <name> | Aeroblade on top"
 								if custommsg then
 									custommsg = custommsg:gsub("<name>", (killer.DisplayName or killer.Name))
 								end
@@ -7537,9 +7546,9 @@ run(function()
 							end
 						else
 							if killer == lplr and AutoToxicFinalKill.Enabled then
-								local custommsg = #AutoToxicPhrases2.ObjectList > 0 and AutoToxicPhrases2.ObjectList[math.random(1, #AutoToxicPhrases2.ObjectList)] or "L <name> | Novoline on top"
+								local custommsg = #AutoToxicPhrases2.ObjectList > 0 and AutoToxicPhrases2.ObjectList[math.random(1, #AutoToxicPhrases2.ObjectList)] or "L <name> | Aeroblade on top"
 								if custommsg == lastsaid then
-									custommsg = #AutoToxicPhrases2.ObjectList > 0 and AutoToxicPhrases2.ObjectList[math.random(1, #AutoToxicPhrases2.ObjectList)] or "L <name> | Novoline on top"
+									custommsg = #AutoToxicPhrases2.ObjectList > 0 and AutoToxicPhrases2.ObjectList[math.random(1, #AutoToxicPhrases2.ObjectList)] or "L <name> | Aeroblade on top"
 								else
 									lastsaid = custommsg
 								end
@@ -7565,7 +7574,7 @@ run(function()
 							end
 						end
 						if AutoToxicWin.Enabled then
-							local custommsg = #AutoToxicPhrases.ObjectList > 0 and AutoToxicPhrases.ObjectList[math.random(1, #AutoToxicPhrases.ObjectList)] or "This win was easier then snapping a twig | Novoline on top"
+							local custommsg = #AutoToxicPhrases.ObjectList > 0 and AutoToxicPhrases.ObjectList[math.random(1, #AutoToxicPhrases.ObjectList)] or "This win was easier than snapping a twig | Aeroblade on top"
 							if textChatService.ChatVersion == Enum.ChatVersion.TextChatService then
 								textChatService.ChatInputBarConfiguration.TargetTextChannel:SendAsync(custommsg)
 							else
@@ -7580,7 +7589,7 @@ run(function()
 						if custommsg then
 							custommsg = custommsg:gsub("<name>", (plr.DisplayName or plr.Name))
 						end
-						local msg = custommsg or "Imagine getting flagged L "..(plr.DisplayName or plr.Name).." | Novoline on top"
+						local msg = custommsg or "Imagine getting flagged LOL "..(plr.DisplayName or plr.Name).." | Aeroblade on top"
 						if textChatService.ChatVersion == Enum.ChatVersion.TextChatService then
 							textChatService.ChatInputBarConfiguration.TargetTextChannel:SendAsync(msg)
 						else
@@ -7600,7 +7609,7 @@ run(function()
 								if custommsg then
 									custommsg = custommsg:gsub("<name>", (plr.DisplayName or plr.Name))
 								end
-								local msg = custommsg or "I don't care about the fact that I'm exploiting, I care about you dying in a block game. L "..(plr.DisplayName or plr.Name).." | Novoline on top"
+								local msg = custommsg or "I don't care about the fact that I'm using scripts, I care about you dying in a block game. L "..(plr.DisplayName or plr.Name).." | Novoline on top"
 								if textChatService.ChatVersion == Enum.ChatVersion.TextChatService then
 									textChatService.ChatInputBarConfiguration.TargetTextChannel:SendAsync(msg)
 								else
@@ -9558,8 +9567,8 @@ run(function()
 	end
 }
 
-Atmosphere = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
-		Name = 'ThemeChanger',
+Atmosphere = GuiLibrary.ObjectsThatCanBeSaved.AerobladeWindow.Api.CreateOptionsButton({
+		Name = 'Themes',
 		ExtraText = function()
 			return AtmosphereMethod.Value ~= 'Custom' and AtmosphereMethod.Value or ''
 		end,
@@ -9711,11 +9720,11 @@ end)
 																																																																																																																																																																																																																					
 run(function()
 	local insta = {Enabled = false}
-	insta = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+	insta = GuiLibrary.ObjectsThatCanBeSaved.AerobladeWindow.Api.CreateOptionsButton({
 		Name = "EmberExploit",
 		Function = function(callback)
 			if callback then
-				warningNotification("EmberExploit", "Ember blade is required for this to work", 3)
+				warningNotification("EmberExploit", "Ember blade is required for this to work", 1)
 				task.spawn(function()
 					repeat
 						task.wait()
@@ -9732,7 +9741,7 @@ run(function()
 	})
 end)
 
-run(function()
+--[[run(function()
 	local insta = {Enabled = false}
 	insta = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
 		Name = "InfiniteJump",
@@ -9770,8 +9779,8 @@ run(function()
 		end,
 		HoverText = "🔥"
 	})
-end)
-run(function()
+end)--]]
+--[[run(function()
 	local AutoUpgradeEra = {}
 	AutoUpgradeEra = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
 		Name = 'AutoUpgradeEra',
@@ -9807,7 +9816,7 @@ run(function()
 			end
 		end
     })
-end)
+end)--]]
 function IsAlive(plr)
     plr = plr or lplr
     if not plr.Character then return false end
@@ -9819,8 +9828,8 @@ end
 
 run(function()
     local GodMode = {Enabled = false}
-    GodMode = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
-        Name = "Antihistamine",
+    GodMode = GuiLibrary.ObjectsThatCanBeSaved.AerobladeWindow.Api.CreateOptionsButton({
+        Name = "Anti Hit/Godmode",
         Function = function(callback)
             if callback then
 				spawn(function()
@@ -9881,7 +9890,7 @@ end)
 
 	run(function()
 		local InfiniteYield = {Enabled = false}
-		InfiniteYield = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+		InfiniteYield = GuiLibrary.ObjectsThatCanBeSaved.AerobladeWindow.Api.CreateOptionsButton({
 			Name = "Chat Bypass",
 			Function = function(callback)
 				if callback then
@@ -9897,7 +9906,7 @@ end)
 	end)
 run(function()
 local InfiniteYield = {Enabled = false}
-InfiniteYield = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+InfiniteYield = GuiLibrary.ObjectsThatCanBeSaved.AerobladeWindow.Api.CreateOptionsButton({
 			Name = "Rise TargetHud",
 			Function = function(callback)
 				if callback then
@@ -9912,7 +9921,7 @@ InfiniteYield = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOption
 	end)		
 																																																																																																																																																																																																																																											
 																																																																																																																																																																																																																																													
-local controlmodule = require(lplr.PlayerScripts.PlayerModule).controls
+--[[local controlmodule = require(lplr.PlayerScripts.PlayerModule).controls
 
 local oldmove
 local BetterBreadCrumbs = {Enabled = false}
@@ -9958,7 +9967,7 @@ BetterBreadCrumbs = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOp
         end
     end,
     HoverText = "Credits NeptuneRbx"
-})
+})--]]
 
 
 
@@ -10244,7 +10253,7 @@ end)--]]
         Function = function(callback) BoostNotification.Enabled = callback end
     })
 end)--]]																																																																																																																																																																																																																																																
-local connection
+--[[local connection
 -- by nebula
 run(function()
     local SwordOutline
@@ -10292,7 +10301,7 @@ run(function()
             end
         end
     })
-end)
+end)--]]
 
 
 run(function()
@@ -10663,7 +10672,7 @@ end)
 end)--]]																																																																																																																																																																																																																																																										
 run(function()
 local InfiniteYield = {Enabled = false}
-InfiniteYield = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+InfiniteYield = GuiLibrary.ObjectsThatCanBeSaved.AerobladeWindow.Api.CreateOptionsButton({
 			Name = "HotbarMods",
 			Function = function(callback)
 				if callback then
@@ -10694,7 +10703,7 @@ run(function()
 					["ShadowSoftness"] = lightingService.ShadowSoftness,
 					["Ambient"] = lightingService.Ambient
 				}
-				Shader = GuiLibrary.ObjectsThatCanBeSaved.WorldWindow.Api.CreateOptionsButton({
+				Shader = GuiLibrary.ObjectsThatCanBeSaved.AerobladeWindow.Api.CreateOptionsButton({
 					Name = "Shader",
 					HoverText = "pro shader",
 					ExtraText = function() return "Vanilla" end,
@@ -10752,9 +10761,9 @@ run(function()
 run(function()
     local BringEveryone = {Enabled = false}
     local PlaceIdPicker = {Value = "Squads/5v5/Doubles/Skywars"}
-    BringEveryone = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
-        Name = "BringAll",
-        HoverText = "Brings everyone to your custom-match (by nebula module and modes by stav)",
+    BringEveryone = GuiLibrary.ObjectsThatCanBeSaved.AerobladeWindow.Api.CreateOptionsButton({
+        Name = "InstantWin",
+        HoverText = "rape",
         Function = function(callback)
             if callback then
                 pcall(function()
@@ -10781,6 +10790,198 @@ run(function()
     })
 end)																																																										
 -- bedtp by flow anticheat fixed by nebula
+																																																																																																																																																																																																																																																																																																																																				
+																																																																																																																																																																																																																																																																			
+runFunction(function()
+        local TPHighJump = {Enabled = false}
+
+        local function PerformHighJump()
+            local character = game.Players.LocalPlayer.Character
+            local humanoidRootPart = character and character:FindFirstChild("HumanoidRootPart")
+            
+            if humanoidRootPart then
+                local jumpDistance = TPHighJumpDistance.Value
+                local initialHeight = humanoidRootPart.Position.Y
+                for i = 1, 3 do  
+                    humanoidRootPart.CFrame = CFrame.new(humanoidRootPart.Position + Vector3.new(0, jumpDistance, 0))
+                    wait(0.1) 
+                    
+                    local currentHeight = humanoidRootPart.Position.Y - initialHeight
+                    warningNotification("TPHighJump", "Currently " .. tostring(currentHeight) .. " studs in the air", 3)
+                end
+            end
+        end
+
+        TPHighJump = GuiLibrary.ObjectsThatCanBeSaved.AerobladeWindow.Api.CreateOptionsButton({
+            Name = "TPHighJump",
+            Function = function(callback)
+                if callback then
+                    PerformHighJump()
+
+            wait(0.6)
+            TPHighJump.ToggleButton(false)
+
+                end
+            end,
+            HoverText = "x3 the number that you put in height"
+        })
+
+        TPHighJumpDistance = TPHighJump.CreateSlider({
+            Name = "Jump Height (studs)",
+            Min = 1,
+            Max = 350,
+            Default = 50,
+            Function = function(value)
+                TPHighJumpDistance.Value = value
+            end
+        })
+    end)
+
+--[[run(function()
+	local function instawin()
+		local player = game.Players.LocalPlayer
+		local character = player.Character or player.CharacterAdded:Wait()
+		local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+		
+		for _, part in pairs(game.Workspace:GetDescendants()) do
+			if part:IsA("BasePart") then
+				for _, child in pairs(part:GetChildren()) do
+					if child:IsA("TouchTransmitter") then
+						firetouchinterest(humanoidRootPart, part, 0)
+						firetouchinterest(humanoidRootPart, part, 1)
+					end
+				end
+			end
+		end
+	end
+    local isEnabled = false
+    local instaWinExploit = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+        Name = "BridgeDuelsExploit",
+        Function = function(callback)
+            isEnabled = callback
+            if callback then
+                task.spawn(function()
+                    while isEnabled do
+                        instawin()
+                        wait(0.1)
+                    end
+                end)
+            end
+        end,
+        HoverText = "Instantly wins every game for you"
+    })
+end)--]]																																																																																																																																																																																																																																						
+
+run(function()
+    local AutoUpgradeStats = {Enabled = false}
+    local replicatedStorage = game:GetService("ReplicatedStorage")
+    local netManaged = replicatedStorage.rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged
+    local isRunning = false  
+
+    AutoUpgradeStats = GuiLibrary.ObjectsThatCanBeSaved.AerobladeWindow.Api.CreateOptionsButton({
+        Name = "AutoUpgradeStats/TeamLevel", -- erco you better not fucking paste this one too 🤦
+        Function = function(callback)
+            isRunning = callback
+
+            if callback then
+		AutoUpgradeStats.ToggleButton(false)																																							
+                local upgrades = {
+                    {"SPEED", 1}, {"SPEED", 2}, {"SPEED", 3},
+                    {"DAMAGE", 1}, {"DAMAGE", 2}, {"DAMAGE", 3},
+                    {"ARMOR", 1}, {"ARMOR", 2}, {"ARMOR", 3},
+                    {"DESTRUCTION", 1}, {"DESTRUCTION", 2}, {"DESTRUCTION", 3}
+                }
+
+                local teamLevels = {3, 6, 5, 4, 7, 8, 9, 10, 11, 1, 2, 12, 13, 14, 15, 16, 17, 18, 19, 20}
+
+                repeat
+                    for _, upgrade in ipairs(upgrades) do
+                        netManaged.RequestUpgradeStat:InvokeServer(unpack(upgrade))
+                    end
+
+                    for _, level in ipairs(teamLevels) do
+                        netManaged.RequestPurchaseTeamLevel:InvokeServer(level)
+                    end
+
+                    wait(0.1)
+                until isRunning == false
+            end
+        end,
+        HoverText = "e"
+    })
+end)
+run(function()
+	local insta = {Enabled = false}
+	local running = false
+
+	insta = GuiLibrary.ObjectsThatCanBeSaved.AerobladeWindow.Api.CreateOptionsButton({
+		Name = "SkyScytheInstakill",
+		Function = function(callback)
+			if callback then
+				if not running then
+					running = true
+					spawn(function()
+						while running do
+							game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged.SkyScytheSpin:FireServer()
+							wait(0.1)
+						end
+					end)
+				end
+			else
+				running = false
+			end
+		end
+	})
+end)
+local controlmodule = require(lplr.PlayerScripts.PlayerModule).controls
+
+local oldmove
+local BetterBreadCrumbs = {Enabled = false}
+local BetterBreadCrumbsMode = {Value = "Optimized"}
+local lastDotTime = 0
+local dotInterval = 0.2
+local dotLifetime = 0.5
+local dotColor = Color3.fromRGB(0, 0, 255)
+
+local function createDot(position, color, lifetime)
+    local part = Instance.new("Part")
+    part.Shape = Enum.PartType.Ball
+    part.Size = Vector3.new(2, 2, 2)
+    part.Position = position
+    part.Anchored = true
+    part.CanCollide = false
+    part.Color = color
+    part.Material = Enum.Material.Neon
+    part.Parent = workspace
+
+    game:GetService("Debris"):AddItem(part, lifetime)
+end
+
+BetterBreadCrumbs = GuiLibrary.ObjectsThatCanBeSaved.AerobladeWindow.Api.CreateOptionsButton({
+    Name = "BetterBreadcrumbs",
+    Function = function(callback)
+        if callback then
+            BetterBreadCrumbs.connection = game:GetService("RunService").RenderStepped:Connect(function()
+                if lplr.Character and lplr.Character:FindFirstChild("HumanoidRootPart") then
+                    local rootPart = lplr.Character.HumanoidRootPart
+                    if rootPart.Velocity.Magnitude > 0.1 then
+                        local currentTime = tick()
+                        if currentTime - lastDotTime >= dotInterval then
+                            local groundPosition = Vector3.new(rootPart.Position.X, rootPart.Position.Y - rootPart.Size.Y / 2 - 0.15, rootPart.Position.Z)
+                            createDot(groundPosition, dotColor, dotLifetime)
+                            lastDotTime = currentTime
+                        end
+                    end
+                end
+            end)
+        else
+            if BetterBreadCrumbs.connection then
+                BetterBreadCrumbs.connection:Disconnect()
+                BetterBreadCrumbs.connection = nil
+            end
+        end
+    end
+})
 run(function()
     local BedTP = {Enabled = false}
     local TweenService = game:GetService("TweenService")
@@ -10822,7 +11023,7 @@ run(function()
         end
     end
 
-    BedTP = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
+    BedTP = GuiLibrary.ObjectsThatCanBeSaved.AerobladeWindow.Api.CreateOptionsButton({
         Name = "BedTP",
         Function = function(callback)
             if callback then
@@ -10831,455 +11032,4 @@ run(function()
             end
         end
     })
-end)																																																																																																																																																																																																																																																																																																																																									
---[[run(function()
-	local texture_pack = {};
-	texture_pack = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
-		Name = 'TexturePack',
-		HoverText = 'Customizes your texture pack.',
-		Function = function(callback)
-			if callback then
-				if texture_pack_m.Value == 'Noboline' then
-					local Players = game:GetService("Players")
-					local ReplicatedStorage = game:GetService("ReplicatedStorage")
-					local Workspace = game:GetService("Workspace")
-					local objs = game:GetObjects("rbxassetid://13988978091")
-					local import = objs[1]
-					import.Parent = game:GetService("ReplicatedStorage")
-					local index = {
-						{
-							name = "wood_sword",
-							offset = CFrame.Angles(math.rad(0), math.rad(-100), math.rad(-90)),
-							model = import:WaitForChild("Wood_Sword"),
-						},
-						{
-							name = "stone_sword",
-							offset = CFrame.Angles(math.rad(0), math.rad(-100), math.rad(-90)),
-							model = import:WaitForChild("Stone_Sword"),
-						},
-						{
-							name = "iron_sword",
-							offset = CFrame.Angles(math.rad(0), math.rad(-100), math.rad(-90)),
-							model = import:WaitForChild("Iron_Sword"),
-						},
-						{
-							name = "diamond_sword",
-							offset = CFrame.Angles(math.rad(0), math.rad(-100), math.rad(-90)),
-							model = import:WaitForChild("Diamond_Sword"),
-						},
-						{
-							name = "emerald_sword",
-							offset = CFrame.Angles(math.rad(0), math.rad(-100), math.rad(-90)),
-							model = import:WaitForChild("Emerald_Sword"),
-						},
-						{
-							name = "wood_pickaxe",
-							offset = CFrame.Angles(math.rad(0), math.rad(-190), math.rad(-95)),
-							model = import:WaitForChild("Wood_Pickaxe"),
-						},
-						{
-							name = "stone_pickaxe",
-							offset = CFrame.Angles(math.rad(0), math.rad(-190), math.rad(-95)),
-							model = import:WaitForChild("Stone_Pickaxe"),
-						},
-						{
-							name = "iron_pickaxe",
-							offset = CFrame.Angles(math.rad(0), math.rad(-190), math.rad(-95)),
-							model = import:WaitForChild("Iron_Pickaxe"),
-						},
-						{
-							name = "diamond_pickaxe",
-							offset = CFrame.Angles(math.rad(0), math.rad(80), math.rad(-95)),
-							model = import:WaitForChild("Diamond_Pickaxe"),
-						},
-						{
-							name = "wood_axe",
-							offset = CFrame.Angles(math.rad(0), math.rad(-10), math.rad(-95)),
-							model = import:WaitForChild("Wood_Axe"),
-						},
-						{
-							name = "stone_axe",
-							offset = CFrame.Angles(math.rad(0), math.rad(-10), math.rad(-95)),
-							model = import:WaitForChild("Stone_Axe"),
-						},
-						{
-							name = "iron_axe",
-							offset = CFrame.Angles(math.rad(0), math.rad(-10), math.rad(-95)),
-							model = import:WaitForChild("Iron_Axe"),
-						},
-						{
-							name = "diamond_axe",
-							offset = CFrame.Angles(math.rad(0), math.rad(-90), math.rad(-95)),
-							model = import:WaitForChild("Diamond_Axe"),
-						},
-					}
-					local func = Workspace.Camera.Viewmodel.ChildAdded:Connect(function(tool)
-						if not tool:IsA("Accessory") then
-							return
-						end
-						for _, v in ipairs(index) do
-							if v.name == tool.Name then
-								for _, part in ipairs(tool:GetDescendants()) do
-									if part:IsA("BasePart") or part:IsA("MeshPart") or part:IsA("UnionOperation") then
-										part.Transparency = 1
-									end
-								end
-								local model = v.model:Clone()
-								model.CFrame = tool.Handle.CFrame * v.offset
-								model.CFrame = model.CFrame * CFrame.Angles(math.rad(0), math.rad(-50), math.rad(0))
-								model.Parent = tool
-								local weld = Instance.new("WeldConstraint")
-								weld.Part0 = model
-								weld.Part1 = tool.Handle
-								weld.Parent = model
-								local tool2 = Players.LocalPlayer.Character:WaitForChild(tool.Name)
-								for _, part in ipairs(tool2:GetDescendants()) do
-									if part:IsA("BasePart") or part:IsA("MeshPart") or part:IsA("UnionOperation") then
-										part.Transparency = 1
-										if part.Name == "Handle" then
-											part.Transparency = 0
-										end
-									end
-								end
-							end
-						end
-					end)
-				elseif texture_pack_m.Value == 'Aquarium' then
-					local objs = game:GetObjects("rbxassetid://14217388022")
-					local import = objs[1]
-					
-					import.Parent = game:GetService("ReplicatedStorage")
-					
-					local index = {
-					
-						{
-							name = "wood_sword",
-							offset = CFrame.Angles(math.rad(0),math.rad(-100),math.rad(-90)),
-							model = import:WaitForChild("Wood_Sword"),
-						},
-						
-						{
-							name = "stone_sword",
-							offset = CFrame.Angles(math.rad(0),math.rad(-100),math.rad(-90)),
-							model = import:WaitForChild("Stone_Sword"),
-						},
-						
-						{
-							name = "iron_sword",
-							offset = CFrame.Angles(math.rad(0),math.rad(-100),math.rad(-90)),
-							model = import:WaitForChild("Iron_Sword"),
-						},
-						
-						{
-							name = "diamond_sword",
-							offset = CFrame.Angles(math.rad(0),math.rad(-100),math.rad(-90)),
-							model = import:WaitForChild("Diamond_Sword"),
-						},
-						
-						{
-							name = "emerald_sword",
-							offset = CFrame.Angles(math.rad(0),math.rad(-100),math.rad(-90)),
-							model = import:WaitForChild("Diamond_Sword"),
-						},
-						
-						{
-							name = "Rageblade",
-							offset = CFrame.Angles(math.rad(0),math.rad(-100),math.rad(-90)),
-							model = import:WaitForChild("Diamond_Sword"),
-						},
-						
-					}
-					
-					local func = Workspace:WaitForChild("Camera").Viewmodel.ChildAdded:Connect(function(tool)
-						
-						if(not tool:IsA("Accessory")) then return end
-						
-						for i,v in pairs(index) do
-						
-							if(v.name == tool.Name) then
-							
-								for i,v in pairs(tool:GetDescendants()) do
-						
-									if(v:IsA("Part") or v:IsA("MeshPart") or v:IsA("UnionOperation")) then
-										
-										v.Transparency = 1
-										
-									end
-								
-								end
-							
-								local model = v.model:Clone()
-								model.CFrame = tool:WaitForChild("Handle").CFrame * v.offset
-								model.CFrame *= CFrame.Angles(math.rad(0),math.rad(-50),math.rad(0))
-								model.Parent = tool
-								
-								local weld = Instance.new("WeldConstraint",model)
-								weld.Part0 = model
-								weld.Part1 = tool:WaitForChild("Handle")
-								
-								local tool2 = Players.LocalPlayer.Character:WaitForChild(tool.Name)
-								
-								for i,v in pairs(tool2:GetDescendants()) do
-						
-									if(v:IsA("Part") or v:IsA("MeshPart") or v:IsA("UnionOperation")) then
-										
-										v.Transparency = 1
-										
-									end
-								
-								end
-								
-								local model2 = v.model:Clone()
-								model2.Anchored = false
-								model2.CFrame = tool2:WaitForChild("Handle").CFrame * v.offset
-								model2.CFrame *= CFrame.Angles(math.rad(0),math.rad(-50),math.rad(0))
-								model2.CFrame *= CFrame.new(0.4,0,-.9)
-								model2.Parent = tool2
-								
-								local weld2 = Instance.new("WeldConstraint",model)
-								weld2.Part0 = model2
-								weld2.Part1 = tool2:WaitForChild("Handle")
-							
-							end
-						
-						end
-						
-					end)
-				else
-					local Players = game:GetService("Players")
-					local ReplicatedStorage = game:GetService("ReplicatedStorage")
-					local Workspace = game:GetService("Workspace")
-					local objs = game:GetObjects("rbxassetid://14356045010")
-					local import = objs[1]
-					import.Parent = game:GetService("ReplicatedStorage")
-					index = {
-						{
-							name = "wood_sword",
-							offset = CFrame.Angles(math.rad(0),math.rad(-100),math.rad(-90)),
-							model = import:WaitForChild("Wood_Sword"),
-						},
-						{
-							name = "stone_sword",
-							offset = CFrame.Angles(math.rad(0),math.rad(-100),math.rad(-90)),
-							model = import:WaitForChild("Stone_Sword"),
-						},
-						{
-							name = "iron_sword",
-							offset = CFrame.Angles(math.rad(0),math.rad(-100),math.rad(-90)),
-							model = import:WaitForChild("Iron_Sword"),
-						},
-						{
-							name = "diamond_sword",
-							offset = CFrame.Angles(math.rad(0),math.rad(-100),math.rad(-90)),
-							model = import:WaitForChild("Diamond_Sword"),
-						},
-						{
-							name = "emerald_sword",
-							offset = CFrame.Angles(math.rad(0),math.rad(-100),math.rad(-90)),
-							model = import:WaitForChild("Emerald_Sword"),
-						}, 
-						{
-							name = "rageblade",
-							offset = CFrame.Angles(math.rad(0),math.rad(-100),math.rad(90)),
-							model = import:WaitForChild("Rageblade"),
-						}, 
-						   {
-							name = "fireball",
-									offset = CFrame.Angles(math.rad(0), math.rad(0), math.rad(90)),
-							model = import:WaitForChild("Fireball"),
-						}, 
-						{
-							name = "telepearl",
-									offset = CFrame.Angles(math.rad(0), math.rad(0), math.rad(90)),
-							model = import:WaitForChild("Telepearl"),
-						}, 
-						{
-							name = "wood_bow",
-							offset = CFrame.Angles(math.rad(0), math.rad(0), math.rad(90)),
-							model = import:WaitForChild("Bow"),
-						},
-						{
-							name = "wood_crossbow",
-							offset = CFrame.Angles(math.rad(0), math.rad(0), math.rad(90)),
-							model = import:WaitForChild("Crossbow"),
-						},
-						{
-							name = "tactical_crossbow",
-							offset = CFrame.Angles(math.rad(0), math.rad(180), math.rad(-90)),
-							model = import:WaitForChild("Crossbow"),
-						},
-							{
-							name = "wood_pickaxe",
-							offset = CFrame.Angles(math.rad(0), math.rad(-180), math.rad(-95)),
-							model = import:WaitForChild("Wood_Pickaxe"),
-						},
-						{
-							name = "stone_pickaxe",
-							offset = CFrame.Angles(math.rad(0), math.rad(-180), math.rad(-95)),
-							model = import:WaitForChild("Stone_Pickaxe"),
-						},
-						{
-							name = "iron_pickaxe",
-							offset = CFrame.Angles(math.rad(0), math.rad(-180), math.rad(-95)),
-							model = import:WaitForChild("Iron_Pickaxe"),
-						},
-						{
-							name = "diamond_pickaxe",
-							offset = CFrame.Angles(math.rad(0), math.rad(80), math.rad(-95)),
-							model = import:WaitForChild("Diamond_Pickaxe"),
-						},
-					   {
-								  
-							name = "wood_axe",
-							offset = CFrame.Angles(math.rad(0), math.rad(-10), math.rad(-95)),
-							model = import:WaitForChild("Wood_Axe"),
-						},
-						{
-							name = "stone_axe",
-							offset = CFrame.Angles(math.rad(0), math.rad(-10), math.rad(-95)),
-							model = import:WaitForChild("Stone_Axe"),
-						},
-						{
-							name = "iron_axe",
-							offset = CFrame.Angles(math.rad(0), math.rad(-10), math.rad(-95)),
-							model = import:WaitForChild("Iron_Axe"),
-						 },
-						 {
-							name = "diamond_axe",
-							offset = CFrame.Angles(math.rad(0), math.rad(-89), math.rad(-95)),
-							model = import:WaitForChild("Diamond_Axe"),
-						 },
-					
-					
-					
-					 }
-					local func = Workspace:WaitForChild("Camera").Viewmodel.ChildAdded:Connect(function(tool)
-						if(not tool:IsA("Accessory")) then return end
-						for i,v in pairs(index) do
-							if(v.name == tool.Name) then
-								for i,v in pairs(tool:GetDescendants()) do
-									if(v:IsA("Part") or v:IsA("MeshPart") or v:IsA("UnionOperation")) then
-										v.Transparency = 1
-									end
-								end
-								local model = v.model:Clone()
-								model.CFrame = tool:WaitForChild("Handle").CFrame * v.offset
-								model.CFrame *= CFrame.Angles(math.rad(0),math.rad(-50),math.rad(0))
-								model.Parent = tool
-								local weld = Instance.new("WeldConstraint",model)
-								weld.Part0 = model
-								weld.Part1 = tool:WaitForChild("Handle")
-								local tool2 = Players.LocalPlayer.Character:WaitForChild(tool.Name)
-								for i,v in pairs(tool2:GetDescendants()) do
-									if(v:IsA("Part") or v:IsA("MeshPart") or v:IsA("UnionOperation")) then
-										v.Transparency = 1
-									end
-								end
-								local model2 = v.model:Clone()
-								model2.Anchored = false
-								model2.CFrame = tool2:WaitForChild("Handle").CFrame * v.offset
-								model2.CFrame *= CFrame.Angles(math.rad(0),math.rad(-50),math.rad(0))
-								model2.CFrame *= CFrame.new(.7,0,-.8)
-								model2.Parent = tool2
-								local weld2 = Instance.new("WeldConstraint",model)
-								weld2.Part0 = model2
-								weld2.Part1 = tool2:WaitForChild("Handle")
-							end
-						end
-					end)
-				end
-			end
-		end
-	})
-	texture_pack_m = texture_pack.CreateDropdown({
-		Name = 'Mode',
-		List = {
-			'Noboline',
-			'Aquarium',
-			'Ocean'
-		},
-		Default = 'Noboline',
-		HoverText = 'Mode to render the texture pack.',
-		Function = function() end;
-	});
-end);--]] -- removed 
-																																																																																																																																																																																																																																																																
-runFunction(function()
-        local TPHighJump = {Enabled = false}
-
-        local function PerformHighJump()
-            local character = game.Players.LocalPlayer.Character
-            local humanoidRootPart = character and character:FindFirstChild("HumanoidRootPart")
-            
-            if humanoidRootPart then
-                local jumpDistance = TPHighJumpDistance.Value
-                local initialHeight = humanoidRootPart.Position.Y
-                for i = 1, 3 do  
-                    humanoidRootPart.CFrame = CFrame.new(humanoidRootPart.Position + Vector3.new(0, jumpDistance, 0))
-                    wait(0.1) 
-                    
-                    local currentHeight = humanoidRootPart.Position.Y - initialHeight
-                    warningNotification("TPHighJump", "Currently " .. tostring(currentHeight) .. " studs in the air", 3)
-                end
-            end
-        end
-
-        TPHighJump = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
-            Name = "TPHighJump",
-            Function = function(callback)
-                if callback then
-                    PerformHighJump()
-
-            wait(0.6)
-            TPHighJump.ToggleButton(false)
-
-                end
-            end,
-            HoverText = "x3 the number that you put in height"
-        })
-
-        TPHighJumpDistance = TPHighJump.CreateSlider({
-            Name = "Jump Height (studs)",
-            Min = 1,
-            Max = 350,
-            Default = 50,
-            Function = function(value)
-                TPHighJumpDistance.Value = value
-            end
-        })
-    end)
-
-run(function()
-	local function instawin()
-		local player = game.Players.LocalPlayer
-		local character = player.Character or player.CharacterAdded:Wait()
-		local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
-		
-		for _, part in pairs(game.Workspace:GetDescendants()) do
-			if part:IsA("BasePart") then
-				for _, child in pairs(part:GetChildren()) do
-					if child:IsA("TouchTransmitter") then
-						firetouchinterest(humanoidRootPart, part, 0)
-						firetouchinterest(humanoidRootPart, part, 1)
-					end
-				end
-			end
-		end
-	end
-    local isEnabled = false
-    local instaWinExploit = GuiLibrary.ObjectsThatCanBeSaved.NovolineWindow.Api.CreateOptionsButton({
-        Name = "BridgeDuelsExploit",
-        Function = function(callback)
-            isEnabled = callback
-            if callback then
-                task.spawn(function()
-                    while isEnabled do
-                        instawin()
-                        wait(0.1)
-                    end
-                end)
-            end
-        end,
-        HoverText = "Instantly wins every game for you"
-    })
-end)																																																																																																																																																																																																																																						
+end)
