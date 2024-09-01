@@ -1,5 +1,5 @@
 if shared.VapeExecuted then
-	local VERSION = " Novoline Custom Vape"..(shared.VapePrivate and " PRIVATE" or "").." "..readfile("vape/commithash.txt"):sub(1, 6)
+	local VERSION = "new repository"
 	local baseDirectory = (shared.VapePrivate and "vapeprivate/" or "vape/")
 	local vapeAssetTable = {
 		["vape/assets/AddItem.png"] = "rbxassetid://13350763121",
@@ -144,7 +144,7 @@ if shared.VapeExecuted then
 	local vapeCachedAssets = {}
 	local function vapeGithubRequest(scripturl)
 		if not isfile("vape/"..scripturl) then
-			local suc, res = pcall(function() return game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/"..readfile("vape/commithash.txt").."/"..scripturl, true) end)
+			local suc, res = pcall(function() return game:HttpGet("https://raw.githubusercontent.com/novoline4rbx/Aeroblade/"..readfile("vape/commithash.txt").."/"..scripturl, true) end)
 			assert(suc, res)
 			assert(res ~= "404: Not Found", res)
 			if scripturl:find(".lua") then res = "--This watermark is used to delete the file if its cached, remove it to make the file persist after commits.\n"..res end
@@ -356,7 +356,7 @@ if shared.VapeExecuted then
 	hoverbox.Text = "  ".."Placeholder"
 	hoverbox.ZIndex = 11
 	hoverbox.TextColor3 = Color3.fromRGB(160, 160, 160)
-	hoverbox.Font = Enum.Font.Arial
+	hoverbox.Font = Enum.Font.Gotham
 	hoverbox.TextXAlignment = Enum.TextXAlignment.Left
 	hoverbox.TextSize = 14
 	hoverbox.Visible = false
@@ -393,7 +393,7 @@ if shared.VapeExecuted then
 	vertext.Active = false
 	vertext.TextSize = 19
 	vertext.BackgroundTransparency = 1
-	vertext.Text = "Current Build:"..VERSION
+	vertext.Text = "ver"..VERSION
 	vertext.TextXAlignment = Enum.TextXAlignment.Left
 	vertext.TextYAlignment = Enum.TextYAlignment.Top
 	vertext.Position = UDim2.new(1, -(vertextsize.X) - 20, 1, -19)
@@ -918,7 +918,7 @@ if shared.VapeExecuted then
 		settingsbox2.TextColor3 = Color3.fromRGB(80, 80, 80)
 		settingsbox2.Font = Enum.Font.SourceSans
 		settingsbox2.TextXAlignment = Enum.TextXAlignment.Right
-		settingsbox2.Text = "Vape "..VERSION.."  "
+		settingsbox2.Text = "Aeroblade "..VERSION.."  "
 		settingsbox2.TextSize = 16
 		settingsbox2.Parent = windowtitle
 		local settingsbox3 = Instance.new("Frame")
@@ -1830,7 +1830,7 @@ if shared.VapeExecuted then
 			local bindtext3 = Instance.new("TextLabel")
 			bindtext3.Text = "  PRESS  KEY TO BIND"
 			bindtext3.Size = UDim2.new(0, 150, 0, 33)
-			bindtext3.Font = Enum.Font.SourceSans
+			bindtext3.Font = Enum.Font.Gotham
 			bindtext3.TextXAlignment = Enum.TextXAlignment.Left
 			bindtext3.TextSize = 17
 			bindtext3.TextColor3 = Color3.fromRGB(44, 44, 44)
@@ -2351,7 +2351,7 @@ if shared.VapeExecuted then
 			buttontext.Active = false
 			buttontext.TextColor3 = Color3.fromRGB(160, 160, 160)
 			buttontext.TextSize = 14
-			buttontext.Font = Enum.Font.Arial
+			buttontext.Font = Enum.Font.Gotham
 			buttontext.TextXAlignment = Enum.TextXAlignment.Left
 			buttontext.Position = UDim2.new(0, (argstable["Icon"] and 33 or 10), 0, 1)
 			buttontext.Parent = button
@@ -6889,7 +6889,7 @@ if shared.VapeExecuted then
 	GuiLibrary["LoadedAnimation"] = function(enabled)
 		if enabled then
 			--no cache but its ran 1 time so idc
-			GuiLibrary.CreateNotification("Finished Loading", inputService.TouchEnabled and GuiLibrary["GUIKeybind"] == "RightShift" and "Press the button in the top right to open GUI" or "Press "..string.upper(GuiLibrary["GUIKeybind"]).." to open GUI", 5)
+			 Loading", inputService.TouchEnabled and GuiLibrary["GUIKeybind"] == "RightShift" and "Press the button in the top right to open GUI" or "Press "..string.upper(GuiLibrary["GUIKeybind"]).." to open GUI", 5)
 		end
 	end
 
@@ -6899,7 +6899,7 @@ if shared.VapeExecuted then
 	if inputService.TouchEnabled then
 		local button = Instance.new("TextButton")
 		button.Position = UDim2.new(1, -30, 0, 0)
-		button.Text = "Vape"
+		button.Text = "Aeroblade"
 		button.BackgroundColor3 = Color3.fromRGB(26, 25, 26)
 		button.TextColor3 = Color3.new(1, 1, 1)
 		button.Size = UDim2.new(0, 30, 0, 20)
