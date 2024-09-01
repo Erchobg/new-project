@@ -105,7 +105,7 @@ local function displayErrorPopup(text, funclist)
 	local prompt = ErrorPrompt.new("Default")
 	prompt._hideErrorCode = true
 	local gui = Instance.new("ScreenGui", game:GetService("CoreGui"))
-	prompt:setErrorTitle("Aeroblade")
+	prompt:setErrorTitle("Vortex")
 	local funcs
 	if funclist then
 		funcs = {}
@@ -283,8 +283,8 @@ local Blatant = GuiLibrary.CreateWindow({
 	Icon = "vape/assets/BlatantIcon.png",
 	IconSize = 16
 })
-local Aeroblade = GuiLibrary.CreateWindow({
-	Name = "Aeroblade",
+local Vortex = GuiLibrary.CreateWindow({
+	Name = "Vortex",
 	Icon = "vape/assets/TargetIcon2.png",
 	IconSize = 16
 })
@@ -332,7 +332,7 @@ GUI.CreateButton({
 	IconSize = 16
 })	
 GUI.CreateButton({
-	Name = "Aeroblade",
+	Name = "Vortex",
 	Function = function(callback) Aeroblade.SetVisible(callback) end,
 	Icon = "vape/assets/TargetIcon2.png",
 	IconSize = 16
