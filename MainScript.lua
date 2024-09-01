@@ -1584,7 +1584,7 @@ local windowSortOrder = {
 	RenderButton = 3,
 	UtilityButton = 4,
 	WorldButton = 5,
-	VortexWindow = 7,																																				
+	VortexButton = 7,																																				
 	FriendsButton = 6,
 	TargetsButton = 7,
 	ProfilesButton = 8
@@ -1910,6 +1910,7 @@ GUISettings.CreateButton2({
 			RenderWindow = 4,
 			UtilityWindow = 5,
 			WorldWindow = 6,
+			VortexWindow = 7,																																															
 			FriendsWindow = 7,
 			TargetsWindow = 8,
 			ProfilesWindow = 9,
