@@ -105,7 +105,7 @@ local function displayErrorPopup(text, funclist)
 	local prompt = ErrorPrompt.new("Default")
 	prompt._hideErrorCode = true
 	local gui = Instance.new("ScreenGui", game:GetService("CoreGui"))
-	prompt:setErrorTitle("Novoline")
+	prompt:setErrorTitle("Aeroblade")
 	local funcs
 	if funclist then
 		funcs = {}
@@ -143,7 +143,7 @@ local function vapeGithubRequest(scripturl)
 				displayErrorPopup("The connection to github is taking a while, Please be patient.")
 			end
 		end)
-		suc, res = pcall(function() return game:HttpGet("https://raw.githubusercontent.com/nexus4rbx/NovolineForRoblox/"..readfile("vape/commithash.txt").."/"..scripturl, true) end)
+		suc, res = pcall(function() return game:HttpGet("https://raw.githubusercontent.com/novoline4rbx/Aeroblade/"..readfile("vape/commithash.txt").."/"..scripturl, true) end)
 		if not suc or res == "404: Not Found" then
 			displayErrorPopup("Failed to connect to github : vape/"..scripturl.." : "..res)
 			error(res)
@@ -283,9 +283,9 @@ local Blatant = GuiLibrary.CreateWindow({
 	Icon = "vape/assets/BlatantIcon.png",
 	IconSize = 16
 })
-local Novoline = GuiLibrary.CreateWindow({
-	Name = "Novoline",
-	Icon = "vape/assets/BlatantIcon.png",
+local Aeroblade = GuiLibrary.CreateWindow({
+	Name = "Aeroblade",
+	Icon = "vape/assets/TargetIcon2.png",
 	IconSize = 16
 })
 local Render = GuiLibrary.CreateWindow({
@@ -332,9 +332,9 @@ GUI.CreateButton({
 	IconSize = 16
 })	
 GUI.CreateButton({
-	Name = "Novoline",
-	Function = function(callback) Novoline.SetVisible(callback) end,
-	Icon = "vape/assets/BlatantIcon.png",
+	Name = "Aeroblade",
+	Function = function(callback) Aeroblade.SetVisible(callback) end,
+	Icon = "vape/assets/TargetIcon2.png",
 	IconSize = 16
 })
 GUI.CreateButton({
@@ -1584,7 +1584,7 @@ local windowSortOrder = {
 	RenderButton = 3,
 	UtilityButton = 4,
 	WorldButton = 5,
-	NovolineWindow = 7,																																				
+	AerobladeWindow = 7,																																				
 	FriendsButton = 6,
 	TargetsButton = 7,
 	ProfilesButton = 8
@@ -1807,7 +1807,7 @@ local teleportConnection = playersService.LocalPlayer.OnTeleport:Connect(functio
 			if shared.VapeDeveloper then
 				loadstring(readfile("vape/NewMainScript.lua"))()
 			else
-				loadstring(game:HttpGet("https://raw.githubusercontent.com/nexus4rbx/NovolineForRoblox/"..readfile("vape/commithash.txt").."/NewMainScript.lua", true))()
+				loadstring(game:HttpGet("https://raw.githubusercontent.com/novoline4rbx/Aeroblade/"..readfile("vape/commithash.txt").."/NewMainScript.lua", true))()
 			end
 		]]
 		if shared.VapeDeveloper then
@@ -1956,7 +1956,7 @@ local function loadVape()
 			loadstring(readfile("vape/CustomModules/"..game.PlaceId..".lua"))()
 		else
 			if not shared.VapeDeveloper then
-				local suc, publicrepo = pcall(function() return game:HttpGet("https://raw.githubusercontent.com/nexus4rbx/NovolineForRoblox/"..readfile("vape/commithash.txt").."/CustomModules/"..game.PlaceId..".lua") end)
+				local suc, publicrepo = pcall(function() return game:HttpGet("https://raw.githubusercontent.com/novoline4rbx/Aeroblade/"..readfile("vape/commithash.txt").."/CustomModules/"..game.PlaceId..".lua") end)
 				if suc and publicrepo and publicrepo ~= "404: Not Found" then
 					writefile("vape/CustomModules/"..game.PlaceId..".lua", "--This watermark is used to delete the file if its cached, remove it to make the file persist after commits.\n"..publicrepo)
 					loadstring(readfile("vape/CustomModules/"..game.PlaceId..".lua"))()
@@ -1988,7 +1988,7 @@ local function loadVape()
 	if not shared.VapeSwitchServers then
 		if BlatantModeToggle.Enabled then
 			pcall(function()
-				local frame = GuiLibrary.CreateNotification("Blatant Enabled", "Novoline is now in Blatant Mode.", 5.5, "assets/WarningNotification.png")
+				local frame = GuiLibrary.CreateNotification("Blatant Enabled", "Aeroblade is now in Blatant Mode.", 5.5, "assets/WarningNotification.png")
 				frame.Frame.Frame.ImageColor3 = Color3.fromRGB(236, 129, 44)
 			end)
 		end
