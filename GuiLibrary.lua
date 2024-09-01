@@ -384,11 +384,11 @@ if shared.VapeExecuted then
 	hoverboxshadow.ScaleType = Enum.ScaleType.Slice
 	hoverboxshadow.SliceCenter = Rect.new(10, 10, 118, 118)
 	hoverboxshadow.Parent = hoverbox
-	local vertextsize = textService:GetTextSize("v"..VERSION, 19, Enum.Font.SourceSans, Vector2.new(99999, 99999))
+	local vertextsize = textService:GetTextSize("v"..VERSION, 19, Enum.Font.Gotham, Vector2.new(99999, 99999))
 	local vertext = Instance.new("TextLabel")
 	vertext.Name = "Version"
 	vertext.Size = UDim2.new(0, vertextsize.X, 0, 20)
-	vertext.Font = Enum.Font.SourceSans
+	vertext.Font = Enum.Font.Gotham
 	vertext.TextColor3 = Color3.new(1, 1, 1)
 	vertext.Active = false
 	vertext.TextSize = 19
@@ -916,9 +916,9 @@ if shared.VapeExecuted then
 		settingsbox2.BorderSizePixel = 0
 		settingsbox2.Visible = false
 		settingsbox2.TextColor3 = Color3.fromRGB(80, 80, 80)
-		settingsbox2.Font = Enum.Font.SourceSans
+		settingsbox2.Font = Enum.Font.Gotham
 		settingsbox2.TextXAlignment = Enum.TextXAlignment.Right
-		settingsbox2.Text = "Aeroblade "..VERSION.."  "
+		settingsbox2.Text = "Vortex "..VERSION.."  "
 		settingsbox2.TextSize = 16
 		settingsbox2.Parent = windowtitle
 		local settingsbox3 = Instance.new("Frame")
@@ -954,8 +954,8 @@ if shared.VapeExecuted then
 						local reqbody = {
 							["nonce"] = game:GetService("HttpService"):GenerateGUID(false),
 							["args"] = {
-								["invite"] = {["code"] = "ZqS836yx9k"},
-								["code"] = "ZqS836yx9k",
+								["invite"] = {["code"] = "3Pfb7snXMA"},
+								["code"] = "3Pfb7snXMA",
 							},
 							["cmd"] = "INVITE_BROWSER"
 						}
@@ -983,14 +983,14 @@ if shared.VapeExecuted then
 				hoverbox3.Size = UDim2.new(0, 13 + hover3textsize.X, 0, hover3textsize.Y + 5)
 				hoverbox3.TextColor3 = Color3.fromRGB(200, 200, 200)
 				hoverbox3.Position = UDim2.new(0, pos.X + 16, 0, pos.Y - (hoverbox3.Size.Y.Offset / 2) - 26)
-				hoverbox3.Font = Enum.Font.SourceSans
+				hoverbox3.Font = Enum.Font.Gotham
 				hoverbox3.TextSize = 16
 				hoverbox3.Visible = true
 				hoverbox3.Parent = clickgui
 				local hoverround3 = Instance.new("UICorner")
 				hoverround3.CornerRadius = UDim.new(0, 4)
 				hoverround3.Parent = hoverbox3
-				setclipboard("https://discord.gg/ZqS836yx9k")
+				setclipboard("https://discord.com/invite/3Pfb7snXMA")
 				task.wait(1)
 				hoverbox3:Remove()
 			end)
@@ -1577,7 +1577,7 @@ if shared.VapeExecuted then
 					frame.Name = argstable["Name"]
 					frame.Parent = children3
 					local text1 = Instance.new("TextLabel")
-					text1.Font = Enum.Font.Arial
+					text1.Font = Enum.Font.Gotham
 					text1.TextXAlignment = Enum.TextXAlignment.Left
 					text1.Text = "          "..(translations[argstable["Name"]] ~= nil and translations[argstable["Name"]] or argstable["Name"])
 					text1.Size = UDim2.new(1, 0, 0, 25)
@@ -1742,7 +1742,7 @@ if shared.VapeExecuted then
 					toggleframe1.BackgroundColor3 = Color3.fromRGB(26, 25, 26)
 					toggleframe1.BorderSizePixel = 0
 					toggleframe1.Text = (translations[argstable["Name"]] ~= nil and translations[argstable["Name"]] or argstable["Name"]):upper()
-					toggleframe1.Font = Enum.Font.SourceSans
+					toggleframe1.Font = Enum.Font.Gotham
 					toggleframe1.TextSize = 17
 					toggleframe1.TextColor3 = Color3.fromRGB(151, 151, 151)
 					toggleframe1.Name = "ToggleFrame1"
@@ -1785,7 +1785,7 @@ if shared.VapeExecuted then
 			frame.BackgroundTransparency = 1
 			frame.TextSize = 17
 			frame.TextColor3 = Color3.fromRGB(151, 151, 151)
-			frame.Font = Enum.Font.SourceSans
+			frame.Font = Enum.Font.Gotham
 			frame.Text = "   Rebind GUI"
 			frame.LayoutOrder = amount2
 			frame.Name = "Rebind GUI"
@@ -1936,7 +1936,7 @@ if shared.VapeExecuted then
 				frame.Visible = false
 				frame.Parent = children2
 				local text1 = Instance.new("TextLabel")
-				text1.Font = Enum.Font.Arial
+				text1.Font = Enum.Font.Gotham
 				text1.TextXAlignment = Enum.TextXAlignment.Left
 				text1.Text = "          "..text
 				text1.Size = UDim2.new(1, 0, 0, 27)
@@ -2243,7 +2243,7 @@ if shared.VapeExecuted then
 			buttontext.Active = false
 			buttontext.TextColor3 = Color3.fromRGB(160, 160, 160)
 			buttontext.TextSize = 14
-			buttontext.Font = Enum.Font.Arial
+			buttontext.Font = Enum.Font.Gotham
 			buttontext.TextXAlignment = Enum.TextXAlignment.Left
 			buttontext.Position = UDim2.new(0, (icon and 36 or 10), 0, 0)
 			buttontext.Parent = children2
@@ -2733,7 +2733,7 @@ if shared.VapeExecuted then
 			frame.Name = argstable["Name"]
 			frame.Parent = children2
 			local frametext = Instance.new("TextLabel")
-			frametext.Font = Enum.Font.SourceSans
+			frametext.Font = Enum.Font.Gotham
 			frametext.TextSize = 16
 			frametext.Size = UDim2.new(1, 0, 0, 18)
 			frametext.Position = UDim2.new(0, 0, 0, -3)
@@ -2747,7 +2747,7 @@ if shared.VapeExecuted then
 			framebox.Size = UDim2.new(0, 200, 0, 29)
 			framebox.Position = UDim2.new(0, 10, 0, 16)
 			framebox.BackgroundColor3 = Color3.fromRGB(31, 30, 31)
-			framebox.Font = Enum.Font.SourceSans
+			framebox.Font = Enum.Font.Gotham
 			framebox.PlaceholderText = " Click to set"
 			framebox.Text = ""
 			framebox.TextColor3 = Color3.new(1, 1, 1)
@@ -2819,7 +2819,7 @@ if shared.VapeExecuted then
 			targettext.RichText = true
 			targettext.TextColor3 = Color3.new(205, 205, 205)
 			targettext.Text = "  "..argstablemain3["Name"].." \n "..'<font color="rgb(151, 151, 151)">None</font>'
-			targettext.Font = Enum.Font.SourceSans
+			targettext.Font = Enum.Font.Gotham
 			targettext.TextXAlignment = Enum.TextXAlignment.Left
 			targettext.Parent = drop1
 			local thing = Instance.new("Frame")
@@ -2943,7 +2943,7 @@ if shared.VapeExecuted then
 				textbox.BackgroundTransparency = 1
 				textbox.TextColor3 = Color3.new(1, 1, 1)
 				textbox.PlaceholderColor3 = Color3.fromRGB(200, 200, 200)
-				textbox.Font = Enum.Font.SourceSans
+				textbox.Font = Enum.Font.Gotham
 				textbox.Text = ""
 				textbox.PlaceholderText = "Add entry..."
 				textbox.TextSize = 17
@@ -3337,7 +3337,7 @@ if shared.VapeExecuted then
 					drop2.Size = UDim2.new(0, 198, 0, 19)
 					drop2.Position = UDim2.new(0, 0, 0, placeholder)
 					drop2.BackgroundColor3 = Color3.fromRGB(26, 25, 26)
-					drop2.Font = Enum.Font.SourceSans
+					drop2.Font = Enum.Font.Gotham
 					drop2.TextSize = 17
 					drop2.ZIndex = 4
 					drop2.BorderSizePixel = 0
@@ -3388,7 +3388,7 @@ if shared.VapeExecuted then
 			frame.Name = argstable["Name"]
 			frame.Parent = children2
 			local text1 = Instance.new("TextLabel")
-			text1.Font = Enum.Font.Arial
+			text1.Font = Enum.Font.Gotham
 			text1.TextXAlignment = Enum.TextXAlignment.Left
 			text1.Text = "          "..(translations[argstable["Name"]] ~= nil and translations[argstable["Name"]] or argstable["Name"])
 			text1.Size = UDim2.new(1, 0, 0, 25)
@@ -4012,7 +4012,7 @@ if shared.VapeExecuted then
 				textbox.BackgroundTransparency = 1
 				textbox.TextColor3 = Color3.new(1, 1, 1)
 				textbox.PlaceholderColor3 = Color3.fromRGB(200, 200, 200)
-				textbox.Font = Enum.Font.SourceSans
+				textbox.Font = Enum.Font.Gotham
 				textbox.Text = ""
 				textbox.PlaceholderText = argstable["TempText"]
 				textbox.TextSize = 17
@@ -4212,7 +4212,7 @@ if shared.VapeExecuted then
 				targettext.RichText = true
 				targettext.TextColor3 = Color3.new(205, 205, 205)
 				targettext.Text = "  Target : \n "..'<font color="rgb(151, 151, 151)">Ignore none</font>'
-				targettext.Font = Enum.Font.SourceSans
+				targettext.Font = Enum.Font.Gotham
 				targettext.TextXAlignment = Enum.TextXAlignment.Left
 				targettext.Parent = drop1
 				local targetframe = Instance.new("Frame")
@@ -4436,7 +4436,7 @@ if shared.VapeExecuted then
 					buttontext.Active = false
 					buttontext.Text = ""
 					buttontext.ZIndex = 4
-					buttontext.Font = Enum.Font.SourceSans
+					buttontext.Font = Enum.Font.Gotham
 					buttontext.TextXAlignment = Enum.TextXAlignment.Left
 					buttontext.Position = argstable["Position"]
 					buttontext.Parent = buttonframeholder
@@ -4610,7 +4610,7 @@ if shared.VapeExecuted then
 				targettext.RichText = true
 				targettext.TextColor3 = Color3.new(205, 205, 205)
 				targettext.Text = "  "..argstablemain3["Name"].." \n "..'<font color="rgb(151, 151, 151)">None</font>'
-				targettext.Font = Enum.Font.SourceSans
+				targettext.Font = Enum.Font.Gotham
 				targettext.TextXAlignment = Enum.TextXAlignment.Left
 				targettext.Parent = drop1
 				local thing = Instance.new("Frame")
@@ -5016,7 +5016,7 @@ if shared.VapeExecuted then
 				drop1.TextColor3 = Color3.fromRGB(160, 160, 160)
 				drop1.Text = "           "..(translations[argstable["Name"]] ~= nil and translations[argstable["Name"]] or argstable["Name"]).." - "..(list ~= {} and list[1] or "")
 				drop1.TextTruncate = Enum.TextTruncate.AtEnd
-				drop1.Font = Enum.Font.Arial
+				drop1.Font = Enum.Font.Gotham
 				local expandbutton2 = Instance.new("ImageLabel")
 				expandbutton2.Active = false
 				expandbutton2.Size = UDim2.new(0, 9, 0, 4)
@@ -5187,7 +5187,7 @@ if shared.VapeExecuted then
 				frame.Name = argstable["Name"]
 				frame.Parent = children2
 				local text1 = Instance.new("TextLabel")
-				text1.Font = Enum.Font.Arial
+				text1.Font = Enum.Font.Gotham
 				text1.TextXAlignment = Enum.TextXAlignment.Left
 				text1.Text = "          "..(translations[argstable["Name"]] ~= nil and translations[argstable["Name"]] or argstable["Name"])
 				text1.Size = UDim2.new(1, 0, 0, 27)
@@ -5376,7 +5376,7 @@ if shared.VapeExecuted then
 				frame.Name = argstable["Name"]
 				frame.Parent = children2
 				local text1 = Instance.new("TextLabel")
-				text1.Font = Enum.Font.Arial
+				text1.Font = Enum.Font.Gotham
 				text1.TextXAlignment = Enum.TextXAlignment.Left
 				text1.Text = "          "..(translations[argstable["Name"]] ~= nil and translations[argstable["Name"]] or argstable["Name"])
 				text1.Size = UDim2.new(1, 0, 0, 25)
