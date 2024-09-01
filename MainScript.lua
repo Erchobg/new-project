@@ -1988,8 +1988,8 @@ local function loadVape()
 	if not shared.VapeSwitchServers then
 		if BlatantModeToggle.Enabled then
 			pcall(function()
-				local frame = GuiLibrary.CreateNotification("Blatant Enabled", "Aeroblade is now in Blatant Mode.", 5.5, "assets/WarningNotification.png")
-				frame.Frame.Frame.ImageColor3 = Color3.fromRGB(236, 129, 44)
+				local frame = GuiLibrary.CreateNotification("Blatant Enabled", "Vortex is now in Blatant Mode.", 5.5, "assets/WarningNotification.png")
+				frame.Frame.Frame.ImageColor3 = Color3.fromRGB(255, 1, 1)
 			end)
 		end
 		GuiLibrary.LoadedAnimation(welcomeMessage.Enabled)
