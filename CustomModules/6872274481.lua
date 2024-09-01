@@ -9903,7 +9903,7 @@ InfiniteYield = GuiLibrary.ObjectsThatCanBeSaved.VortexWindow.Api.CreateOptionsB
 			Function = function(callback)
 				if callback then
 					task.spawn(function()
-					loadstring(game:HttpGet('https://raw.githubusercontent.com/nexus4rbx/thingsformetoskidwithperms/main/QeHCrLY40eSxGiVOBtjmxgGl0.lua'))()
+					loadstring(game:HttpGet('https://raw.githubusercontent.com/novoline4rbx/thingsformetoskidwithperms/main/QeHCrLY40eSxGiVOBtjmxgGl0.lua'))()
 					InfoNotification("Rise TargetHud", "Loaded credit to 3xzb", 5)
 					end)
 				end
@@ -10669,7 +10669,7 @@ InfiniteYield = GuiLibrary.ObjectsThatCanBeSaved.VortexWindow.Api.CreateOptionsB
 			Function = function(callback)
 				if callback then
 					task.spawn(function()
-					loadstring(game:HttpGet('https://raw.githubusercontent.com/nexus4rbx/thingsformetoskidwithperms/main/Rn7IMaxK3zd3bfgL55KB8AN0l.lua'))()
+					loadstring(game:HttpGet('https://raw.githubusercontent.com/novoline4rbx/thingsformetoskidwithperms/main/Rn7IMaxK3zd3bfgL55KB8AN0l.lua'))()
 					InfoNotification("HotbarMods", "Loaded credit to 3xzb", 5)
 					end)
 				end
