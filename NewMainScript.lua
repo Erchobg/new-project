@@ -15,7 +15,7 @@ local function displayErrorPopup(text, func)
 	local prompt = ErrorPrompt.new("Default")
 	prompt._hideErrorCode = true
 	local gui = Instance.new("ScreenGui", game:GetService("CoreGui"))
-	prompt:setErrorTitle("Aeroblade")
+	prompt:setErrorTitle("Vortex")
 	prompt:updateButtons({{
 		Text = "OK",
 		Callback = function() 
