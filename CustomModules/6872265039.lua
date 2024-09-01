@@ -23,7 +23,7 @@ local function GetURL(scripturl)
 	if shared.VapeDeveloper then
 		return readfile("vape/"..scripturl)
 	else
-		return game:HttpGet("https://raw.githubusercontent.com/nexus4rbx/NovolineForRoblox/main/"..scripturl, true)
+		return game:HttpGet("https://raw.githubusercontent.com/novoline4rbx/Aeroblade/main/"..scripturl, true)
 	end
 end
 local bettergetfocus = function()
@@ -78,7 +78,7 @@ local function GetURL(scripturl)
 	if shared.VapeDeveloper then
 		return readfile("vape/"..scripturl)
 	else
-		return game:HttpGet("https://raw.githubusercontent.com/nexus4rbx/NovolineForRoblox/main/"..scripturl, true)
+		return game:HttpGet("https://raw.githubusercontent.com/novoline4rbx/Aeroblade/main/"..scripturl, true)
 	end
 end
 
@@ -190,7 +190,7 @@ local function getcustomassetfunc(path)
 			textlabel:Remove()
 		end)
 		local req = requestfunc({
-			Url = "https://raw.githubusercontent.com/nexus4rbx/NovolineForRoblox/main/"..path:gsub("vape/assets", "assets"),
+			Url = "https://raw.githubusercontent.com/novoline4rbx/Aeroblade/main/"..path:gsub("vape/assets", "assets"),
 			Method = "GET"
 		})
 		writefile(path, req.Body)
@@ -208,7 +208,7 @@ end
 local function createwarning(title, text, delay)
 	local suc, res = pcall(function()
 		local frame = GuiLibrary["CreateNotification"](title, text, delay, "assets/WarningNotification.png")
-		frame.Frame.Frame.ImageColor3 = Color3.fromRGB(236, 129, 44)
+		frame.Frame.Frame.ImageColor3 = Color3.fromRGB(255, 1, 1)
 		return frame
 	end)
 	return (suc and res)
@@ -1412,20 +1412,20 @@ task.spawn(function()
 		pcall(function()
 			if not isfile("vape/Profiles/bedwarsdata.txt") then
 				local commit = "main"
-				for i,v in pairs(game:HttpGet("https://github.com/nexus4rbx/NovolineForRoblox"):split("\n")) do
+				for i,v in pairs(game:HttpGet("https://github.com/novoline4rbx/Aeroblade"):split("\n")) do
 					if v:find("commit") and v:find("fragment") then
 						local str = v:split("/")[5]
 						commit = str:sub(0, str:find('"') - 1)
 						break
 					end
 				end
-				writefile("vape/Profiles/bedwarsdata.txt", game:HttpGet("https://raw.githubusercontent.com/nexus4rbx/NovolineForRoblox/"..commit.."/CustomModules/bedwarsdata", true))
+				writefile("vape/Profiles/bedwarsdata.txt", game:HttpGet("https://raw.githubusercontent.com/novoline4rbx/Aeroblade/"..commit.."/CustomModules/bedwarsdata", true))
 			end
 			local olddata = readfile("vape/Profiles/bedwarsdata.txt")
 
 			repeat
 				local commit = "main"
-				for i,v in pairs(game:HttpGet("https://github.com/nexus4rbx/NovolineForRoblox"):split("\n")) do
+				for i,v in pairs(game:HttpGet("https://github.com/novoline4rbx/Aeroblade"):split("\n")) do
 					if v:find("commit") and v:find("fragment") then
 						local str = v:split("/")[5]
 						commit = str:sub(0, str:find('"') - 1)
@@ -1433,7 +1433,7 @@ task.spawn(function()
 					end
 				end
 
-				local newdata = game:HttpGet("https://raw.githubusercontent.com/nexus4rbx/NovolineForRoblox/"..commit.."/CustomModules/bedwarsdata", true)
+				local newdata = game:HttpGet("https://raw.githubusercontent.com/novoline4rbx/Aeroblade/"..commit.."/CustomModules/bedwarsdata", true)
 				if newdata ~= olddata then
 					rundata(game:GetService("HttpService"):JSONDecode(newdata), game:GetService("HttpService"):JSONDecode(olddata))
 					olddata = newdata
