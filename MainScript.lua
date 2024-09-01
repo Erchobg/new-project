@@ -333,7 +333,7 @@ GUI.CreateButton({
 })	
 GUI.CreateButton({
 	Name = "Vortex",
-	Function = function(callback) Aeroblade.SetVisible(callback) end,
+	Function = function(callback) Vortex.SetVisible(callback) end,
 	Icon = "vape/assets/TargetIcon2.png",
 	IconSize = 16
 })
