@@ -10864,42 +10864,39 @@ runFunction(function()
     })
 end)--]]																																																																																																																																																																																																																																						
 
+
 run(function()
     local AutoUpgradeStats = {Enabled = false}
     local replicatedStorage = game:GetService("ReplicatedStorage")
     local netManaged = replicatedStorage.rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged
-    local isRunning = false  
 
     AutoUpgradeStats = GuiLibrary.ObjectsThatCanBeSaved.VortexWindow.Api.CreateOptionsButton({
-        Name = "AutoUpgradeStats/TeamLevel", -- erco you better not fucking paste this one too 🤦
+        Name = "AutoUpgradeStats/TeamLevel",
         Function = function(callback)
-            isRunning = callback
-
-            if callback then
-		AutoUpgradeStats.ToggleButton(false)																																							
+            if callback then                                                                                                                                                            
                 local upgrades = {
                     {"SPEED", 1}, {"SPEED", 2}, {"SPEED", 3},
                     {"DAMAGE", 1}, {"DAMAGE", 2}, {"DAMAGE", 3},
                     {"ARMOR", 1}, {"ARMOR", 2}, {"ARMOR", 3},
                     {"DESTRUCTION", 1}, {"DESTRUCTION", 2}, {"DESTRUCTION", 3}
                 }
-
                 local teamLevels = {3, 6, 5, 4, 7, 8, 9, 10, 11, 1, 2, 12, 13, 14, 15, 16, 17, 18, 19, 20}
-
-                repeat
-                    for _, upgrade in ipairs(upgrades) do
-                        netManaged.RequestUpgradeStat:InvokeServer(unpack(upgrade))
-                    end
-
-                    for _, level in ipairs(teamLevels) do
-                        netManaged.RequestPurchaseTeamLevel:InvokeServer(level)
-                    end
-
-                    wait(0.1)
-                until isRunning == false
+                task.spawn(function()
+                    repeat
+                        for _, upgrade in ipairs(upgrades) do
+                            netManaged.RequestUpgradeStat:InvokeServer(unpack(upgrade))
+                        end
+    
+                        for _, level in ipairs(teamLevels) do
+                            netManaged.RequestPurchaseTeamLevel:InvokeServer(level)
+                        end
+    
+                        wait(0.1)
+                    until (not AutoUpgradeStats.Enabled)
+                end)   
             end
         end,
-        HoverText = "e"
+        HoverText = "erco skidded this fr"
     })
 end)
 run(function()
