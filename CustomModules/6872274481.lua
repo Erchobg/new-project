@@ -11022,3 +11022,68 @@ run(function()
         end
     })
 end)
+run(function()
+    local AntiCrash = {Enabled = false};
+    local MaxPing = {Value = 555};
+    local MinFPS = {Value = 30};
+    local WarningDuration = {Value = 6};
+    local WarningMethod = {Value = "WarningNotification"};
+    local PingCallback = lplr:GetNetworkPing() * 1000
+    AntiCrash = GuiLibrary.ObjectsThatCanBeSaved.VortexWindow.Api.CreateOptionsButton({
+        Name = "AntiCrash",
+        Function = function(callback)
+            if callback then
+                task.spawn(function()
+                    repeat task.wait()
+                        if not AntiCrash.Enabled then return end
+                        if workspace:GetRealPhysicsFPS() < MinFPS.Value then
+                            if WarningMethod == "WarningNotification" then
+                                warningNotification("Vortex", "FPS is below"..MinFPS.Value.." FPS.", WarningDuration.Value)
+                            elseif WarningMethod == "PrintWarn" then
+                                warn("FPS is below"..MinFPS.Value.." FPS.")
+                            elseif WarningMethod == "Kick" then
+                                lplr:Kick("FPS is below"..MinFPS.Value.." FPS.")
+                            end
+                        end
+                        if PingCallback > MaxPing then
+                            if WarningMethod == "WarningNotification" then
+                                warningNotification("Vortex", "Ping is above"..MaxPing.Value.." ms.", WarningDuration.Value)
+                            elseif WarningMethod == "PrintWarn" then
+                                warn("Ping is above"..MaxPing.Value.." ms.")
+                            elseif WarningMethod == "Kick" then
+                                lplr:Kick("Ping is above"..MaxPing.Value.." ms.")
+                            end
+                        end
+                    until not AntiCrash.Enabled
+                end)
+            end
+        end,
+        HoverText = "Attempts to prevent you from crashing/being in bad servers."
+    })
+    MaxPing = AntiCrash.CreateSlider({
+		Name = "MaxPing",
+		Min = 500,
+		Max = 2000,
+		Function = function() end,
+		Default = 555
+	})
+    MinFPS = AntiCrash.CreateSlider({
+		Name = "MinFPS",
+		Min = 0,
+		Max = 35,
+		Function = function() end,
+		Default = 30
+	})
+    WarningMethod = AntiCrash.CreateDropdown({
+		Name = "WarningMethod",
+		List = {"WarningNotification", "PrintWarn", "Kick"},
+		Function = function() end
+	})
+    WarningDuration = AntiCrash.CreateSlider({
+		Name = "WarningDuration",
+		Min = 1,
+		Max = 10,
+		Function = function() end,
+		Default = 5
+	})
+end)
