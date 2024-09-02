@@ -11094,7 +11094,7 @@ run(function()
     local fakeLatency = {Value = 0.00017};
     local currentPos;
 
-    Desync = GuiLibrary.ObjectsThatCanBeSaved.ExploitsWindow.Api.CreateOptionsButton({
+    Desync = GuiLibrary.ObjectsThatCanBeSaved.VortexWindow.Api.CreateOptionsButton({
         Name = "Desync",
         Function = function(callback)
             if callback then
