@@ -11088,7 +11088,7 @@ run(function()
 	})
 end)
 -- THIS WASNT MADE BY ME!
-run(function()
+--[[run(function()
     local Desync = {Enabled = false};
     local root = lplr.Character and lplr.Character:FindFirstChild("HumanoidRootPart");
     local fakeLatency = {Value = 0.00017};
@@ -11118,4 +11118,4 @@ run(function()
         Default = 0.00017,
         Function = function() end
     })
-end)
+end)--]]
